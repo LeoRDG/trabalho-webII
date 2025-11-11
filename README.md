@@ -6,21 +6,21 @@ PHP/MySQL.*
 
 ### Requisitos
 
-- [ ] **1. Uma tabela de *Banco de Dados*.**
-   - [ ] Com **6 ou mais** atributos (colunas).
-   - [ ] Com **4 ou mais** tipos diferentes de dados.
-   - [ ] Deve ser **diferente** da tabela usada nos materiais da disciplina
+- [x] **1. Uma tabela de *Banco de Dados*.**
+   - [x] Com **6 ou mais** atributos (colunas).
+   - [x] Com **4 ou mais** tipos diferentes de dados.
+   - [x] Deve ser **diferente** da tabela usada nos materiais da disciplina
 
-- [ ] **2. Página para exibir os dados da tabela.**
-   - [ ] Com opção para **Inserir** dados.
+- [x] **2. Página para exibir os dados da tabela.**
+   - [x] Com opção para **Inserir** dados.
    - [ ] Com opção para **Excluir** dados.
    - [ ] Com opção para **Alterar** dados.
 
-- [ ] **3. Formulário HTML para inserir dados.**
-   - [ ] Usando **tipos adequados.**
-   - [ ] **Formatação** com *CSS/Bootstrap/etc.*
+- [x] **3. Formulário HTML para inserir dados.**
+   - [x] Usando **tipos adequados.**
+   - [x] **Formatação** com *CSS/Bootstrap/etc.*
    - [ ] *JavaScript* funcional para **validação.**
-   - [ ] *PHP* para **Inserir** dados no *BD*.
+   - [x] *PHP* para **Inserir** dados no *BD*.
 
 - [ ] **4. Página para Excluir Dados.**
 

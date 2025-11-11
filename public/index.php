@@ -34,7 +34,7 @@
         <li><label><input checked disabled type="checkbox"><b>Formulário HTML para inserir dados.</b></label>
             <ul>
                 <li><label><input checked disabled type="checkbox"> Usando <b>tipos adequados.</b></label></li>
-                <li><label><input disabled type="checkbox"> <b>Formatação</b> com <i>CSS/Bootstrap/etc.</i></label></li>
+                <li><label><input checked disabled type="checkbox"> <b>Formatação</b> com <i>CSS/Bootstrap/etc.</i></label></li>
                 <li><label><input disabled type="checkbox"> <i>JavaScript</i> funcional para <b>validação.</b></label></li>
                 <li><label><input checked disabled type="checkbox"> <i>PHP</i> para <b>Inserir</b> dados no <i>BD</i>.</label></li>
             </ul>
