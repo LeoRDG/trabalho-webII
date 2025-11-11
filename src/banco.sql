@@ -7,7 +7,7 @@ CREATE TABLE `produtos` (
     `marca` VARCHAR(40),
     `categoria` VARCHAR(40),
     `descricao` TEXT,
-    `preco_base` DECIMAL NOT NULL,
+    `preco` DECIMAL NOT NULL,
     `estoque` INT NOT NULL DEFAULT 0,
     `peso` DECIMAL NOT NULL,
     `condicao` ENUM('Novo','Usado','Recondicionado') NOT NULL,
