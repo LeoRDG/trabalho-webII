@@ -1,90 +1,106 @@
-<!-- TODO Definir quais campos sao required -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-    <?php 
+    <?php
     $titulo = "Adicionar Produto";
     require "head.php";
     ?>
+    <link rel="stylesheet" href="style/add_form_style.css">
+</head>
+
 <body>
     <?php require "menu.php" ?>
-    <?php 
-        require __DIR__."/../src/Produto.php";
-        $categorias = Produto::categorias();
-        $marcas = Produto::marcas();
+    <?php
+    require __DIR__ . "/../src/Produto.php";
+    $categorias = Produto::categorias();
+    $marcas = Produto::marcas();
     ?>
 
     <form action="criarproduto.php" method="POST">
-        <p>Cadastrar Produto</p>
-        <div>
-            <label for="nome">Nome: </label>
-            <input required type="text" id="nome" name="nome">
-        </div>
+        <fieldset class=form-add>
+            <legend><h3>Adicionar Produto</h3></legend>
 
-        <div>
-            <label for="marca">Marca: </label>
-            <input list="marcas" name="marca" id="marca">
-            <datalist id="marcas">
+            <div class="campo">
+                <label for="nome">Nome: </label>
+                <input required type="text" id="nome" name="nome">
+            </div>
 
-                <?php foreach ($marcas as $m): ?>
-                    <option value=<?= $m ?>>
-                <?php endforeach ?>
+            <div class="campo">
+                <label for="marca">Marca: </label>
+                <input list="marcas" name="marca" id="marca">
+                <datalist id="marcas">
 
-            </datalist>
-        </div>
+                    <?php foreach ($marcas as $m): ?>
+                        <option value=<?= $m ?>>
+                        <?php endforeach ?>
 
-        <div>
-            <label for="categoria">Categoria: </label>
-            <input list="categorias" name="categoria" id="categoria">
-            <datalist id="categorias">
+                </datalist>
+            </div>
 
-                <?php foreach ($categorias as $c): ?>
-                    <option value=<?= $c ?>>
-                <?php endforeach ?>
-                
-            </datalist>
-        </div>
+            <div class="campo">
+                <label for="categoria">Categoria: </label>
+                <input list="categorias" name="categoria" id="categoria">
+                <datalist id="categorias">
 
-        <div>
-            <label for="descricao">Descrição: </label>
-            <textarea name="descricao" id="descricao"></textarea>
-        </div>
+                    <?php foreach ($categorias as $c): ?>
+                        <option value=<?= $c ?>>
+                        <?php endforeach ?>
 
-        <div>
-            <label for="preco">Preço: </label>
-            <input required type="number" id="preco" name="preco" min=0>
-        </div>
+                </datalist>
+            </div>
 
-        <div>
-            <label for="estoque">Estoque: </label>
-            <input type="number" id="estoque" name="estoque" min=0>
-        </div>
+            <div class="campo">
+                <label for="descricao">Descrição: </label>
+                <textarea name="descricao" id="descricao"></textarea>
+            </div>
 
-        <div>
-            <label for="peso">Peso: </label>
-            <input required type="number" id="peso" name="peso" min=0>
-        </div>
+            <div class="campo">
+                <label for="preco">Preço: </label>
+                <input required type="number" id="preco" name="preco" min=0>
+            </div>
 
-        <div>
-            <label for="condicao">Condição: </label>
-                <input required type="radio" value="Novo" id="Novo" name="condicao">
-                <label for="Novo">Novo</label>
+            <div class="campo">
+                <label for="estoque">Estoque: </label>
+                <input type="number" id="estoque" name="estoque" min=0>
+            </div>
 
-                <input type="radio" value="Usado" id="Usado" name="condicao">
-                <label for="Usado">Usado</label>
+            <div class="campo">
+                <label for="peso">Peso: </label>
+                <input required type="number" id="peso" name="peso" min=0>
+            </div>
 
-                <input type="radio" value="Recondicionado" id="Recondicionado" name="condicao">
-                <label for="Recondicionado">Recondicionado</label>
-        </div>
-        
-        <div>
-            <label for="frete">Frete Grátis: </label>
-            <input type="checkbox" id="frete" name="frete">
-        </div>
-        
-        <input type="submit" value="Adicionar">
+            <fieldset class="campo">
+                <legend for="condicao">Condição: </legend>
+                <div>
+                    <input required type="radio" value="Novo" id="Novo" name="condicao">
+                    <label for="Novo">Novo</label>
+                </div>
+
+                <div>
+                    <input type="radio" value="Usado" id="Usado" name="condicao">
+                    <label for="Usado">Usado</label>
+                </div>
+
+                <div>
+                    <input type="radio" value="Recondicionado" id="Recondicionado" name="condicao">
+                    <label for="Recondicionado">Recondicionado</label>
+                </div>
+            </fieldset>
+
+            <div class="campo">
+                <div>
+                    <input type="checkbox" id="frete" name="frete">
+                    <label for="frete">Frete Grátis</label>
+                </div>
+            </div>
+
+            <div class="campo" id="botoes">
+                <input type="reset" id="enviar" value="Limpar">
+                <input type="submit" id="resetar" value="Adicionar">
+            </div>
+        </fieldset>
     </form>
-    
 </body>
+
 </html>
