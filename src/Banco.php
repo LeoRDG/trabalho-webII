@@ -25,7 +25,7 @@ class Banco {
      * @param string $comando_esperado O tipo que o query deve ser: SELECT, INSERT, etc..
      * @return void Nao retorna nada, Cria um novo erro se o uqery nao for valido
      */
-    static function validar_query(string $query, string $comando_esperado){
+    private static function validar_query(string $query, string $comando_esperado){
         $comando = strtoupper( strtok($query, " ") );
         $comando_esperado = strtoupper($comando_esperado);
 
@@ -41,16 +41,18 @@ class Banco {
      * Roda um query do tipo SELECT no banco de dados
      * @param string $query O query para rodar no banco
      * @param ?array $params Os parametros para colocar no query
+     * @param bool $assoc Usar array associativo?
      * @return array Um array com o que foi encontrado no select
      */
-    static function select (string $query, ?array $params=null): array {
+    static function select (string $query, ?array $params=null, bool $assoc=false): array {
         self::validar_query($query, "select");
 
-        $result = [];
         $con = self::conexao();
-        $con->execute_query($query, $params);
+        $result = $con->execute_query($query, $params);
 
-        return $result;
+        $tipo_array = $assoc ? MYSQLI_ASSOC : MYSQLI_NUM;
+        
+        return $result->fetch_all($tipo_array);
     }
 
 
@@ -58,15 +60,25 @@ class Banco {
      * Roda um query do tipo INSERT no banco de dados
      * @param string $query O query para rodar no banco
      * @param ?array $params Os parametros para colocar no query
-     * @return array Um array com o que foi encontrado no select
+     * @return int Um inteiro que representa o id dos dados inseridos
      */
-    static function insert (string $query, ?array $params=null): bool {
+    static function insert (string $query, ?array $params=null): int {
         self::validar_query($query, "insert");
         
         $con = self::conexao();
         $con->execute_query($query, $params);
-
-        return true;
+        
+        return $con->insert_id;
     }
 
+
+    /**
+     * Busca todos os valores únicos de uma coluna
+     */
+    static function unique (string $coluna): array {
+        $q = "SELECT $coluna FROM produtos GROUP BY $coluna ORDER BY $coluna";
+        $result = self::select($q);
+        $result = array_map(fn ($i) => $i[0], $result);
+        return $result;
+    }
 }
