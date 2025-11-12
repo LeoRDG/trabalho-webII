@@ -14,7 +14,7 @@ class Produto {
     public string $condicao;
     public string $imagem;
     public bool $frete_gratis;
-    public DateTime $criado_em; 
+    public string $criado_em; 
     public DateTime $modificado_em; 
 
 
@@ -64,33 +64,86 @@ class Produto {
     }
 
 
-    static function insereTeste(){
+    static function insereTeste($qtd){
         $conds = ["Novo", "Usado", "Recondicionado"];
-        $time = time();
-        for ($i=0;$i<50;$i++){
-            $time -= $i*86400*23;
+        $produtos = [
+            "Mouse Óptico USB",
+            "Teclado Mecânico RGB",
+            "Monitor 24 Polegadas Full HD",
+            "Notebook 15.6'' Intel i5",
+            "Headset Gamer Surround",
+            "Cadeira Ergonômica de Escritório",
+            "Smartphone 128GB",
+            "Tablet Android 10''",
+            "Impressora Multifuncional Wi-Fi",
+            "HD Externo 1TB",
+            "SSD 512GB NVMe",
+            "Roteador Dual Band AC1200",
+            "Webcam Full HD",
+            "Microfone Condensador USB",
+            "Caixa de Som Bluetooth",
+            "Pendrive 64GB",
+            "Carregador Portátil 10000mAh",
+            "Fonte 500W 80 Plus Bronze",
+            "Placa de Vídeo RTX 3060",
+            "Processador Ryzen 5 5600G",
+            "Memória RAM 16GB DDR4",
+            "Placa-Mãe B550M",
+            "Cooler para CPU RGB",
+            "Cabo HDMI 2.1 2m",
+            "Adaptador USB-C para HDMI",
+            "Hub USB 3.0 4 Portas",
+            "Leitor de Cartão SD",
+            "Controle Bluetooth para PC",
+            "Tapete Gamer XXL",
+            "Suporte Articulado para Monitor"
+        ];
+        $categorias = [
+                "Periféricos",
+                "Computadores e Notebooks",
+                "Armazenamento",
+                "Redes e Conectividade",
+                "Áudio e Vídeo",
+                "Componentes de Hardware",
+                "Acessórios",
+                "Móveis e Suportes",
+                "Energia e Baterias",
+                "Dispositivos Móveis"
+        ];
+        $marcas = [
+            "Logitech",
+            "Razer",
+            "Dell",
+            "HP",
+            "Lenovo",
+            "Corsair",
+            "Asus",
+            "Acer",
+            "Samsung",
+            "Kingston",
+            "Seagate",
+            "TP-Link"
+        ];
+
+
+        for ($i=0;$i<$qtd;$i++){
+            $time = mt_rand(1577836800, 1735689600);
             $date = date("Y-m-d", $time);
             $campos = [
-                "nome" => "NOME_TESTE$i",
-                "marca" => "MARCA_TESTE$i",
-                "categoria" => "CAT_TESTE$i",
-                "descricao" => "DESC_TESTE$i",
-                "preco" => $i*100,
-                "estoque" => $i,
-                "peso" => $i*sqrt(2),
-                "condicao" => $conds[$i%3],
-                "frete_gratis" => (int) $i%2,
-                "caminho_imagem" => "NOME_TESTE$i.png",
+                "nome" => $produtos[array_rand($produtos)],
+                "marca" => $marcas[array_rand($marcas)],
+                "categoria" => $categorias[array_rand($categorias)],
+                "descricao" => ($i%2==0) ? "" : "iiwejfiwefjwief jwiefj wiefjiw ejf wiefjnw ijefn wiejfnwiefn wiefnw ienfiwenfwienf eijfn3i4nf4 n3fn3efe",
+                "preco" => mt_rand(10000, 12034000) / 1000,
+                "estoque" => mt_rand(1, 500),
+                "peso" => mt_rand(100, 10000) / 1000,
+                "condicao" => $conds[array_rand($conds)],
+                "frete_gratis" => 1,
                 "criado_em" => $date,
             ];
             
-            $chaves = array_keys($campos);
-            $t = implode(",", $chaves);
-            $inter = array_map(fn($i) => "?", $chaves);
-            $inter = implode(",", $inter);
-            
-            $q = "INSERT INTO `produtos` ($t) VALUES ($inter)";
-            Banco::insert($q, array_values($campos));
+            $p = new Produto($campos);
+            $p->insert();
         }
     }
 
