@@ -10,15 +10,18 @@
 </head>
 
 <body>
-    <?php require "menu.php" ?>
-    <?php
+    <?php 
+    require "menu.php";
+    require __DIR__ . "/../src/util.php";
     require __DIR__ . "/../src/Produto.php";
     $categorias = Produto::categorias();
     $marcas = Produto::marcas();
+    $modo = "add";
 
-    if (isset($_GET["sucesso"]) && $_GET["sucesso"] > 0): ?>
-        <p id="sucesso">Produto inserido com sucesso! id = <?= $_GET["sucesso"]?></p>
-    <?php endif ?>
+    if (isset($_GET["sucesso"]) && $_GET["sucesso"] > 0) {
+        echo "<p id='sucesso'>Produto inserido com sucesso! id = {$_GET['sucesso']}</p>";
+    }
+    ?>
 
     <form action="criarproduto.php" method="POST" enctype="multipart/form-data">
         <fieldset class=form-add>

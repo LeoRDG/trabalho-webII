@@ -6,12 +6,15 @@
     $titulo = "Ver Produtos";
     require "head.php";
     ?>
+    <link rel="stylesheet" href="style/tabela_produtos.css">
+</head>
 
 <body>
 
     <?php
     include "menu.php";
     require __DIR__ . "/../src/Produto.php";
+    require __DIR__ . "/../src/util.php";
     define("TAMANHO", 50);
 
     $pagina = $_GET["pagina"] ?? 1;
@@ -42,39 +45,38 @@
         <a href="adicionarproduto.php">Novo Produto</a>
         <p><?= "Mostrando " . count($produtos) . " de " . $total ." Produtos (" . $inicio+1 . "-" . $fim . ")"?></p>
 
-    <?php
-    for ($i=$pagina-$qtd_btn; $i<=$pagina+$qtd_btn; $i++) {
-        if ($i > 0 && $i <=$pag_max) {
-            echo "<a href='?pagina=$i'> $i </a>";
-        }
-    } 
-    
-    ?>
+        <?php
+        for ($i=$pagina-$qtd_btn; $i<=$pagina+$qtd_btn; $i++) {
+            if ($i > 0 && $i <=$pag_max) {
+                echo "<a href='?pagina=$i'> $i </a>";
+            }
+        } 
+        ?>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Preço</th>
-                <th>Estoque</th>
-                <th>Categoria</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php foreach ($produtos as $p): ?>
+        <table>
+            <thead>
                 <tr>
-                    <td><?= $p->id ?> </td>
-                    <td><?= $p->nome ?> </td>
-                    <td><?= $p->preco ?> </td>
-                    <td><?= $p->estoque ?> </td>
-                    <td><?= $p->categoria ?> </td>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Categoria</th>
+                    <th>Detalhes</th>
                 </tr>
-            <?php endforeach ?>
-        </tbody>
+            </thead>
 
-    </table>
+            <tbody>
+                <?php foreach ($produtos as $p): ?>
+                    <tr>
+                        <td class="atributo" id="id"><?= $p->id ?> </td>
+                        <td class="atributo" id="nome"><?= $p->nome ?> </td>
+                        <td class="atributo" id="preco"><?= $p->preco ?> </td>
+                        <td class="atributo" id="categoria"><?= $p->categoria ?> </td>
+                        <td class="atributo" id=""><a href="" class="material-symbols-outlined">visibility</a ></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
 
 </body>
 
