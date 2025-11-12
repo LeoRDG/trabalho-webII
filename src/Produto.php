@@ -103,4 +103,18 @@ class Produto {
     static function marcas(): array{
         return Banco::unique("marca");
     }
+
+
+    static function quantidade_total(): int{
+        $resultado = Banco::select("SELECT COUNT(*) FROM produtos");
+        return $resultado[0][0] ?? 0;
+    }
+
+
+    static function get_produtos(int $offset, int $quantidade): array{
+        $q = "SELECT id, nome, preco, estoque, categoria FROM produtos LIMIT $quantidade OFFSET $offset";
+        $result = Banco::select($q, null, true);
+        $produtos = array_map(fn($i) => new Produto($i), $result); 
+        return $produtos;
+    }
 }
