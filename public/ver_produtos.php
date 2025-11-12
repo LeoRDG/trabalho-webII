@@ -23,8 +23,24 @@
     $qtd_btn = 4;
     ?>
 
-    <a href="adicionarproduto.php">Novo Produto</a>
-    <p><?= "Mostrando " . count($produtos) . " de " . $total ." Produtos (" . $inicio+1 . "-" . $fim . ")"?></p>
+    <form action="">
+        <div class="filtros">
+            <?php 
+                criar_input("text", "nome", "Nome", "filtro");            
+                criar_input("text", "marca", "Marca", "filtro");            
+                criar_input("text", "categoria", "Categoria", "filtro");            
+                criar_input("number", "preco", "Preco", "filtro");            
+            ?>
+        </div>
+        <div class="" id="botoes">
+                <input type="reset" id="enviar" value="Limpar">
+                <input type="submit" id="resetar" value="Buscar">
+        </div>
+    </form>
+
+    <div>
+        <a href="adicionarproduto.php">Novo Produto</a>
+        <p><?= "Mostrando " . count($produtos) . " de " . $total ." Produtos (" . $inicio+1 . "-" . $fim . ")"?></p>
 
     <?php
     for ($i=$pagina-$qtd_btn; $i<=$pagina+$qtd_btn; $i++) {
