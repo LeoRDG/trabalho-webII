@@ -19,7 +19,6 @@ form{
     display: flex;
     flex-direction: column;
     margin: 10px;
-    min-width: 400px;
 }
 
 .campo input, textarea{

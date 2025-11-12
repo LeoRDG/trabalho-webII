@@ -1,0 +1,41 @@
+.atributo{
+    padding: 12px 30px;
+
+}
+
+table, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    height: 80px;
+}
+
+table{
+    margin: 15px
+}
+
+.filtros{ 
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    background-color: beige;
+    padding: 20px;
+}
+
+.campo {
+    margin: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.campo input, textarea{
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid lightgray;
+}
+
+.campo label {
+    text-align: left;
+    font-size: 15px;
+    color: rgb(9, 9, 9);
+    padding: 0 0 2px 8px;
+}
