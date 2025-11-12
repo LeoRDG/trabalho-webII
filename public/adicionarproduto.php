@@ -15,9 +15,12 @@
     require __DIR__ . "/../src/Produto.php";
     $categorias = Produto::categorias();
     $marcas = Produto::marcas();
-    ?>
 
-    <form action="criarproduto.php" method="POST">
+    if (isset($_GET["sucesso"]) && $_GET["sucesso"] > 0): ?>
+        <p id="sucesso">Produto inserido com sucesso! id = <?= $_GET["sucesso"]?></p>
+    <?php endif ?>
+
+    <form action="criarproduto.php" method="POST" enctype="multipart/form-data">
         <fieldset class=form-add>
             <legend><h3>Adicionar Produto</h3></legend>
 
@@ -87,6 +90,11 @@
                     <label for="Recondicionado">Recondicionado</label>
                 </div>
             </fieldset>
+
+            <div class="campo">
+                <label for="img" accept="image/*">Imagem do Produto</label>
+                <input type="file" name="img">
+            </div>
 
             <div class="campo">
                 <div>

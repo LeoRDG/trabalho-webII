@@ -18,3 +18,5 @@ db_connection.php
 
 .DS_Store
 Thumbs.db
+
+/images/

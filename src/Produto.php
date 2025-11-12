@@ -12,7 +12,7 @@ class Produto {
     public string $categoria;
     public string $descricao;
     public string $condicao;
-    public string $caminho_imagem;
+    public string $imagem;
     public bool $frete_gratis;
     public DateTime $criado_em; 
     public DateTime $modificado_em; 
@@ -25,7 +25,7 @@ class Produto {
     }
 
     function insert(): int {
-        if (isset($this->id)) return -1; // Produto ja existe entao nao inserir;
+        if (isset($this->id)) return -1; // Produto ja existe, entao nao inserir;
         
         // Filtra os campos em exclude para que nao sejam inseridos na tabela pois o valor será calculado pelo mysql
         // Carrega os valores dinamicamente a partir dos atributos desse objeto
@@ -41,11 +41,6 @@ class Produto {
         // Crias as strings com os atributos e as interrogacoes
         $atributos = implode(",", array_keys($filtered_vars) );
         $inters = implode(",", array_map(fn ($i) => "?", $filtered_vars) );
-
-        var_dump($filtered_vars);
-        var_dump($atributos);
-        var_dump($inters);
-
 
         return Banco::insert("INSERT INTO produtos ($atributos) VALUES ($inters)", array_values($filtered_vars));
     }
