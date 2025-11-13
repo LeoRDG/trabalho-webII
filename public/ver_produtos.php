@@ -30,9 +30,11 @@
         <div class="filtros">
             <?php 
                 criar_input("text", "nome", "Nome", "filtro");            
-                criar_input("text", "marca", "Marca", "filtro");            
-                criar_input("text", "categoria", "Categoria", "filtro");            
+                criar_input("lista", "marca", "Marca", "filtro", "", Produto::marcas());            
+                criar_input("lista", "categoria", "Categoria", "filtro", "", Produto::categorias());            
                 criar_input("number", "preco", "Preco", "filtro");            
+                criar_input("number", "estoque", "Estoque", "filtro");            
+                criar_input("date", "criado_em", "Criado entre", "filtro");            
             ?>
         </div>
         <div class="" id="botoes">

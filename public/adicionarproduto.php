@@ -34,7 +34,9 @@
                 criar_input("number", "preco", "Preco");
                 criar_input("number", "estoque", "Estoque");
                 criar_input("number", "peso", "Peso");
-
+                criar_input("radio", "codicao", "Condição", "", "", ["Novo", "Usado", "Recondicionado"]);
+                criar_input("checkbox", "frete_gratis", "Frete Grátis");
+                criar_input("file", "img", "Imagem");
             ?>
             <div class="campo" id="botoes">
                 <input type="reset" id="enviar" value="Limpar">
