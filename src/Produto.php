@@ -46,6 +46,21 @@ class Produto {
     }
 
 
+    function carregar(): bool {
+        $resultado = Banco::select("SELECT * FROM produtos WHERE id = ?", [$this->id], true);
+        if (!$resultado) return false;
+        $resultado = $resultado[0];
+        // var_dump($resultado);
+        foreach ($resultado as $chave => $valor){
+            if (property_exists($this, $chave) && $valor !== null) {
+                if ($chave === "modificado_em") $this->$chave = date_create_from_format("Y-m-d h:i:s", $valor);
+                else $this->$chave = $valor;
+            }
+        }
+        return true;
+    }
+
+
     static function get(): array {   
         $resultado = Banco::select("SELECT * FROM produtos", null, true);
 

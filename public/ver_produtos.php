@@ -73,7 +73,7 @@
                         <td class="atributo" id="nome"><?= $p->nome ?> </td>
                         <td class="atributo" id="preco"><?= $p->preco ?> </td>
                         <td class="atributo" id="categoria"><?= $p->categoria ?> </td>
-                        <td class="atributo" id=""><a href="" class="material-symbols-outlined">visibility</a ></td>
+                        <td class="atributo" id=""><a href="detalhes.php?pid=<?=$p->id?>" class="material-symbols-outlined">visibility</a ></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

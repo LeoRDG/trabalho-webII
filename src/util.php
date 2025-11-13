@@ -14,25 +14,27 @@ function criar_input($tipo, $nome, $label, $modo="", $valor="", $opcoes=[]) {
         echo "</div>";
     } 
     else if ($tipo === "lista") {
-        echo "<input $desativado list='$nome' name='$nome'>"; 
+        echo "<input $desativado list='$nome' name='$nome' value='$valor'>"; 
         echo "<datalist name='$nome' id='$nome'>";
         foreach ($opcoes as $opc) echo "<option>$opc</option>";
         echo "</datalist>";
     } 
     else if ($tipo === "textarea") {
-        echo "<textarea $desativado name='$nome' id='$nome'></textarea>";
+        echo "<textarea $desativado name='$nome' id='$nome'>$valor</textarea>";
     }
     else if ($tipo === "radio") {
         echo "<fieldset>";
         echo "<legend>$label</legend>";
         foreach ($opcoes as $opc) {
-            echo "<input $desativado type='$tipo' id='$opc' name='$nome' value=$opc></input>";
+            $checked = ($opc === $valor) ? "checked" : "";
+            echo "<input $desativado type='$tipo' id='$opc' name='$nome' value=$opc $checked></input>";
             echo "<label for='$opc'>$opc</label>";
         }
         echo "</fieldset>";
     }
     else if ($tipo === "checkbox") {
-        echo "<input $desativado type='$tipo' id='$nome' name='$nome'></input>";
+        $checked = ($valor != 0) ? "checked" : "";
+        echo "<input $checked $desativado type='$tipo' id='$nome' name='$nome'></input>";
         echo "<label for='$nome'>$label</label>";
     }
     else if ($tipo === "file") {
