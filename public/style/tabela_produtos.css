@@ -39,3 +39,11 @@ table{
     color: rgb(9, 9, 9);
     padding: 0 0 2px 8px;
 }
+
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+

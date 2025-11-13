@@ -173,15 +173,51 @@ class Produto {
     }
 
 
-    static function quantidade_total(): int{
-        $resultado = Banco::select("SELECT COUNT(*) FROM produtos");
+    static function quantidade_total($filtros = []): int{
+        // Cria as strings para os filtros e bota os valores em um array
+        [$subq, $filtro_valores] = self::preparar_filtros($filtros);
+        
+        $resultado = Banco::select("SELECT COUNT(*) FROM produtos ".$subq, $filtro_valores);
+
         return $resultado[0][0] ?? 0;
     }
 
+    
+    static function preparar_filtros(array $filtros) {
+        $filtro_strings = [];
+        $filtro_valores = [];
+        $string = "";
+        foreach ($filtros as $k => $v) {
+            if (!$v || !$v[0] && !$v[1]) continue;
+            if (in_array($k, ["preco", "estoque", "criado_em"])) {
+                $filtro_strings[] = "$k BETWEEN ? AND ?";
+                $filtro_valores[] = $v[0];
+                $filtro_valores[] = $v[1];
+            }
+            else {
+                $filtro_strings[] = "$k LIKE ?";
+                $filtro_valores[] = "%$v%";
+            }
+        }
 
-    static function get_produtos(int $offset, int $quantidade): array{
-        $q = "SELECT id, nome, preco, estoque, categoria FROM produtos LIMIT $quantidade OFFSET $offset";
-        $result = Banco::select($q, null, true);
+        $string = ($filtro_strings) ? "WHERE " . implode("\nAND ", $filtro_strings) : "";
+
+        return [$string, $filtro_valores];
+    }
+
+
+    static function get_produtos(int $offset, int $quantidade, array $filtros=[]): array{
+        $q = "SELECT id, nome, preco, estoque, categoria FROM produtos\n";
+
+        // Cria as strings para os filtros e bota os valores em um array
+        [$subq, $filtro_valores] = self::preparar_filtros($filtros);
+        
+        $q .= $subq;
+        $q .= "\nLIMIT $quantidade OFFSET $offset";
+
+        echo "<pre>$q</pre>";
+
+        $result = Banco::select($q, $filtro_valores, true);
         $produtos = array_map(fn($i) => new Produto($i), $result); 
         return $produtos;
     }
