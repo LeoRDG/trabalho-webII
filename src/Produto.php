@@ -227,8 +227,6 @@ class Produto {
         $q .= $subq;
         $q .= "\nLIMIT $quantidade OFFSET $offset";
 
-        echo "<pre>$q</pre>";
-
         $result = Banco::select($q, $filtro_valores, true);
         $produtos = array_map(fn($i) => new Produto($i), $result); 
         return $produtos;

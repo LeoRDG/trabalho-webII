@@ -21,7 +21,7 @@ function gerar_paginacao_url(string $pagina_num, array $filtros=[]){
 
 function gerar_filtros_get(): array{
     // $pagina = $_GET["pagina"] ?? 1;
-    // $filtros = ["pagina" => $pagina];
+    $filtros = [];
     
     foreach  ($_GET as $chave => $valor) {
         if (!in_array($chave, FILTROS_GET_PERMITIDOS)) continue;

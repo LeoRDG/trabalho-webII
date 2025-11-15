@@ -1,4 +1,5 @@
-<?php 
+<?php
+require_once __DIR__ . "/util.php";
 
 /**
  * Cria um input HTML baseado no tipo especificado
@@ -74,11 +75,10 @@ function botoes_formulario(string $texto_reset = "Limpar", string $texto_submit 
  * Gera links de paginação
  */
 function links_paginacao(int $pagina_atual, int $pag_max, int $qtd_btn, array $filtros = []): void {
-    require_once __DIR__ . "/util.php";
-    
     for ($i = $pagina_atual - $qtd_btn; $i <= $pagina_atual + $qtd_btn; $i++) {
         if ($i <= 0 || $i > $pag_max) continue;
-        echo "<a href='" . gerar_paginacao_url($i, $filtros) . "'> $i </a>";
+        $url = gerar_paginacao_url($i, $filtros);
+        echo "<a href='$url'>$i</a>";
     }
 }
 
@@ -86,14 +86,14 @@ function links_paginacao(int $pagina_atual, int $pag_max, int $qtd_btn, array $f
  * Gera uma linha de tabela de produto
  */
 function linha_tabela_produto($produto): void {
-    require_once __DIR__ . "/util.php";
+    $detalhes_url = url("detalhes.php", ["pid" => $produto->id]);
     
     echo "<tr>";
-    echo "<td class='atributo' id='id'>" . $produto->id . "</td>";
-    echo "<td class='atributo' id='nome'>" . $produto->nome . "</td>";
-    echo "<td class='atributo' id='preco'>" . $produto->preco . "</td>";
-    echo "<td class='atributo' id='categoria'>" . $produto->categoria . "</td>";
-    echo "<td class='atributo' id=''><a href=" . \url("detalhes.php", ["pid" => $produto->id]) . " class='material-symbols-outlined'>visibility</a></td>";
+    echo "<td class='atributo' id='id'> $produto->id </td>";
+    echo "<td class='atributo' id='nome'> $produto->nome </td>";
+    echo "<td class='atributo' id='preco'> $produto->preco </td>";
+    echo "<td class='atributo' id='categoria'> $produto->categoria </td>";
+    echo "<td class='atributo'><a href='$detalhes_url' class='material-symbols-outlined'>visibility</a></td>";
     echo "</tr>";
 }
 
