@@ -4,16 +4,16 @@
 <head>
     <?php
     $titulo = "Adicionar Produto";
-    require "head.php";
+    require_once __DIR__ . "/modulos/head.php";
     ?>
     <link rel="stylesheet" href="style/add_form_style.css">
 </head>
 
 <body>
     <?php 
-    require "menu.php";
-    require __DIR__ . "/../src/util.php";
-    require __DIR__ . "/../src/Produto.php";
+    require_once __DIR__ . "/modulos/menu.php";
+    require_once __DIR__ . "/../src/util.php";
+    require_once __DIR__ . "/../src/Produto.php";
     $categorias = Produto::categorias();
     $marcas = Produto::marcas();
     $modo = "add";

@@ -4,7 +4,7 @@
 <head>
     <?php
     $titulo = "Ver Produtos";
-    require "head.php";
+    require_once __DIR__ . "/modulos/head.php";
     ?>
     <link rel="stylesheet" href="style/tabela_produtos.css">
 </head>
@@ -12,21 +12,9 @@
 <body>
 
     <?php
-    include "menu.php";
-    require __DIR__ . "/../src/Produto.php";
-    require __DIR__ . "/../src/util.php";
-    
-    $pagina = $_GET["pagina"] ?? 1;
-    $filtros = ["nome" => $_GET["nome"] ?? "",
-                "marca" => $_GET["marca"] ?? "",
-                "categoria" => $_GET["categoria"] ?? "",
-                "preco" => [ $_GET["preco_min"] ?? "", $_GET["preco_max"] ?? "" ],
-                "estoque" => [ $_GET["estoque_min"] ?? "", $_GET["estoque_max"] ?? "" ],
-                "criado_em" => [ $_GET["criado_em_min"] ?? "", $_GET["criado_em_max"] ?? "" ],
-                ];
-                
-    // $filtros = array_filter($_GET, fn ($k) => isset($k, $filtros) && $_GET[$k], ARRAY_FILTER_USE_KEY);
-    
+    require_once __DIR__ . "/modulos/menu.php";
+    require_once __DIR__ . "/../src/Produto.php";
+    require_once __DIR__ . "/../src/util.php";
     $tamanho = 30;
     $total = Produto::quantidade_total();
     $total_filtro = Produto::quantidade_total($filtros);

@@ -2,12 +2,12 @@
 <html lang="pt-br">
 
 <head>
-    <?php require "head.php" ?>
+    <?php require_once __DIR__ . "/modulos/head.php" ?>
 </head>
 
 <body>
 
-    <?php require "menu.php" ?>
+    <?php require_once __DIR__ . "/modulos/menu.php"; ?>
 
     <h1>Trabalho Web II</h1>
 

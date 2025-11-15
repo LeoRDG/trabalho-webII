@@ -1,6 +1,6 @@
 <?php 
 
-require "Banco.php";
+require_once __DIR__ . "/Banco.php";
 
 class Produto {
     public int $id;

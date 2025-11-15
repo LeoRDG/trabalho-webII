@@ -4,8 +4,8 @@ if ( !isset($_GET["pid"]) ) {
     exit;
 };
 
-require __DIR__ ."/../src/Produto.php";
-require __DIR__ ."/../src/util.php";
+require_once __DIR__ . "/../src/Produto.php";
+require_once __DIR__ . "/../src/util.php";
 
 $id = $_GET["pid"];
 
