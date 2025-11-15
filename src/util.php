@@ -19,17 +19,6 @@ function gerar_paginacao_url(string $pagina_num, array $filtros=[]): string{
     return url("", $params);
 }
 
-function gerar_filtros_get(): array{
-    // $pagina = $_GET["pagina"] ?? 1;
-    $filtros = [];
-    
-    foreach  ($_GET as $chave => $valor) {
-        if (!in_array($chave, FILTROS_GET_PERMITIDOS)) continue;
-        $filtros[$chave] = $valor;
-    }
-
-    return $filtros;
-}
 
 function get_id_produto(): int {
     if ( !isset($_GET["pid"]) ) {

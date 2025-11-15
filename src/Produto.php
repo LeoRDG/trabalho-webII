@@ -224,7 +224,7 @@ class Produto {
 
 
     static function get_produtos(int $offset, int $quantidade, array $filtros=[]): array{
-        $q = "SELECT id, nome, preco, estoque, categoria FROM produtos\n";
+        $q = "SELECT id, nome, preco, estoque, categoria, marca FROM produtos\n";
 
         // Cria as strings para os filtros e bota os valores em um array
         [$subq, $filtro_valores] = self::preparar_filtros($filtros);

@@ -4,10 +4,12 @@ define("BOTOES_PAGINACAO", 4);
 
 require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
+require_once __DIR__ . "/../src/consts.php";
 require_once __DIR__ . "/../src/HTML.php";
 
 $pagina = (int) ($_GET["pagina"] ?? 1);
-$filtros = gerar_filtros_get();
+$filtros = array_filter($_GET, fn ($valor, $chave) => ($valor && in_array($chave, FILTROS_GET_PERMITIDOS)), ARRAY_FILTER_USE_BOTH);
+var_dump($filtros);
 
 $total = Produto::quantidade_total();
 $total_filtro = Produto::quantidade_total($filtros);
@@ -35,14 +37,14 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 
             <div class="campo">
                 <label for="nome">Nome: </label>
-                <input type="text" id="nome" name="nome">
+                <input type="text" id="nome" name="nome" value="<?= $filtros["nome"] ?? "" ?>">
             </div>
 
             <div class="campo">
                 <label for="marca">Marca: </label>
-                <input list="marcas" name="marca" id="marca">
+                <input list="marcas" name="marca" id="marca" value=<?= $filtros["marca"] ?? "" ?>>
                 <datalist id="marcas">
-                    <?php foreach ($marcas as $m): ?>
+                    <?php foreach (Produto::marcas() as $m): ?>
                         <option value=<?= $m ?>>
                     <?php endforeach ?>
                 </datalist>
@@ -50,24 +52,24 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 
             <div class="campo">
                 <label for="categoria">Categoria: </label>
-                <input list="categorias" name="categoria" id="categoria">
+                <input list="categorias" name="categoria" id="categoria" value=<?= $filtros["categoria"] ?? "" ?>>
                 <datalist id="categorias">
-                    <?php foreach ($categorias as $c): ?>
+                    <?php foreach (Produto::categorias() as $c): ?>
                         <option value=<?= $c ?>>
-                        <?php endforeach ?>
+                    <?php endforeach ?>
                 </datalist>
             </div>
 
             <div class="campo">
                 <label>Preço: </label>
-                <input required type="number" id="preco_min" placeholder="Min" name="preco_min" min=0>
-                <input required type="number" id="preco_max" placeholder="Max" name="preco_max" min=0>
+                <input type="number" id="preco_min" placeholder="Min" name="preco_min" min=0 value=<?= $filtros["preco_min"] ?? "" ?>>
+                <input type="number" id="preco_max" placeholder="Max" name="preco_max" min=0 value=<?= $filtros["preco_max"] ?? "" ?>>
             </div>
 
             <div class="campo">
                 <label>Criado entre: </label>
-                <input required type="date" id="preco_min" placeholder="Min" name="preco_min" min=0>
-                <input required type="date" id="preco_max" placeholder="Max" name="preco_max" min=0>
+                <input type="date" id="criado_em_min" placeholder="Min" name="criado_em_min" min=0 value=<?= $filtros["criado_em_min"] ?? "" ?>>
+                <input type="date" id="criado_em_max" placeholder="Max" name="criado_em_max" min=0 value=<?= $filtros["criado_em_max"] ?? "" ?>>
             </div>
 
             <div class="campo" id="botoes">
@@ -88,9 +90,9 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Nome</th>
                         <th>Preço</th>
+                        <th>Marca</th>
                         <th>Categoria</th>
                         <th>Detalhes</th>
                         <th>Excluir</th>
@@ -100,9 +102,9 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
                 <tbody>
                     <?php foreach ($produtos as $produto) : ?>
                         <tr>
-                            <td class='atributo' id='id'> <?= $produto->id ?></td>
                             <td class='atributo' id='nome'> <?= $produto->nome ?></td>
                             <td class='atributo' id='preco'> <?= $produto->preco ?></td>
+                            <td class='atributo' id='marca'> <?= $produto->marca ?></td>
                             <td class='atributo' id='categoria'> <?= $produto->categoria ?></td>
                             <td class='atributo'><a href='detalhes.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>visibility</a></td>
                             <td class='atributo'><a href='excluir.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>delete</a></td>
