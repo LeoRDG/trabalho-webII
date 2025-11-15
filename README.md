@@ -22,7 +22,7 @@ PHP/MySQL.*
    - [ ] *JavaScript* funcional para **validação.**
    - [x] *PHP* para **Inserir** dados no *BD*.
 
-- [ ] **4. Página para Excluir Dados.**
+- [x] **4. Página para Excluir Dados.**
 
 - [ ] **5. Página para Alteração de Dados.**
    - [ ] Com as mesmas **validações** da *inserção*

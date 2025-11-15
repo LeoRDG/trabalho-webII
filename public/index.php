@@ -26,7 +26,7 @@
         <li><label><input checked disabled type="checkbox"><b>Página para exibir os dados da tabela.</b></label>
             <ul>
                 <li><label><input checked disabled type="checkbox">Com opção para <b>Inserir</b> dados.</label></li>
-                <li><label><input disabled type="checkbox">Com opção para <b>Excluir</b> dados.</label></li>
+                <li><label><input checked disabled type="checkbox">Com opção para <b>Excluir</b> dados.</label></li>
                 <li><label><input disabled type="checkbox">Com opção para <b>Alterar</b> dados.</label></li>
             </ul>
         </li>
@@ -40,7 +40,7 @@
             </ul>
         </li>
 
-        <li><label><input disabled type="checkbox"><b>Página para Excluir Dados.</b></label></li>
+        <li><label><input checked disabled type="checkbox"><b>Página para Excluir Dados.</b></label></li>
 
         <li><label><input disabled type="checkbox"><b>Página para Alteração de Dados.</b></label>
             <ul>
