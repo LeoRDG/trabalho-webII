@@ -62,6 +62,11 @@ class Produto {
     }
 
 
+    function deletar(): bool {
+        return Banco::delete("DELETE FROM produtos WHERE id = ?", [$this->id]);
+    }
+
+
     static function get(): array {   
         $resultado = Banco::select("SELECT * FROM produtos", null, true);
 

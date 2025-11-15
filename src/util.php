@@ -10,7 +10,7 @@ function url(string $url, array $params=[]): string {
  * Gera a url para os botoes para ir para proxima pagina
  * Inclui na url os parametros dos filtros
  */
-function gerar_paginacao_url(string $pagina_num, array $filtros=[]){
+function gerar_paginacao_url(string $pagina_num, array $filtros=[]): string{
     $params = ["pagina" => $pagina_num];
     foreach ($filtros as $chave => $valor) {
         if ( !$valor || !in_array($chave, FILTROS_GET_PERMITIDOS) ) continue;
@@ -29,6 +29,22 @@ function gerar_filtros_get(): array{
     }
 
     return $filtros;
+}
+
+function get_id_produto(): int {
+    if ( !isset($_GET["pid"]) ) {
+        mensagem_erro("Informe o ID do produto!");
+        exit;
+    };
+
+    $id = $_GET["pid"];
+
+    if (!is_numeric($id)) {
+        mensagem_erro("ID invalido!");
+        exit;
+    }
+
+    return $id;
 }
 
 ?>

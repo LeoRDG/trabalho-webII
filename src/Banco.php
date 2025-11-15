@@ -71,6 +71,15 @@ class Banco {
         return $con->insert_id;
     }
 
+    /**
+     * Remove dados do banco
+     */
+    static function delete (string $query, ?array $params=null): bool{
+        self::validar_query($query, "delete");
+        $con = self::conexao();
+        return $con->execute_query($query, $params);
+    }
+
 
     /**
      * Busca todos os valores únicos de uma coluna

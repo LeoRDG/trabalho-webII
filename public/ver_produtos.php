@@ -57,6 +57,7 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
                         <th>Preço</th>
                         <th>Categoria</th>
                         <th>Detalhes</th>
+                        <th>Excluir</th>
                     </tr>
                 </thead>
 
@@ -68,6 +69,7 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
                             <td class='atributo' id='preco'> <?= $produto->preco ?></td>
                             <td class='atributo' id='categoria'> <?= $produto->categoria ?></td>
                             <td class='atributo'><a href='detalhes.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>visibility</a></td>
+                            <td class='atributo'><a href='excluir.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>delete</a></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

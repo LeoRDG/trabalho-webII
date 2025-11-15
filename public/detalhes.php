@@ -1,19 +1,15 @@
 <?php 
-if ( !isset($_GET["pid"]) ) {
-    echo "Informe um id";
-    exit;
-};
-
 require_once __DIR__ . "/../src/Produto.php";
-require_once __DIR__ . "/../src/util.php";
 require_once __DIR__ . "/../src/HTML.php";
+require_once __DIR__ . "/../src/util.php";
 
-$id = $_GET["pid"];
+$id = get_id_produto();
 
 $p = new Produto(["id" => $id]);
 $sucesso = $p->carregar();
+
 if (!$sucesso) {
-    echo "id Nao encontrado";
+    mensagem_erro("ID nao existe na tabela!");
     exit;
 };
 

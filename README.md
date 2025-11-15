@@ -13,7 +13,7 @@ PHP/MySQL.*
 
 - [x] **2. Página para exibir os dados da tabela.**
    - [x] Com opção para **Inserir** dados.
-   - [ ] Com opção para **Excluir** dados.
+   - [x] Com opção para **Excluir** dados.
    - [ ] Com opção para **Alterar** dados.
 
 - [x] **3. Formulário HTML para inserir dados.**
