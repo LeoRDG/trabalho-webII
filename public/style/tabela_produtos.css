@@ -9,6 +9,10 @@ table, tr, td {
     height: 80px;
 }
 
+tbody tr:hover {
+    background-color: rgb(186, 223, 186);
+}
+
 table{
     margin: 15px
 }

@@ -33,8 +33,13 @@
                 criar_input("radio", "condicao", "Condição", "", "", ["Novo", "Usado", "Recondicionado"]);
                 criar_input("checkbox", "frete_gratis", "Frete Grátis");
                 criar_input("file", "img", "Imagem");
+            ?>
 
-                botoes_formulario("Limpar", "Adicionar", "enviar", "resetar"); ?>
+            <div class='campo' id='botoes'>
+                <input type='reset' value='Limpar'>
+                <input type='submit' value='Adicionar'>
+            </div>
+
         </fieldset>
     </form>
 </body>

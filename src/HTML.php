@@ -37,7 +37,7 @@ function criar_input($tipo, $nome, $label, $modo="", $valor="", $opcoes=[]) {
         echo "</fieldset>";
     }
     else if ($tipo === "checkbox") {
-        $checked = ($valor != 0) ? "checked" : "";
+        $checked = ($valor) ? "checked" : "";
         echo "<input $checked $desativado type='$tipo' id='$nome' name='$nome'></input>";
         echo "<label for='$nome'>$label</label>";
     }
@@ -45,6 +45,37 @@ function criar_input($tipo, $nome, $label, $modo="", $valor="", $opcoes=[]) {
         echo "<input $desativado type='$tipo' value='$valor' name='$nome'>";
     }
     echo "</div>";
+}
+
+/**
+ * 
+ */
+function criar_filtros_inputs($filtros=[]){
+    $nome = ($filtros["nome"]) ?? "";
+    $marca = ($filtros["marca"]) ?? "";
+    $categoria = ($filtros["categoria"]) ?? "";
+
+    $preco = [
+        $filtros["preco_min"] ?? "",
+        $filtros["preco_max"] ?? ""
+    ];
+
+    $estoque = [
+        $filtros["estoque_min"] ?? "",
+        $filtros["estoque_max"] ?? ""
+    ];
+
+    $criado_em = [
+        $filtros["criado_em_min"] ?? "",
+        $filtros["criado_em_max"] ?? ""
+    ];
+
+    criar_input("text", "nome", "Nome", "filtro", $nome);
+    criar_input("lista", "marca", "Marca", "filtro", $marca, Produto::marcas());
+    criar_input("lista", "categoria", "Categoria", "filtro", $categoria, Produto::categorias());
+    criar_input("number", "preco", "Preco", "filtro", $preco);
+    criar_input("number", "estoque", "Estoque", "filtro", $estoque);
+    criar_input("date", "criado_em", "Criado entre", "filtro", $criado_em);
 }
 
 /**
@@ -62,16 +93,6 @@ function mensagem_erro(string $mensagem, string $id = "erro"): void {
 }
 
 /**
- * Gera os botões de formulário (reset e submit)
- */
-function botoes_formulario(string $texto_reset = "Limpar", string $texto_submit = "Enviar", string $id_reset = "resetar", string $id_submit = "enviar"): void {
-    echo "<div class='campo' id='botoes'>";
-    echo "<input type='reset' id='$id_reset' value='$texto_reset'>";
-    echo "<input type='submit' id='$id_submit' value='$texto_submit'>";
-    echo "</div>";
-}
-
-/**
  * Gera links de paginação
  */
 function links_paginacao(int $pagina_atual, int $pag_max, int $qtd_btn, array $filtros = []): void {
@@ -80,36 +101,6 @@ function links_paginacao(int $pagina_atual, int $pag_max, int $qtd_btn, array $f
         $url = gerar_paginacao_url($i, $filtros);
         echo "<a href='$url'>$i</a>";
     }
-}
-
-/**
- * Gera uma linha de tabela de produto
- */
-function linha_tabela_produto($produto): void {
-    $detalhes_url = url("detalhes.php", ["pid" => $produto->id]);
-    
-    echo "<tr>";
-    echo "<td class='atributo' id='id'> $produto->id </td>";
-    echo "<td class='atributo' id='nome'> $produto->nome </td>";
-    echo "<td class='atributo' id='preco'> $produto->preco </td>";
-    echo "<td class='atributo' id='categoria'> $produto->categoria </td>";
-    echo "<td class='atributo'><a href='$detalhes_url' class='material-symbols-outlined'>visibility</a></td>";
-    echo "</tr>";
-}
-
-/**
- * Gera o cabeçalho de uma tabela de produtos
- */
-function cabecalho_tabela_produtos(): void {
-    echo "<thead>";
-    echo "<tr>";
-    echo "<th>ID</th>";
-    echo "<th>Nome</th>";
-    echo "<th>Preço</th>";
-    echo "<th>Categoria</th>";
-    echo "<th>Detalhes</th>";
-    echo "</tr>";
-    echo "</thead>";
 }
 
 /**

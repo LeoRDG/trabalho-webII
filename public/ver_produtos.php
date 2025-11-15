@@ -22,10 +22,8 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 <html lang="en">
 
 <head>
-    <?php
-    $titulo = "Ver Produtos";
-    require_once __DIR__ . "/modulos/head.php";
-    ?>
+    <title>Ver Produtos</title>
+    <?php require_once __DIR__ . "/modulos/head.php"; ?>
     <link rel="stylesheet" href="style/tabela_produtos.css">
 </head>
 
@@ -34,28 +32,44 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 
     <form action="">
         <div class="filtros">
-            <?php require "modulos/filtros_produtos.php"; ?>
+            <?php criar_filtros_inputs($filtros) ?>
         </div>
-        <?php botoes_formulario("Limpar", "Buscar", "resetar", "enviar"); ?>
+
+        <div class='campo' id='botoes'>
+            <input type='reset' value='Resetar Filtros'>
+            <input type='submit' value='Pesquisar'>
+        </div>
     </form>
 
     <div class="main">
         <div id="tabela">
             <a href="adicionarproduto.php">Novo Produto</a>
-            <?php 
+            <?php
             info_paginacao($total_filtro, $total, $inicio, $fim);
             links_paginacao($pagina, $pag_max, BOTOES_PAGINACAO, $filtros);
             ?>
 
             <table>
-                <?php cabecalho_tabela_produtos(); ?>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Categoria</th>
+                        <th>Detalhes</th>
+                    </tr>
+                </thead>
 
                 <tbody>
-                    <?php 
-                    foreach ($produtos as $produto) {
-                        linha_tabela_produto($produto);
-                    }
-                    ?>
+                    <?php foreach ($produtos as $produto) : ?>
+                        <tr>
+                            <td class='atributo' id='id'> <?= $produto->id ?></td>
+                            <td class='atributo' id='nome'> <?= $produto->nome ?></td>
+                            <td class='atributo' id='preco'> <?= $produto->preco ?></td>
+                            <td class='atributo' id='categoria'> <?= $produto->categoria ?></td>
+                            <td class='atributo'><a href='detalhes.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>visibility</a></td>
+                        </tr>
+                    <?php endforeach ?>
                 </tbody>
             </table>
         </div>
