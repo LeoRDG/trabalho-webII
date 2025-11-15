@@ -199,11 +199,18 @@ class Produto {
                 $filtros_compostos[$chave][$minmax] = $valor;
             }
             else {
-                $filtro_strings[] = $chave;
-                $filtro_valores[] = $valor;
+                $filtro_strings[] = "$chave LIKE ?";
+                $filtro_valores[] = "%$valor%";
             }
         }
-        
+
+        foreach ($filtros_compostos as $chave => $arr) {
+            $min = ($arr["min"]) ?? 0;
+            $max = ($arr["max"]) ?? 2147483647;
+            $filtro_strings[] = "$chave BETWEEN ? AND ?";
+            array_push($filtro_valores, $min, $max);
+        }
+
 
         $string = ($filtro_strings) ? "WHERE " . implode("\nAND ", $filtro_strings) : "";
 

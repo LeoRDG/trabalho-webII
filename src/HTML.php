@@ -1,12 +1,5 @@
 <?php 
 
-namespace HTML;
-
-/**
- * HTML generation utility functions
- * Provides functions for generating HTML elements
- */
-
 /**
  * Cria um input HTML baseado no tipo especificado
  */
@@ -47,9 +40,6 @@ function criar_input($tipo, $nome, $label, $modo="", $valor="", $opcoes=[]) {
         echo "<input $checked $desativado type='$tipo' id='$nome' name='$nome'></input>";
         echo "<label for='$nome'>$label</label>";
     }
-    else if ($tipo === "file") {
-        echo "<input $desativado type='$tipo' value='$valor' name='$nome'>";
-    }
     else {
         echo "<input $desativado type='$tipo' value='$valor' name='$nome'>";
     }
@@ -88,7 +78,7 @@ function links_paginacao(int $pagina_atual, int $pag_max, int $qtd_btn, array $f
     
     for ($i = $pagina_atual - $qtd_btn; $i <= $pagina_atual + $qtd_btn; $i++) {
         if ($i <= 0 || $i > $pag_max) continue;
-        echo "<a href='" . \gerar_paginacao_url($i, $filtros) . "'> $i </a>";
+        echo "<a href='" . gerar_paginacao_url($i, $filtros) . "'> $i </a>";
     }
 }
 

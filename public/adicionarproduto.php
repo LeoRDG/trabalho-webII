@@ -2,10 +2,8 @@
 <html lang="pt-BR">
 
 <head>
-    <?php
-    $titulo = "Adicionar Produto";
-    require_once __DIR__ . "/modulos/head.php";
-    ?>
+    <title>Adicionar Produto</title>
+    <?php require_once __DIR__ . "/modulos/head.php" ?>
     <link rel="stylesheet" href="style/add_form_style.css">
 </head>
 
@@ -15,11 +13,6 @@
     require_once __DIR__ . "/../src/util.php";
     require_once __DIR__ . "/../src/HTML.php";
     require_once __DIR__ . "/../src/Produto.php";
-    use function HTML\mensagem_sucesso;
-    use function HTML\botoes_formulario;
-    $categorias = Produto::categorias();
-    $marcas = Produto::marcas();
-    $modo = "add";
     
     if (isset($_GET["sucesso"]) && $_GET["sucesso"] > 0) {
         mensagem_sucesso("Produto inserido com sucesso! id = {$_GET['sucesso']}");
@@ -30,9 +23,18 @@
         <fieldset class=form-add>
             <legend><h3>Adicionar Produto</h3></legend>
             <?php 
-                require_once __DIR__ . "/modulos/campos_produto.php";
-            ?>
-            <?php botoes_formulario("Limpar", "Adicionar", "enviar", "resetar"); ?>
+                criar_input("text", "nome", "Nome");
+                criar_input("lista", "marcas", "Marcas", "", "", Produto::marcas());
+                criar_input("lista", "categorias", "Categorias", "", "", Produto::categorias());
+                criar_input("textarea", "descricao", "Descricao");
+                criar_input("number", "preco", "Preco");
+                criar_input("number", "estoque", "Estoque");
+                criar_input("number", "peso", "Peso");
+                criar_input("radio", "condicao", "Condição", "", "", ["Novo", "Usado", "Recondicionado"]);
+                criar_input("checkbox", "frete_gratis", "Frete Grátis");
+                criar_input("file", "img", "Imagem");
+
+                botoes_formulario("Limpar", "Adicionar", "enviar", "resetar"); ?>
         </fieldset>
     </form>
 </body>

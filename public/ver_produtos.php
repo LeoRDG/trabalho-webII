@@ -17,15 +17,9 @@
     require_once __DIR__ . "/../src/util.php";
     require_once __DIR__ . "/../src/HTML.php";
     // use function HTML\botoes_formulario;
-    use HTML;
-    use function HTML\info_paginacao;
-    use function HTML\links_paginacao;
-    use function HTML\cabecalho_tabela_produtos;
-    use function HTML\linha_tabela_produto;
     
-    $pagina = $_GET["pagina"];
-    $filtros = gerar_filtros_get();
-                
+    $pagina = ($_GET["pagina"]) ?? 1;
+    $filtros = gerar_filtros_get();   
     $tamanho = 30;
     $total = Produto::quantidade_total();
     $total_filtro = Produto::quantidade_total($filtros);
@@ -40,7 +34,7 @@
         <div class="filtros">
             <?php require "modulos/filtros_produtos.php"; ?>
         </div>
-        <?php HTML\botoes_formulario("Limpar", "Buscar", "resetar", "enviar"); ?>
+        <?php botoes_formulario("Limpar", "Buscar", "resetar", "enviar"); ?>
     </form>
 
     <div class="main">
