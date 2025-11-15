@@ -1,24 +1,37 @@
-<?php 
-require_once __DIR__ . "/../src/Produto.php";
-require_once __DIR__ . "/../src/HTML.php";
-require_once __DIR__ . "/../src/util.php";
+<!DOCTYPE html>
 
-$id = get_id_produto();
+<head>
+    <?php require_once __DIR__ . "/modulos/head.php" ?>
+</head>
 
-$p = new Produto(["id" => $id]);
-$sucesso = $p->carregar();
+<body>
+    <?php
+    require_once __DIR__ . "/../src/Produto.php";
+    require_once __DIR__ . "/../src/HTML.php";
+    require_once __DIR__ . "/../src/util.php";
+    require_once __DIR__ . "/modulos/menu.php";
+    
+    $id = get_id_produto();
+    
+    $p = new Produto(["id" => $id]);
+    $sucesso = $p->carregar();
+    
+    if (!$sucesso) {
+        mensagem_erro("ID nao existe na tabela!");
+        exit;
+    }; ?>
 
-if (!$sucesso) {
-    mensagem_erro("ID nao existe na tabela!");
-    exit;
-};
+    <button id='edit'>Editar</button>
 
-criar_input("text", "nome", "Nome", "edit", "$p->nome");
-criar_input("lista", "marcas", "Marcas", "edit", "$p->marca", Produto::marcas());
-criar_input("lista", "categorias", "Categorias", "edit", "$p->categoria", Produto::categorias());
-criar_input("textarea", "descricao", "Descricao", "edit", $p->descricao);
-criar_input("number", "preco", "Preco", "edit", $p->preco);
-criar_input("number", "estoque", "Estoque", "edit", $p->estoque);
-criar_input("number", "peso", "Peso", "edit", $p->peso);
-criar_input("checkbox", "frete_gratis", "Frete Grátis", "edit", $p->frete_gratis);
-criar_input("radio", "condicao", "Condição", "edit", $p->condicao, ["Novo", "Usado", "Recondicionado"]);
+    <?php
+    criar_input("text", "nome", "Nome", "edit", "$p->nome");
+    criar_input("lista", "marcas", "Marcas", "edit", "$p->marca", Produto::marcas());
+    criar_input("lista", "categorias", "Categorias", "edit", "$p->categoria", Produto::categorias());
+    criar_input("textarea", "descricao", "Descricao", "edit", $p->descricao);
+    criar_input("number", "preco", "Preco", "edit", $p->preco);
+    criar_input("number", "estoque", "Estoque", "edit", $p->estoque);
+    criar_input("number", "peso", "Peso", "edit", $p->peso);
+    criar_input("checkbox", "frete_gratis", "Frete Grátis", "edit", $p->frete_gratis);
+    criar_input("radio", "condicao", "Condição", "edit", $p->condicao, ["Novo", "Usado", "Recondicionado"]);
+    ?>
+</body>
