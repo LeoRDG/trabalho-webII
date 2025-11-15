@@ -19,7 +19,7 @@
     }
     ?>
 
-    <form action="criarproduto.php" method="POST" enctype="multipart/form-data">
+    <form action="inserir.php" method="POST" enctype="multipart/form-data">
         <fieldset class=form-add>
             <legend><h3>Adicionar Produto</h3></legend>
             <?php 
