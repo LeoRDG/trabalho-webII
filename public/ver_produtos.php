@@ -32,12 +32,48 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 
     <form action="">
         <div class="filtros">
-            <?php criar_filtros_inputs($filtros) ?>
-        </div>
 
-        <div class='campo' id='botoes'>
-            <input type='reset' value='Resetar Filtros'>
-            <input type='submit' value='Pesquisar'>
+            <div class="campo">
+                <label for="nome">Nome: </label>
+                <input type="text" id="nome" name="nome">
+            </div>
+
+            <div class="campo">
+                <label for="marca">Marca: </label>
+                <input list="marcas" name="marca" id="marca">
+                <datalist id="marcas">
+                    <?php foreach ($marcas as $m): ?>
+                        <option value=<?= $m ?>>
+                    <?php endforeach ?>
+                </datalist>
+            </div>
+
+            <div class="campo">
+                <label for="categoria">Categoria: </label>
+                <input list="categorias" name="categoria" id="categoria">
+                <datalist id="categorias">
+                    <?php foreach ($categorias as $c): ?>
+                        <option value=<?= $c ?>>
+                        <?php endforeach ?>
+                </datalist>
+            </div>
+
+            <div class="campo">
+                <label>Preço: </label>
+                <input required type="number" id="preco_min" placeholder="Min" name="preco_min" min=0>
+                <input required type="number" id="preco_max" placeholder="Max" name="preco_max" min=0>
+            </div>
+
+            <div class="campo">
+                <label>Criado entre: </label>
+                <input required type="date" id="preco_min" placeholder="Min" name="preco_min" min=0>
+                <input required type="date" id="preco_max" placeholder="Max" name="preco_max" min=0>
+            </div>
+
+            <div class="campo" id="botoes">
+                <input type="reset" id="reset" value="Resetar">
+                <input type="submit" id="pesquisar" value="Pesquisar">
+            </div>
         </div>
     </form>
 
