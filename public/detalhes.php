@@ -6,6 +6,8 @@ if ( !isset($_GET["pid"]) ) {
 
 require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
+require_once __DIR__ . "/../src/HTML.php";
+use function HTML\criar_input;
 
 $id = $_GET["pid"];
 

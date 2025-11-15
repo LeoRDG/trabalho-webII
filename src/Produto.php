@@ -1,6 +1,7 @@
 <?php 
 
 require_once __DIR__ . "/Banco.php";
+require_once __DIR__ . "/consts.php";
 
 class Produto {
     public int $id;
@@ -186,19 +187,23 @@ class Produto {
     static function preparar_filtros(array $filtros) {
         $filtro_strings = [];
         $filtro_valores = [];
+        $filtros_compostos = [];
         $string = "";
-        foreach ($filtros as $k => $v) {
-            if (!$v || !$v[0] && !$v[1]) continue;
-            if (in_array($k, ["preco", "estoque", "criado_em"])) {
-                $filtro_strings[] = "$k BETWEEN ? AND ?";
-                $filtro_valores[] = $v[0];
-                $filtro_valores[] = $v[1];
+
+        foreach ($filtros as $chave => $valor) {
+            if (!$valor || !in_array($chave, FILTROS_GET_PERMITIDOS)) continue;
+
+            if (str_ends_with($chave, "_min") || str_ends_with($chave, "_max")){
+                $minmax = substr($chave, strlen($chave) - 3);
+                $chave = substr($chave, 0, strlen($chave) - 4);
+                $filtros_compostos[$chave][$minmax] = $valor;
             }
             else {
-                $filtro_strings[] = "$k LIKE ?";
-                $filtro_valores[] = "%$v%";
+                $filtro_strings[] = $chave;
+                $filtro_valores[] = $valor;
             }
         }
+        
 
         $string = ($filtro_strings) ? "WHERE " . implode("\nAND ", $filtro_strings) : "";
 

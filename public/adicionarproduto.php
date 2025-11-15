@@ -13,13 +13,16 @@
     <?php 
     require_once __DIR__ . "/modulos/menu.php";
     require_once __DIR__ . "/../src/util.php";
+    require_once __DIR__ . "/../src/HTML.php";
     require_once __DIR__ . "/../src/Produto.php";
+    use function HTML\mensagem_sucesso;
+    use function HTML\botoes_formulario;
     $categorias = Produto::categorias();
     $marcas = Produto::marcas();
     $modo = "add";
-
+    
     if (isset($_GET["sucesso"]) && $_GET["sucesso"] > 0) {
-        echo "<p id='sucesso'>Produto inserido com sucesso! id = {$_GET['sucesso']}</p>";
+        mensagem_sucesso("Produto inserido com sucesso! id = {$_GET['sucesso']}");
     }
     ?>
 
@@ -27,21 +30,9 @@
         <fieldset class=form-add>
             <legend><h3>Adicionar Produto</h3></legend>
             <?php 
-                criar_input("text", "nome", "Nome");
-                criar_input("lista", "marcas", "Marcas", "", "", $marcas);
-                criar_input("lista", "categorias", "Categorias", "", "", $categorias);
-                criar_input("textarea", "descricao", "Descricao");
-                criar_input("number", "preco", "Preco");
-                criar_input("number", "estoque", "Estoque");
-                criar_input("number", "peso", "Peso");
-                criar_input("radio", "condicao", "Condição", "", "", ["Novo", "Usado", "Recondicionado"]);
-                criar_input("checkbox", "frete_gratis", "Frete Grátis");
-                criar_input("file", "img", "Imagem");
+                require_once __DIR__ . "/modulos/campos_produto.php";
             ?>
-            <div class="campo" id="botoes">
-                <input type="reset" id="enviar" value="Limpar">
-                <input type="submit" id="resetar" value="Adicionar">
-            </div>
+            <?php botoes_formulario("Limpar", "Adicionar", "enviar", "resetar"); ?>
         </fieldset>
     </form>
 </body>

@@ -15,6 +15,17 @@
     require_once __DIR__ . "/modulos/menu.php";
     require_once __DIR__ . "/../src/Produto.php";
     require_once __DIR__ . "/../src/util.php";
+    require_once __DIR__ . "/../src/HTML.php";
+    // use function HTML\botoes_formulario;
+    use HTML;
+    use function HTML\info_paginacao;
+    use function HTML\links_paginacao;
+    use function HTML\cabecalho_tabela_produtos;
+    use function HTML\linha_tabela_produto;
+    
+    $pagina = $_GET["pagina"];
+    $filtros = gerar_filtros_get();
+                
     $tamanho = 30;
     $total = Produto::quantidade_total();
     $total_filtro = Produto::quantidade_total($filtros);
@@ -27,66 +38,28 @@
 
     <form action="">
         <div class="filtros">
-            <?php 
-                criar_input("text", "nome", "Nome", "filtro", $filtros["nome"]);
-                criar_input("lista", "marca", "Marca", "filtro", $filtros["marca"], Produto::marcas());
-                criar_input("lista", "categoria", "Categoria", "filtro", $filtros["categoria"], Produto::categorias());
-                criar_input("number", "preco", "Preco", "filtro", $filtros["preco"]);        
-                criar_input("number", "estoque", "Estoque", "filtro", $filtros["estoque"]);
-                criar_input("date", "criado_em", "Criado entre", "filtro", $filtros["criado_em"]);
-            ?>
+            <?php require "modulos/filtros_produtos.php"; ?>
         </div>
-        <div class="" id="botoes">
-                <input type="reset" id="resetar" value="Limpar">
-                <input type="submit" id="enviar" value="Buscar">
-        </div>
+        <?php HTML\botoes_formulario("Limpar", "Buscar", "resetar", "enviar"); ?>
     </form>
 
     <div class="main">
         <div id="tabela">
             <a href="adicionarproduto.php">Novo Produto</a>
-            <p><?= $total_filtro . " de " . $total ." Produtos encontrados (" . $inicio+1 . "-" . $fim . ")"?></p>
-
-            <?php
-            for ($i=$pagina-$qtd_btn; $i<=$pagina+$qtd_btn; $i++) {
-                if ($i > 0 && $i <=$pag_max) {
-                    $params = "pagina=$i";
-                    foreach ($filtros as $k => $v) {
-                        if (!$v || !$v[0] && !$v[1]) continue;
-                        if (in_array($k, ["preco", "estoque", "criado_em"])) {
-                            $params .= "&{$k}_min=$v[0]";
-                            $params .= "&{$k}_max=$v[1]";
-                        }
-                        else {
-                            $params .= "&$k=$v";
-                        }
-                    }
-                    echo "<a href='?$params'> $i </a>";
-                }
-            } 
+            <?php 
+            info_paginacao($total_filtro, $total, $inicio, $fim);
+            links_paginacao($pagina, $pag_max, $qtd_btn, $filtros);
             ?>
 
             <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Preço</th>
-                        <th>Categoria</th>
-                        <th>Detalhes</th>
-                    </tr>
-                </thead>
+                <?php cabecalho_tabela_produtos(); ?>
 
                 <tbody>
-                    <?php foreach ($produtos as $p): ?>
-                        <tr>
-                            <td class="atributo" id="id"><?= $p->id ?> </td>
-                            <td class="atributo" id="nome"><?= $p->nome ?> </td>
-                            <td class="atributo" id="preco"><?= $p->preco ?> </td>
-                            <td class="atributo" id="categoria"><?= $p->categoria ?> </td>
-                            <td class="atributo" id=""><a href="detalhes.php?pid=<?=$p->id?>" class="material-symbols-outlined">visibility</a ></td>
-                        </tr>
-                    <?php endforeach ?>
+                    <?php 
+                    foreach ($produtos as $p) {
+                        linha_tabela_produto($p);
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
