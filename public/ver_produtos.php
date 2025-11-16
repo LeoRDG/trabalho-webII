@@ -9,7 +9,6 @@ require_once __DIR__ . "/../src/HTML.php";
 
 $pagina = (int) ($_GET["pagina"] ?? 1);
 $filtros = array_filter($_GET, fn ($valor, $chave) => ($valor && in_array($chave, FILTROS_GET_PERMITIDOS)), ARRAY_FILTER_USE_BOTH);
-var_dump($filtros);
 
 $total = Produto::quantidade_total();
 $total_filtro = Produto::quantidade_total($filtros);
@@ -32,7 +31,7 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 <body>
     <?php require_once __DIR__ . "/modulos/menu.php"; ?>
 
-    <form action="">
+    <form id="form-filtros" action="">
         <div class="filtros">
 
             <div class="campo">
@@ -72,10 +71,10 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
                 <input type="date" id="criado_em_max" placeholder="Max" name="criado_em_max" min=0 value=<?= $filtros["criado_em_max"] ?? "" ?>>
             </div>
 
-            <div class="campo" id="botoes">
-                <input type="reset" id="reset" value="Resetar">
-                <input type="submit" id="pesquisar" value="Pesquisar">
-            </div>
+        </div>
+        <div class="campo" id="botoes">
+            <input type="reset" id="reset" value="Resetar">
+            <input type="submit" id="pesquisar" value="Pesquisar">
         </div>
     </form>
 
@@ -88,16 +87,15 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
             ?>
 
             <table>
-                <thead>
+                <!-- <thead>
                     <tr>
                         <th>Nome</th>
                         <th>Preço</th>
                         <th>Marca</th>
                         <th>Categoria</th>
-                        <th>Detalhes</th>
-                        <th>Excluir</th>
+                        <th colspan=2>Ação</th>
                     </tr>
-                </thead>
+                </thead> -->
 
                 <tbody>
                     <?php foreach ($produtos as $produto) : ?>
@@ -107,7 +105,7 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
                             <td class='atributo' id='marca'> <?= $produto->marca ?></td>
                             <td class='atributo' id='categoria'> <?= $produto->categoria ?></td>
                             <td class='atributo'><a href='detalhes.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>visibility</a></td>
-                            <td class='atributo'><a href='excluir.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>delete</a></td>
+                            <td class='atributo'><a href='excluir.php?pid=<?= $produto->id ?>' class='remove material-symbols-outlined'>delete</a></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

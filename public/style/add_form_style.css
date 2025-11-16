@@ -12,13 +12,14 @@ form{
 }
 
 .form-add{
-    width: 45%;
+    width: 66%;
+    margin: 50px;
 }
 
 .campo{
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin: 30px 10px;
 }
 
 .campo.frete_gratis{
@@ -29,7 +30,6 @@ form{
     font-size: 16px;
     padding: 5px;
     border-radius: 7px;
-    border: 1px solid lightgray;
 }
 
 textarea {
@@ -39,15 +39,8 @@ textarea {
 fieldset {
     padding: 10px;
     border-radius: 10px;
-    border: 1px solid lightgray;
-    
-}
-
-.campo label {
-    text-align: left;
-    font-size: 15px;
-    color: rgb(9, 9, 9);
-    padding: 0 0 2px 8px;
+    border: 1px solid var(--border);
+    background-color: var(--card);
 }
 
 #botoes {

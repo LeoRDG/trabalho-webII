@@ -13,6 +13,8 @@
     require_once __DIR__ . "/../src/util.php";
     require_once __DIR__ . "/../src/HTML.php";
     require_once __DIR__ . "/../src/Produto.php";
+
+    Produto::insereTeste(100);
     
     if (isset($_GET["sucesso"]) && $_GET["sucesso"] > 0) {
         mensagem_sucesso("Produto inserido com sucesso! id = {$_GET['sucesso']}");
@@ -72,7 +74,7 @@
                 <input required type="number" id="peso" name="peso" min=0>
             </div>
 
-            <fieldset class="campo">
+            <fieldset class="campo condicao">
                 <legend for="condicao">Condição: </legend>
                 <div>
                     <input required type="radio" value="Novo" id="Novo" name="condicao">

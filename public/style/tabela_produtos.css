@@ -3,45 +3,102 @@
 
 }
 
-table, tr, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+table, td, th {
+    border: none;
     height: 80px;
 }
 
-tbody tr:hover {
-    background-color: rgb(186, 223, 186);
+
+td{
+    border: solid var(--border);
+    border-width: 1px 0 1px 0;
+}
+
+td:hover{
+    border-color: var(--bg-hover);
+}
+
+td:first-child{
+    border: solid var(--border);
+    border-width: 1px 0 1px 1px;
+    border-radius: 20px 0 0 20px;
+}
+
+td:last-child{
+    border: solid var(--border);
+    border-width: 1px 1px 1px 0;
+    border-radius: 0 20px 20px 0;
+}
+
+
+thead tr th{
+    background-color: var(--card);
+    border: 2px solid var(--fg);
+    border-width: 0 0 3px 0;
+}
+
+tr *{
+    background-color: var(--bg);
+}
+
+tbody tr:hover td{
+    background-color: var(--card);
+    border-color: var(--border-focus);
 }
 
 table{
-    margin: 15px
+    /* margin: 15px; */
+    border-spacing: 0px 20px;
 }
 
-.filtros{ 
-    display: flex;
-    flex-direction: row;
-    flex-wrap:wrap;
-    background-color: beige;
+#form-filtros{
+    margin: 20px;
+    background-color: var(--card);
+    border-radius: 20px;
     padding: 20px;
 }
 
+.filtros{ 
+    background-color: var(--card);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .campo {
+    background-color: var(--card);
     margin: 14px;
     display: flex;
     flex-direction: column;
 }
 
 .campo input, textarea{
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    outline: none;
     font-size: 16px;
     padding: 5px;
-    border: 1px solid lightgray;
+    /* border: 1px solid lightgray; */
 }
 
 .campo label {
+    font-weight: bold;
+    background-color: var(--card);
     text-align: left;
     font-size: 15px;
-    color: rgb(9, 9, 9);
     padding: 0 0 2px 8px;
+}
+
+#botoes{
+    flex-direction: row;
+    justify-content: right;
+}
+
+#botoes *{
+    border-radius: 16px;
+    margin: 10px;
+    padding: 12px;
+    /* flex-grow: 1; */
 }
 
 .main {
@@ -50,4 +107,6 @@ table{
     justify-content: center;
 }
 
-
+.material-symbols-outlined{
+    background-color: #00000000;
+}

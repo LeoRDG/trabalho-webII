@@ -14,7 +14,7 @@ PHP/MySQL.*
 - [x] **2. Página para exibir os dados da tabela.**
    - [x] Com opção para **Inserir** dados.
    - [x] Com opção para **Excluir** dados.
-   - [ ] Com opção para **Alterar** dados.
+   - [x] Com opção para **Alterar** dados.
 
 - [x] **3. Formulário HTML para inserir dados.**
    - [x] Usando **tipos adequados.**
@@ -24,5 +24,5 @@ PHP/MySQL.*
 
 - [x] **4. Página para Excluir Dados.**
 
-- [ ] **5. Página para Alteração de Dados.**
+- [x] **5. Página para Alteração de Dados.**
    - [ ] Com as mesmas **validações** da *inserção*

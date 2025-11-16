@@ -51,7 +51,7 @@ class Produto {
         $resultado = Banco::select("SELECT * FROM produtos WHERE id = ?", [$this->id], true);
         if (!$resultado) return false;
         $resultado = $resultado[0];
-        // var_dump($resultado);
+
         foreach ($resultado as $chave => $valor){
             if (property_exists($this, $chave) && $valor !== null) {
                 if ($chave === "modificado_em") $this->$chave = date_create_from_format("Y-m-d h:i:s", $valor);
@@ -64,8 +64,6 @@ class Produto {
     function update(): bool {
         if (!isset($this->id)) return false; // Produto sem id, nao atualizar
         
-        var_dump(get_object_vars($this));
-
         $strings = [];
         $params = [];
         
@@ -79,7 +77,7 @@ class Produto {
         
         $q = "UPDATE produtos SET\n " . implode(",\n ", $strings) . "\n WHERE id = ?";
         // Crias as strings com os atributos e as interrogacoes
-;
+
         echo $q;
         //return Banco::insert("UPDATE produtos SET ($atributos) VALUES ($inters)", array_values($filtered_vars));
 

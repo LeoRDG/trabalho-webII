@@ -22,7 +22,8 @@ function links_paginacao(int $pagina_atual, int $pag_max, int $qtd_btn, array $f
     for ($i = $pagina_atual - $qtd_btn; $i <= $pagina_atual + $qtd_btn; $i++) {
         if ($i <= 0 || $i > $pag_max) continue;
         $url = gerar_paginacao_url($i, $filtros);
-        echo "<a href='$url'>$i</a>";
+        $atual = ($i == $pagina_atual) ? "atual" : "";
+        echo "<a class='pagina $atual' href='$url'>$i</a>";
     }
 }
 
