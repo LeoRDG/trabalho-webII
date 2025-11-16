@@ -35,18 +35,18 @@ class Produto {
         foreach (get_object_vars($this) as $chave => $valor) {
             if (!isset($exclude[$chave])) $filtered_vars[$chave] = $valor;
         }
-
+        
         // Manualmente adicionar a data
         $filtered_vars["criado_em"] = date_format(new DateTime(), "Y-m-d");
-
+        
         // Crias as strings com os atributos e as interrogacoes
         $atributos = implode(",", array_keys($filtered_vars) );
         $inters = implode(",", array_map(fn ($i) => "?", $filtered_vars) );
-
+        
         return Banco::insert("INSERT INTO produtos ($atributos) VALUES ($inters)", array_values($filtered_vars));
     }
-
-
+    
+    
     function carregar(): bool {
         $resultado = Banco::select("SELECT * FROM produtos WHERE id = ?", [$this->id], true);
         if (!$resultado) return false;
@@ -59,6 +59,31 @@ class Produto {
             }
         }
         return true;
+    }
+    
+    function update(): bool {
+        if (!isset($this->id)) return false; // Produto sem id, nao atualizar
+        
+        var_dump(get_object_vars($this));
+
+        $strings = [];
+        $params = [];
+        
+        $exclude = ["id", "modificado_em", "criado_em"];
+        foreach (get_object_vars($this) as $chave => $valor) {
+            if (in_array($chave, $exclude)) continue;
+            $strings[] = "$chave = ?";
+            $params[] = $valor;
+        }
+        $params[] = $this->id;
+        
+        $q = "UPDATE produtos SET\n " . implode(",\n ", $strings) . "\n WHERE id = ?";
+        // Crias as strings com os atributos e as interrogacoes
+;
+        echo $q;
+        //return Banco::insert("UPDATE produtos SET ($atributos) VALUES ($inters)", array_values($filtered_vars));
+
+        return Banco::update($q, $params);
     }
 
 

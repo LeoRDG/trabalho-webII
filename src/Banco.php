@@ -72,6 +72,21 @@ class Banco {
     }
 
     /**
+     * Roda um query do tipo INSERT no banco de dados
+     * @param string $query O query para rodar no banco
+     * @param ?array $params Os parametros para colocar no query
+     * @return int Um inteiro que representa o id dos dados inseridos
+     */
+    static function update (string $query, ?array $params=null): bool {
+        self::validar_query($query, "update");
+        
+        $con = self::conexao();
+        //$con->execute_query($query, $params);
+        
+        return $con->execute_query($query, $params);;
+    }
+
+    /**
      * Remove dados do banco
      */
     static function delete (string $query, ?array $params=null): bool{

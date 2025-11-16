@@ -6,7 +6,7 @@ $(window).on("load", () => {
     inputs.on("keyup change reset", (e) => validar_input(e.target));
 
     function toggle_inputs() {
-        inputs.each(function (){
+        inputs.not(".static").each(function (){
             $(this).prop("disabled", !$(this).prop("disabled")) ;
         });
     }
