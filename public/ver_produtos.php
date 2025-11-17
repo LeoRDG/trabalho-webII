@@ -1,6 +1,6 @@
 <?php
 define("ITENS_POR_PAGINA", 30);
-define("BOTOES_PAGINACAO", 4);
+define("BOTOES_PAGINACAO", 3);
 
 require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
@@ -25,7 +25,7 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 <head>
     <title>Ver Produtos</title>
     <?php require_once __DIR__ . "/modulos/head.php"; ?>
-    <link rel="stylesheet" href="style/tabela_produtos.css">
+    <link rel="stylesheet" href="style/ver_produtos.css">
 </head>
 
 <body>
@@ -77,14 +77,22 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
             <input type="submit" id="pesquisar" value="Pesquisar">
         </div>
     </form>
-
-    <div class="main">
+    
+    <main>
         <div id="tabela">
-            <a href="adicionarproduto.php">Novo Produto</a>
-            <?php
-            info_paginacao($total_filtro, $total, $inicio, $fim);
-            links_paginacao($pagina, $pag_max, BOTOES_PAGINACAO, $filtros);
-            ?>
+            <a id="add-novo" href="adicionarproduto.php">Novo Produto</a>
+            <?= "<p>" . $total_filtro . " de " . $total . " Produtos encontrados (" . ($inicio + 1) . "-" . $fim . ")</p>" ?>
+            <div id="paginas">
+                <?php
+                // Gera os links para ir para outras paginas
+                for ($i = $pagina - BOTOES_PAGINACAO; $i <= $pagina + BOTOES_PAGINACAO; $i++) {
+                    if ($i <= 0 || $i > $pag_max) continue;
+                    $url = gerar_paginacao_url($i, $filtros);
+                    $atual = ($i == $pagina) ? "atual" : "";
+                    echo "<a class='pagina $atual' href='$url'>$i</a>";
+                }
+                ?>
+            </div>
 
             <table>
                 <!-- <thead>
@@ -111,7 +119,7 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
                 </tbody>
             </table>
         </div>
-    </div>
+    </main>
 
 </body>
 

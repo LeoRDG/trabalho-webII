@@ -16,136 +16,282 @@
 
     --border: #22303B;
     --border-focus: #29D3E8;
-}
 
-
-input, textarea, .condicao{
-    border: solid var(--border);
-    outline: none;
-}
-
-input:focus, textarea:focus {
-    border-color: var(--border-focus);
-}
-
-input[type="checkbox"], input[type="radio"], input[type="checkbox"]:disabled {
-    accent-color: var(--primaria);
-    color: red;
-}
-
-p {
-    color: var(--text);
-}
-
-a{
-    color: var(--primaria);
-    font-style: none;
-    text-decoration: none;
-}
-
-a.remove{
-    color: var(--erro);
-}
-
-a.pagina{
-    margin: 2px;
-}
-
-a.pagina.atual{
-    color: var(--fg);
-}
-
-a:hover{
-    color: var(--primaria2);
-}
-
-input[type=reset] {
-    cursor: pointer;
-    font-weight: bold;
-}
-
-input[type=reset]:hover {
-    background-color: var(--aviso);
-    color: var(--bg);
-}
-
-input[type=submit] {
-    font-weight: bold;
-    background-color: var(--primaria);
-    color: var(--bg);
-    cursor: pointer;
-}
-
-input[type=submit]:hover {
-    background-color: var(--primaria2);
-}
-
-ol > li{
-    padding-top: 20px;
-}
-
-ul li:not(.menu li) {
-    padding-top: 5px;
-}
-
-label {
-    font-weight: bold;
-    background-color: var(--card);
-    text-align: left;
-    font-size: 15px;
-    padding: 0 0 2px 8px;
+    --input-focus: rgba(41, 211, 232, 0.05);
+    --sombra: rgba(41, 211, 232, 0.4);
+    --sombra2: rgba(245, 192, 57, 0.4);
 }
 
 * {
-    background-color: var(--bg);
-    color: var(--fg);
-    font-family: Roboto;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    font-family: Roboto;
+    background-color: var(--bg);
+    color: var(--fg);
 }
 
-.menu {
-    background-color: var(--primaria);
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    font-size: 20px;
-    position: sticky;
-    width: 100%;
-    top: 0;
-    left: 0;
-    box-shadow: 0 2px 10px rgba(23, 23, 24, 0.803);
-    margin-bottom: 10px;
+div {
+    background-color: transparent;
 }
 
-.menu a:hover {
-    background-color: var(--primaria2);
-}
-
-.menu * {
-    background-color: var(--primaria);
-    color: var(--bg);
-}
-
-.menu a{
-    text-decoration: none;
-    font-weight: Bold;
-    height: 100%;
-    display: block;
-    padding:10px;
-}
-
-.menu li{
-    padding: 0 10px 0 10px;
-    text-align: center;
-    height: 100%;
-    min-width: 100px;
-}
+/************************ INPUTS ************************/
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+form > fieldset,
+form > div{
+    width: 70%;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 0;
+    padding: 0 20px;
+}
+
+fieldset {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    transition: border-color 0.3s ease;
+    margin: 24px 20px;
+}
+
+fieldset:hover {
+    border-color: var(--border-focus);
+}
+
+fieldset legend {
+    font-size: 15px;
+    color: var(--primaria);
+    background-color: transparent;
+}
+
+div.campo {
+    display: flex;
+    flex-direction: column;
+    margin: 24px 20px;
+    gap: 4px;
+}
+
+div.frete_gratis{
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.campo input[type="text"],
+.campo input[type="number"],
+.campo input[type="date"],
+.campo input[type="file"],
+.campo input[list],
+.campo textarea {
+    font-size: 16px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+    background-color: var(--card);
+    color: var(--fg);
+    width: 100%;
+}
+
+.campo input[type="text"]:focus,
+.campo input[type="number"]:focus,
+.campo input[type="date"]:focus,
+.campo input[list]:focus,
+.campo textarea:focus {
+    border-color: var(--border-focus);
+    outline: none;
+    background-color: var(--input-focus);
+}
+
+textarea{
+    height: 150px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/******* INPUT BOTOES *******/
+
+div#botoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+    margin: 32px 0 16px 0;
+    padding-top: 20px;
+    border-top: 2px solid var(--border);
+}
+
+input[type=submit],
+input[type=reset],
+button {
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-grow: 1;
+}
+
+label {
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 0 2px 6px;
+}
+
+input[type=submit] {
+    background-color: var(--primaria);
+    color: var(--bg);
+    font-weight: 1000;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: var(--primaria2);
+    box-shadow: 0 4px 12px var(--sombra);
+    transform: translateY(-3px);
+}
+
+input[type=reset] {
+    background-color: var(--aviso);
+    color: var(--bg);
+    font-weight: 1000;
+    cursor: pointer;
+}
+
+input[type=reset]:hover {
+    box-shadow: 0 4px 12px var(--sombra2);
+    transform: translateY(-3px);
+}
+
+/******* INPUT ARQUIVO *******/
+
+.campo input[type="file"] {
+    padding: 10px;
+    cursor: pointer;
+    border-style: dashed;
+}
+
+.campo input[type="file"]:hover {
+    border-color: var(--border-focus);
+    background-color: var(--input-focus);
+}
+
+/******* INPUT RADIO/CHECKBoX *******/
+
+input[type="radio"],
+input[type="checkbox"]{
+    accent-color: var(--primaria);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.campo.check{
+    align-items: center;
+    flex-direction: row!important;
+}
+
+.check label {
+    background-color: transparent;
+    padding: 8px;
+    flex-grow: 1;
+    display: inline-block;
+    cursor: pointer;
+}
+
+fieldset.condicao {
+    background-color: var(--card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.condicao label{
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 400px;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    background-color: transparent;
+}
+
+label input{
+    transform: translate(0, 2px);
+    margin: 0 2px;
+}
+
+.condicao div:hover,
+.condicao label:hover,
+.condicao input:hover,
+.check label:hover {
+    background-color: var(--input-focus);
+}
+
+/********************** LINKS ***********************/
+
+a {
+    color: var(--primaria);
+    text-decoration: none;
+    margin: 2px;
+}
+
+a:hover {
+    color: var(--primaria2);
+}
+
+a.remove {
+    color: var(--erro);
+}
+
+a.pagina.atual {
+    color: var(--fg);
+}
+
+
+/********************** MENU **********************/
+
+ul.menu {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 20px;
+    list-style: none;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: var(--bg);
+    margin-bottom: 10px;
+    box-shadow: 0 3px 10px var(--sombra);
+}
+
+.menu li {
+    min-width: 30%;
+}
+
+.menu a {
+    text-align: center;
+    font-weight: Bold;
+    height: 96%;
+    display: block;
+    padding:10px;
+}
+
+.menu a:hover {
+    color: var(--fg);
+    background-color: var(--input-focus);
 }

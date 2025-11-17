@@ -1,0 +1,140 @@
+/************************** LINKS **************************/
+
+/********** Link Novo Produto **********/
+
+#add-novo {
+    padding: 12px 24px;
+    background-color: var(--primaria);
+    display: inline-block;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: var(--bg);
+    transition: all 0.3s ease;
+}
+
+#add-novo:hover {
+    background-color: var(--primaria2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(41, 211, 232, 0.4);
+}
+
+/********** Links Paginas **********/
+
+div#paginas{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    gap: 10px;
+    width: 50%;
+}
+
+a.pagina {
+    background-color: var(--primaria);
+    color: var(--bg);
+    padding: 5px;
+    margin: 0;
+    font-size: 20px;
+    border-radius: 6px;
+}
+
+/********** Links Detalhes/Delete **********/
+
+.material-symbols-outlined {
+    background-color: transparent;
+    font-size: 24px;
+    transition: transform 0.2s ease;
+}
+
+.material-symbols-outlined:hover {
+    transform: scale(1.2);
+}
+
+/************************** FORM **************************/
+#form-filtros {
+    background-color: var(--card);
+    padding: 30px 0px 25px 0;
+}
+
+div.filtros {
+    background-color: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 30px 40px;
+}
+
+.filtros .campo {
+    margin: 0;
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+}
+
+div#botoes {
+    border-top: none;
+    justify-content: right;
+    padding: 30px 0 0 0px;
+    margin: 0;
+}
+
+#botoes * {
+    border-radius: 16px;
+    flex: 0;
+}
+
+/************************** TABLE **************************/
+
+main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+div#tabela {
+    width: 100%;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+table {
+    border-spacing: 0 20px;
+    border: none;
+}
+
+th {
+    background-color: var(--card);
+    border: 2px solid var(--fg);
+    border-width: 0 0 3px 0;
+    height: 80px;
+    padding: 12px 10px 12px 15px;
+}
+
+td {
+    border: solid var(--border);
+    border-width: 1px 0 1px 0;
+    padding: 12px 10px 12px 15px;
+    height: 80px;
+    text-wrap: wrap;
+}
+
+td:first-child {
+    border: solid var(--border);
+    border-width: 1px 0 1px 1px;
+    border-radius: 20px 0 0 20px;
+}
+
+td:last-child {
+    border: solid var(--border);
+    border-width: 1px 1px 1px 0;
+    border-radius: 0 20px 20px 0;
+}
+
+tr:hover td {
+    background-color: var(--input-focus);
+    border-color: var(--border-focus);
+}

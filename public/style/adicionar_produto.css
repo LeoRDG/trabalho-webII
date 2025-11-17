@@ -1,0 +1,18 @@
+fieldset.form-add {
+    width: 100%;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 10px 20px 20px 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.form-add:hover {
+    box-shadow: 0 12px 40px rgba(41, 211, 232, 0.05);
+}
+
+.form-add legend,
+legend h3 {
+    font-weight: 600;
+    color: var(--primaria);
+}

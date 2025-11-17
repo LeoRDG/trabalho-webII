@@ -4,7 +4,7 @@
 <head>
     <title>Adicionar Produto</title>
     <?php require_once __DIR__ . "/modulos/head.php" ?>
-    <link rel="stylesheet" href="style/add_form_style.css">
+    <link rel="stylesheet" href="style/adicionar_produto.css">
 </head>
 
 <body>
@@ -76,20 +76,20 @@
 
             <fieldset class="campo condicao">
                 <legend for="condicao">Condição: </legend>
-                <div>
+                <label for="Novo">
                     <input required type="radio" value="Novo" id="Novo" name="condicao">
-                    <label for="Novo">Novo</label>
-                </div>
+                    Novo
+                </label>
 
-                <div>
+                <label for="Usado">
                     <input type="radio" value="Usado" id="Usado" name="condicao">
-                    <label for="Usado">Usado</label>
-                </div>
+                    Usado
+                </label>
 
-                <div>
+                <label for="Recondicionado">
                     <input type="radio" value="Recondicionado" id="Recondicionado" name="condicao">
-                    <label for="Recondicionado">Recondicionado</label>
-                </div>
+                    Recondicionado
+                </label>
             </fieldset>
 
             <div class="campo">
@@ -97,11 +97,11 @@
                 <input type="file" name="img">
             </div>
 
-            <div class="campo">
-                <div>
-                    <input type="checkbox" id="frete" name="frete">
-                    <label for="frete">Frete Grátis</label>
-                </div>
+            <div class="campo check">
+                <label>
+                    <input type="checkbox" name="frete">
+                    Frete Grátis
+                </label>
             </div>
 
             <div class="campo" id="botoes">

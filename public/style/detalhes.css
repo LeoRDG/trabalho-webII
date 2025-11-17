@@ -1,0 +1,80 @@
+/* ===== PRODUCT DETAILS PAGE SPECIFIC STYLES ===== */
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#edit {
+    display: block;
+    margin: 20px auto;
+    background-color: var(--primaria);
+    color: var(--bg);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#edit:hover {
+    background-color: var(--primaria2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--sombra)
+}
+
+form {
+    background-color: var(--card);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin: 0px 0 30px 0;
+}
+
+.campo{
+    margin: 10px 0!important;
+}
+
+.campo label {
+    color: var(--primaria);
+    font-weight: bold;
+}
+
+.condicao label,
+.check label {
+    color: var(--text);
+    font-weight: normal;
+}
+
+.condicao label,
+.check label {
+    color: var(--text);
+    font-weight: normal;
+}
+
+.campo input.static {
+    background-color: rgba(34, 48, 59, 0.7);
+    color: var(--text);
+    font-style: italic;
+}
+
+.campo input:disabled,
+.campo textarea:disabled {
+    opacity: 0.6;
+    cursor:default;
+    background-color: rgba(34, 48, 59, 0.3);
+}
+
+.campo input.static {
+    background-color: rgba(34, 48, 59, 0.5);
+    cursor: default;
+}
+
+input[type=submit]:disabled {
+    opacity: 0.75;
+    cursor: default;
+    transform: none;
+}
+
+input[type=submit]:disabled:hover {
+    box-shadow: none;
+}
