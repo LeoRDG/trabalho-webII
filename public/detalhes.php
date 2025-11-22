@@ -18,7 +18,7 @@
     $sucesso = $p->carregar();
 
     if (!$sucesso) {
-        mensagem_erro("ID nao existe na tabela!");
+        echo ("ID nao existe na tabela!");
         exit;
     }; ?>
 
@@ -73,7 +73,7 @@
 
             <div class="campo">
                 <label for="estoque">Estoque: </label>
-                <input disabled required type="number" id="estoque" name="estoque" min="0" value="<?= $p->estoque ?>">
+                <input disabled type="number" id="estoque" name="estoque" min="0" value="<?= $p->estoque ?>">
                 <small class="erro" hidden></small>
             </div>
 
@@ -102,13 +102,13 @@
                     <input disabled <?= $checked ?> type="radio" value="Recondicionado" id="Recondicionado" name="condicao">
                     Recondicionado
                 </label>
-                <small class="erro"></small>
+                <small class="ë></small>
             </fieldset>
 
             <div class="campo check">
                 <?php $checked = ($p->frete_gratis) ? "checked" : "" ?>
                 <label for="frete">
-                    <input disabled $checked type="checkbox" id="frete" name="frete">
+                    <input disabled $checked type="checkbox" id="frete" name="frete_gratis">
                     Frete Grátis
                 </label>
             </div>

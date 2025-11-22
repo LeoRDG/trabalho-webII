@@ -11,7 +11,6 @@
     <?php 
     require_once __DIR__ . "/modulos/menu.php";
     require_once __DIR__ . "/../src/util.php";
-    require_once __DIR__ . "/../src/HTML.php";
     require_once __DIR__ . "/../src/Produto.php";
     
     if (isset($_GET["sucesso"]) && $_GET["sucesso"] > 0) {
@@ -103,7 +102,7 @@
 
             <div class="campo check">
                 <label>
-                    <input type="checkbox" name="frete">
+                    <input type="checkbox" name="frete_gratis">
                     Frete Grátis
                 </label>
             </div>
