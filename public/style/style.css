@@ -7,7 +7,7 @@
     --text: #c6cbce;
 
     --primaria: #29D3E8;
-    --primaria2: #007bff;
+    --primaria2: #16c4d3;
 
     --sucesso: #3DF57F;
     --aviso: #F5C039;
@@ -33,6 +33,11 @@
 
 div {
     background-color: transparent;
+}
+
+.erro{
+    border-color: var(--erro)!important;
+    color: var(--erro)!important;
 }
 
 /************************ INPUTS ************************/
@@ -254,7 +259,7 @@ a:hover {
     color: var(--primaria2);
 }
 
-a.remove {
+a.remover {
     color: var(--erro);
 }
 

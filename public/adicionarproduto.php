@@ -13,13 +13,14 @@
     require_once __DIR__ . "/../src/util.php";
     require_once __DIR__ . "/../src/HTML.php";
     require_once __DIR__ . "/../src/Produto.php";
-
-    Produto::insereTeste(100);
     
     if (isset($_GET["sucesso"]) && $_GET["sucesso"] > 0) {
         mensagem_sucesso("Produto inserido com sucesso! id = {$_GET['sucesso']}");
     }
     ?>
+
+    <a class="erro" href="inserir.php?multiplos=1000">Inserir 1000 produtos aleatórios!</a>
+    <a class="remover" href="excluir.php?todos=1">Deletar todos os produtos</a>
 
     <form action="inserir.php" method="POST" enctype="multipart/form-data">
         <fieldset class=form-add>
@@ -27,15 +28,17 @@
 
             <div class="campo">
                 <label for="nome">Nome: </label>
-                <input required type="text" id="nome" name="nome">
+                <input class="texto" required type="text" id="nome" name="nome">
+                <small class="erro" hidden></small>
             </div>
 
             <div class="campo">
                 <label for="marca">Marca: </label>
-                <input list="marcas" name="marca" id="marca">
+                <input class="texto" list="marcas" name="marca" id="marca">
+                <small class="erro" hidden></small>
                 <datalist id="marcas">
 
-                    <?php foreach ($marcas as $m): ?>
+                    <?php foreach (Produto::marcas() as $m): ?>
                         <option value=<?= $m ?>>
                         <?php endforeach ?>
 
@@ -44,34 +47,39 @@
 
             <div class="campo">
                 <label for="categoria">Categoria: </label>
-                <input list="categorias" name="categoria" id="categoria">
+                <input class="texto" list="categorias" name="categoria" id="categoria">
+                <small class="erro" hidden></small>
                 <datalist id="categorias">
 
-                    <?php foreach ($categorias as $c): ?>
+                    <?php foreach (Produto::categorias() as $c): ?>
                         <option value=<?= $c ?>>
-                        <?php endforeach ?>
+                    <?php endforeach ?>
 
                 </datalist>
             </div>
 
             <div class="campo">
                 <label for="descricao">Descrição: </label>
-                <textarea name="descricao" id="descricao"></textarea>
+                <textarea class="texto" name="descricao" id="descricao"></textarea>
+                <small class="erro" hidden></small>
             </div>
 
             <div class="campo">
                 <label for="preco">Preço: </label>
-                <input required type="number" id="preco" name="preco" min=0>
+                <input class="numero" required type="text" id="preco" name="preco" min="0", step="0.01">
+                <small class="erro" hidden></small>
             </div>
 
             <div class="campo">
                 <label for="estoque">Estoque: </label>
-                <input type="number" id="estoque" name="estoque" min=0>
+                <input class="numero" required type="number" id="estoque" name="estoque" min="0">
+                <small class="erro" hidden></small>
             </div>
 
             <div class="campo">
-                <label for="peso">Peso: </label>
-                <input required type="number" id="peso" name="peso" min=0>
+                <label for="peso">Peso (g): </label>
+                <input class="numero" required type="number" id="peso" name="peso" min="0" step="0.1">
+                <small class="erro" hidden></small>
             </div>
 
             <fieldset class="campo condicao">
@@ -90,6 +98,7 @@
                     <input type="radio" value="Recondicionado" id="Recondicionado" name="condicao">
                     Recondicionado
                 </label>
+                <small class="erro" hidden></small>
             </fieldset>
 
             <div class="campo check">
@@ -100,8 +109,8 @@
             </div>
 
             <div class="campo" id="botoes">
-                <input type="reset" id="enviar" value="Limpar">
-                <input type="submit" id="resetar" value="Adicionar">
+                <input type="reset" id="resetar" value="Limpar">
+                <input type="submit" id="enviar" value="Adicionar">
             </div>
 
         </fieldset>

@@ -61,20 +61,20 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 
             <div class="campo">
                 <label>Preço: </label>
-                <input type="number" id="preco_min" placeholder="Min" name="preco_min" min=0 value=<?= $filtros["preco_min"] ?? "" ?>>
-                <input type="number" id="preco_max" placeholder="Max" name="preco_max" min=0 value=<?= $filtros["preco_max"] ?? "" ?>>
+                <input type="number" id="preco_min" placeholder="Min" name="preco_min" min="0" step="0.01" value=<?= $filtros["preco_min"] ?? "" ?>>
+                <input type="number" id="preco_max" placeholder="Max" name="preco_max" min="0" step="0.01" value=<?= $filtros["preco_max"] ?? "" ?>>
             </div>
 
             <div class="campo">
                 <label>Criado entre: </label>
-                <input type="date" id="criado_em_min" placeholder="Min" name="criado_em_min" min=0 value=<?= $filtros["criado_em_min"] ?? "" ?>>
-                <input type="date" id="criado_em_max" placeholder="Max" name="criado_em_max" min=0 value=<?= $filtros["criado_em_max"] ?? "" ?>>
+                <input type="date" id="criado_em_min" placeholder="Min" name="criado_em_min" value=<?= $filtros["criado_em_min"] ?? "" ?>>
+                <input type="date" id="criado_em_max" placeholder="Max" name="criado_em_max" value=<?= $filtros["criado_em_max"] ?? "" ?>>
             </div>
 
         </div>
         <div class="campo" id="botoes">
             <input type="reset" id="reset" value="Resetar">
-            <input type="submit" id="pesquisar" value="Pesquisar">
+            <input type="submit" id="enviar" value="Pesquisar">
         </div>
     </form>
     
@@ -113,7 +113,7 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
                             <td class='atributo' id='marca'> <?= $produto->marca ?></td>
                             <td class='atributo' id='categoria'> <?= $produto->categoria ?></td>
                             <td class='atributo'><a href='detalhes.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>visibility</a></td>
-                            <td class='atributo'><a href='excluir.php?pid=<?= $produto->id ?>' class='remove material-symbols-outlined'>delete</a></td>
+                            <td class='atributo'><a href='excluir.php?pid=<?= $produto->id ?>' class='remover material-symbols-outlined'>delete</a></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

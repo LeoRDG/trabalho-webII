@@ -53,7 +53,7 @@ class Produto {
 
         foreach ($resultado as $chave => $valor){
             if (property_exists($this, $chave) && $valor !== null) {
-                if ($chave === "modificado_em") $this->$chave = date_create_from_format("Y-m-d h:i:s", $valor);
+                if ($chave == "modificado_em") $this->$chave = date_create_from_format("Y-m-d H:i:s", $valor);
                 else $this->$chave = $valor;
             }
         }
@@ -257,5 +257,9 @@ class Produto {
         $result = Banco::select($q, $filtro_valores, true);
         $produtos = array_map(fn($i) => new Produto($i), $result); 
         return $produtos;
+    }
+
+    static function remover_todos(){
+        Banco::delete("DELETE FROM produtos");
     }
 }
