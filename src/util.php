@@ -20,16 +20,23 @@ function gerar_paginacao_url(string $pagina_num, array $filtros=[]): string{
 }
 
 
+function redirecionar($url) {
+    $location = $url ?? $_SERVER["HTTP_REFERER"] ?? "index.html";
+    header("Location: $location");
+        
+}
+
+
 function get_id_produto(): int {
     if ( !isset($_GET["pid"]) ) {
-        mensagem_erro("Informe o ID do produto!");
+        echo ("Informe o ID do produto!");
         exit;
     };
 
     $id = $_GET["pid"];
 
     if (!is_numeric($id)) {
-        mensagem_erro("ID invalido!");
+        echo ("ID invalido!");
         exit;
     }
 

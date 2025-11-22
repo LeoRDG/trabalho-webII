@@ -15,7 +15,7 @@
     require_once __DIR__ . "/../src/Produto.php";
     
     if (isset($_GET["sucesso"]) && $_GET["sucesso"] > 0) {
-        mensagem_sucesso("Produto inserido com sucesso! id = {$_GET['sucesso']}");
+        echo ("Produto inserido com sucesso! id = {$_GET['sucesso']}");
     }
     ?>
 
@@ -66,7 +66,7 @@
 
             <div class="campo">
                 <label for="preco">Preço: </label>
-                <input class="numero" required type="text" id="preco" name="preco" min="0", step="0.01">
+                <input class="numero" required type="text" id="preco" name="preco" min="0" step="0.01">
                 <small class="erro" hidden></small>
             </div>
 

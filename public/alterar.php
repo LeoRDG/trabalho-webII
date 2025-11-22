@@ -1,7 +1,10 @@
 <?php
 require_once __DIR__ . "/../src/Produto.php";
+require_once __DIR__ . "/../src/util.php";
 
-$p = new Produto($_POST);
+if ( !empty($_POST) ) {
+    $p = new Produto($_POST);
+    $p->update();
+}
 
-$p->update();
-
+redirecionar($redirecionar ?? null);
