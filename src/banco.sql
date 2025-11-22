@@ -12,7 +12,6 @@ CREATE TABLE `produtos` (
     `peso` DECIMAL(10,2) NOT NULL,
     `condicao` ENUM('Novo','Usado','Recondicionado') NOT NULL,
     `frete_gratis` TINYINT NOT NULL DEFAULT 0,
-    `imagem` VARCHAR(100),
     `criado_em` DATE NOT NULL DEFAULT (CURDATE()),
     `modificado_em` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

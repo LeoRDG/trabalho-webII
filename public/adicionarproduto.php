@@ -92,11 +92,6 @@
                 </label>
             </fieldset>
 
-            <div class="campo">
-                <label for="img" accept="image/*">Imagem do Produto</label>
-                <input type="file" name="img">
-            </div>
-
             <div class="campo check">
                 <label>
                     <input type="checkbox" name="frete">

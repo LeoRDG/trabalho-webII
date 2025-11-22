@@ -13,7 +13,6 @@ class Produto {
     public string $categoria;
     public string $descricao;
     public string $condicao;
-    public string $imagem;
     public bool $frete_gratis;
     public string $criado_em; 
     public DateTime $modificado_em; 
