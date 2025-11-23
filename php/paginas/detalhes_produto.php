@@ -64,7 +64,7 @@
 
             <div class="campo">
                 <label for="preco">Preço: </label>
-                <input disabled required type="number" id="preco" name="preco" min="0" step="0.01" value="<?= $p->preco ?>">
+                <input disabled required type="number" class="preco" id="preco" name="preco" min="0" step="0.01" value="<?= $p->preco ?>">
                 <small class="erro" hidden></small>
             </div>
 

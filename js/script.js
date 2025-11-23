@@ -13,14 +13,14 @@ $(window).on("load", () => {
     $("input#categoria").on("keyup change reset", (e) => validar_texto(e.target, 40));
     $("textarea#descricao").on("keyup change reset", (e) => validar_texto(e.target, 4_000, /[^\w\sãõáéíóúÁÉÍÓÚçâôêÂÔ\-\.@&%$!\(\):,"\?]/g));
     
-    $("input#preco").on("keyup change reset", (e) => validar_numero(e.target, 1.00, 1_000_000.00, 2));
+    $("input.preco").on("keyup change reset", (e) => validar_numero(e.target, 1.00, 1_000_000.00, 2));
     $("input#estoque").on("keyup change reset", (e) => validar_numero(e.target, 0, 500, 0));
     $("input#peso").on("keyup change reset", (e) => validar_numero(e.target, 1.0, 20_000.0, 1));
 
     $("a.remover").click((e) => confirm("Tem certeza que quer fazer isso?") ? null : e.preventDefault());
 
     $(".msg").slideDown(200);
-    setTimeout(() => $(".msg").slideUp(200), 2500);
+    setTimeout(() => $(".msg").slideUp(200), 5000);
 
     function toggle_inputs() {
         inputs.not(".static").each(function (){

@@ -8,13 +8,20 @@ require_once __DIR__ . "/../src/util.php";
 $pagina = (int) ($_GET["pagina"] ?? 1);
 $filtros = array_filter($_GET, fn ($valor, $chave) => ($valor && in_array($chave, FILTROS_GET_PERMITIDOS)), ARRAY_FILTER_USE_BOTH);
 
-$total = Produto::quantidade_total();
-$total_filtro = Produto::quantidade_total($filtros);
-$pag_max = ceil($total_filtro / ITENS_POR_PAGINA);
-$inicio = ($pagina - 1) * ITENS_POR_PAGINA;
-$fim = ($pagina == $pag_max) ? $total_filtro : $inicio + ITENS_POR_PAGINA;
+try {
+    $total = Produto::quantidade_total();
+    $total_filtro = Produto::quantidade_total($filtros);
+    $pag_max = ceil($total_filtro / ITENS_POR_PAGINA);
+    $inicio = ($pagina - 1) * ITENS_POR_PAGINA;
+    $fim = ($pagina == $pag_max) ? $total_filtro : $inicio + ITENS_POR_PAGINA;
 
-$produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
+    $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
+    $marcas = Produto::marcas();
+    $categorias = Produto::categorias();
+}
+catch (Exception $e) {
+    redirecionar("index.php?erro={$e->getMessage()}");
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,13 +45,15 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
             <div class="campo">
                 <label for="nome">Nome: </label>
                 <input type="text" id="nome" name="nome" value="<?= $filtros["nome"] ?? "" ?>">
+                <small class="erro" hidden></small>
             </div>
 
             <div class="campo">
                 <label for="marca">Marca: </label>
                 <input list="marcas" name="marca" id="marca" value=<?= $filtros["marca"] ?? "" ?>>
+                <small class="erro" hidden></small>
                 <datalist id="marcas">
-                    <?php foreach (Produto::marcas() as $m): ?>
+                    <?php foreach ($marcas as $m): ?>
                         <option value=<?= $m ?>>
                     <?php endforeach ?>
                 </datalist>
@@ -53,8 +62,9 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
             <div class="campo">
                 <label for="categoria">Categoria: </label>
                 <input list="categorias" name="categoria" id="categoria" value=<?= $filtros["categoria"] ?? "" ?>>
+                <small class="erro" hidden></small>
                 <datalist id="categorias">
-                    <?php foreach (Produto::categorias() as $c): ?>
+                    <?php foreach ($categorias as $c): ?>
                         <option value=<?= $c ?>>
                     <?php endforeach ?>
                 </datalist>
@@ -62,20 +72,26 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 
             <div class="campo">
                 <label>Preço: </label>
-                <input type="number" id="preco_min" placeholder="Min" name="preco_min" min="0" step="0.01" value=<?= $filtros["preco_min"] ?? "" ?>>
-                <input type="number" id="preco_max" placeholder="Max" name="preco_max" min="0" step="0.01" value=<?= $filtros["preco_max"] ?? "" ?>>
+                <input type="number" class="preco" id="preco_min" placeholder="Min" name="preco_min" min="0" step="0.01" value=<?= $filtros["preco_min"] ?? "" ?>>
+                <small class="erro" hidden></small>
+                <input type="number" class="preco" id="preco_max" placeholder="Max" name="preco_max" min="0" step="0.01" value=<?= $filtros["preco_max"] ?? "" ?>>
+                <small class="erro" hidden></small>
             </div>
 
             <div class="campo">
                 <label>Criado entre: </label>
                 <input type="date" id="criado_em_min" placeholder="Min" name="criado_em_min" value=<?= $filtros["criado_em_min"] ?? "" ?>>
+                <small class="erro" hidden></small>
                 <input type="date" id="criado_em_max" placeholder="Max" name="criado_em_max" value=<?= $filtros["criado_em_max"] ?? "" ?>>
+                <small class="erro" hidden></small>
             </div>
 
         </div>
         <div class="campo" id="botoes">
             <input type="reset" id="reset" value="Resetar">
+            <small class="erro" hidden></small>
             <input type="submit" id="enviar" value="Pesquisar">
+            <small class="erro" hidden></small>
         </div>
     </form>
     
@@ -88,8 +104,8 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
                 // Gera os links para ir para outras paginas
                 for ($i = $pagina - BOTOES_PAGINACAO; $i <= $pagina + BOTOES_PAGINACAO; $i++) {
                     if ($i <= 0 || $i > $pag_max) continue;
-                    $url = gerar_paginacao_url($i, $filtros);
                     $atual = ($i == $pagina) ? "atual" : "";
+                    $url = ($i == $pagina) ? "" : gerar_paginacao_url($i, $filtros);
                     echo "<a class='pagina $atual' href='$url'>$i</a>";
                 }
                 ?>

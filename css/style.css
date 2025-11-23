@@ -35,7 +35,7 @@ div {
     background-color: transparent;
 }
 
-p, span {
+p, span, small {
     background-color: inherit;
     color: inherit;
 }
@@ -289,11 +289,6 @@ a.remover {
     color: var(--erro);
 }
 
-a.pagina.atual {
-    color: var(--fg);
-}
-
-
 /********************** MENU **********************/
 
 ul.menu {
@@ -315,11 +310,18 @@ ul.menu {
 }
 
 .menu a {
+    color: var(--text)!important;
     text-align: center;
     font-weight: Bold;
     height: 96%;
     display: block;
     padding:10px;
+}
+
+.menu a.current {
+    font-weight: bolder!important;
+    color: var(--bg)!important;
+    background-color: var(--primaria)!important;
 }
 
 .menu a:hover {

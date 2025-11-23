@@ -7,7 +7,7 @@ try {
     $qtd = $_GET["multiplos"] ?? null;
     if ( is_numeric($qtd) ) {
         Produto::insereTeste($qtd);
-        $red_url = "../paginas/adicionar_produto.php?sucesso=$qtd produtos inserido com sucesso!";
+        $red_url = "../paginas/ver_produtos.php?sucesso=$qtd produtos inserido com sucesso!";
     }
 
     if (!empty($_POST)) {

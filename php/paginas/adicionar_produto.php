@@ -13,10 +13,15 @@
     include __DIR__ . "/../include/msg.php";
     require_once __DIR__ . "/../src/util.php";
     require_once __DIR__ . "/../src/Produto.php";
-    ?>
 
-    <a class="erro" href="../actions/inserir.php?multiplos=1000">Inserir 1000 produtos aleatórios!</a>
-    <a class="remover" href="../actions/excluir.php?todos=1">Deletar todos os produtos</a>
+    try {
+        $marcas = Produto::marcas();
+        $categorias = Produto::categorias();
+    } 
+    catch (Exception $e) {
+        redirecionar("index.php?erro={$e->getMessage()}");
+    }
+    ?>
 
     <form action="../actions/inserir.php" method="POST" enctype="multipart/form-data">
         <fieldset class=form-add>
@@ -34,7 +39,7 @@
                 <small class="erro" hidden></small>
                 <datalist id="marcas">
 
-                    <?php foreach (Produto::marcas() as $m): ?>
+                    <?php foreach ($marcas as $m): ?>
                         <option value="<?= $m ?>">
                     <?php endforeach ?>
 
@@ -47,7 +52,7 @@
                 <small class="erro" hidden></small>
                 <datalist id="categorias">
 
-                    <?php foreach (Produto::categorias() as $c): ?>
+                    <?php foreach ($categorias as $c): ?>
                         <option value="<?= $c ?>">
                     <?php endforeach ?>
 
@@ -62,7 +67,7 @@
 
             <div class="campo">
                 <label for="preco">Preço: </label>
-                <input class="numero" required type="number" id="preco" name="preco" min="0" step="0.01">
+                <input class="numero" required type="number" class="preco" id="preco" name="preco" min="0" step="0.01">
                 <small class="erro" hidden></small>
             </div>
 
@@ -111,6 +116,11 @@
 
         </fieldset>
     </form>
+
+    <div id="extras">
+        <a class="remover" href="../actions/inserir.php?multiplos=1000">Inserir 1000 produtos aleatórios!</a>
+        <a class="remover" href="../actions/excluir.php?todos=1">Deletar todos os produtos</a>
+    </div>
 </body>
 
 </html>
