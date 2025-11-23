@@ -77,14 +77,11 @@ class Produto {
         $q = "UPDATE produtos SET\n " . implode(",\n ", $strings) . "\n WHERE id = ?";
         // Crias as strings com os atributos e as interrogacoes
 
-        echo $q;
-        //return Banco::insert("UPDATE produtos SET ($atributos) VALUES ($inters)", array_values($filtered_vars));
-
         return Banco::update($q, $params);
     }
 
 
-    function deletar(): bool {
+    function deletar(): int {
         return Banco::delete("DELETE FROM produtos WHERE id = ?", [$this->id]);
     }
 

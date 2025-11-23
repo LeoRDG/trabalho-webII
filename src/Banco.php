@@ -1,5 +1,10 @@
 <?php
 
+class BancoException extends Exception {
+    public function __construct(string $message = "", int $code = 0, ?Throwable $previous = null) {
+        parent::__construct($message, $code, $previous);
+    }
+}
 
 class Banco {
     private const HOST = "localhost";
@@ -10,12 +15,23 @@ class Banco {
 
     /**
      * Conecta ao banco de dados.
-     * @return mysqli|null A conexao com o banco ou null se nao foi possivel conectar.
+     * @return mysqli A conexao com o banco
+     * @throws BancoException Se nao foi possivel conectar ao banco
      */
     private static function conexao (): mysqli {
-        $con = new mysqli(self::HOST, self::USUARIO, self::SENHA, self::BANCO);
-        mysqli_set_charset($con, "utf8");
-        return $con;
+        try {
+            $con = new mysqli(self::HOST, self::USUARIO, self::SENHA, self::BANCO);
+
+            if ($con->connect_error) {
+                throw new BancoException("Erro ao conectar ao banco de dados: $con->connect_error (Código: $con->connect_errno)");
+            }
+
+            mysqli_set_charset($con, "utf8");
+            return $con;
+
+        } catch (mysqli_sql_exception $e) {
+            throw new BancoException("Erro ao conectar ao banco de dados: {$e->getMessage()}", $e->getCode(), $e);
+        }
     }
 
 
@@ -33,7 +49,7 @@ class Banco {
 
         $msg = "Query deve ser $comando_esperado, não $comando";
         echo $msg;
-        throw new InvalidArgumentException($msg);
+        throw new BancoException($msg);
     }
 
 
@@ -43,16 +59,27 @@ class Banco {
      * @param ?array $params Os parametros para colocar no query
      * @param bool $assoc Usar array associativo?
      * @return array Um array com o que foi encontrado no select
+     * @throws BancoException Se houver erro na conexao ou na execucao do query
      */
     static function select (string $query, ?array $params=null, bool $assoc=false): array {
-        self::validar_query($query, "select");
+        try {
+            self::validar_query($query, "select");
 
-        $con = self::conexao();
-        $result = $con->execute_query($query, $params);
+            $con = self::conexao();
+            $result = $con->execute_query($query, $params);
 
-        $tipo_array = $assoc ? MYSQLI_ASSOC : MYSQLI_NUM;
-        
-        return $result->fetch_all($tipo_array);
+            if ($result === false) {
+                throw new BancoException("Erro ao executar SELECT: $con->error (Código: $con->errno)");
+            }
+
+            $tipo_array = $assoc ? MYSQLI_ASSOC : MYSQLI_NUM;
+            
+            return $result->fetch_all($tipo_array);
+        } catch (BancoException $e) {
+            throw $e;
+        } catch (Exception $e) {
+            throw new BancoException("Erro ao executar SELECT: {$e->getMessage()}", $e->getCode(), $e);
+        }
     }
 
 
@@ -61,43 +88,83 @@ class Banco {
      * @param string $query O query para rodar no banco
      * @param ?array $params Os parametros para colocar no query
      * @return int Um inteiro que representa o id dos dados inseridos
+     * @throws BancoException Se houver erro na conexao ou na execucao do query
      */
     static function insert (string $query, ?array $params=null): int {
-        self::validar_query($query, "insert");
-        
-        $con = self::conexao();
-        $con->execute_query($query, $params);
-        
-        return $con->insert_id;
+        try {
+            self::validar_query($query, "insert");
+            
+            $con = self::conexao();
+            $result = $con->execute_query($query, $params);
+            
+            if ($result === false) {
+                throw new BancoException("Erro ao executar INSERT: $con->error (Código: $con->errno)");
+            }
+            
+            return $con->insert_id;
+        } catch (BancoException $e) {
+            throw $e;
+        } catch (Exception $e) {
+            throw new BancoException("Erro ao executar INSERT: {$e->getMessage()}", $e->getCode(), $e);
+        }
     }
 
     /**
-     * Roda um query do tipo INSERT no banco de dados
+     * Roda um query do tipo UPDATE no banco de dados
      * @param string $query O query para rodar no banco
      * @param ?array $params Os parametros para colocar no query
-     * @return int Um inteiro que representa o id dos dados inseridos
+     * @return bool True se o update foi executado com sucesso
+     * @throws BancoException Se houver erro na conexao ou na execucao do query
      */
     static function update (string $query, ?array $params=null): bool {
-        self::validar_query($query, "update");
-        
-        $con = self::conexao();
-        //$con->execute_query($query, $params);
-        
-        return $con->execute_query($query, $params);;
+        try {
+            self::validar_query($query, "update");
+            
+            $con = self::conexao();
+            $result = $con->execute_query($query, $params);
+            
+            if ($result === false) {
+                throw new BancoException("Erro ao executar UPDATE: $con->error Código: $con->errno)");
+            }
+            
+            return $result;
+        } catch (BancoException $e) {
+            throw $e;
+        } catch (Exception $e) {
+            throw new BancoException("Erro ao executar UPDATE: {$e->getMessage()}", $e->getCode(), $e);
+        }
     }
 
     /**
      * Remove dados do banco
+     * @param string $query O query para rodar no banco
+     * @param ?array $params Os parametros para colocar no query
+     * @return int A quantidade de linhas removidas
+     * @throws BancoException Se houver erro na conexao ou na execucao do query
      */
-    static function delete (string $query, ?array $params=null): bool{
-        self::validar_query($query, "delete");
-        $con = self::conexao();
-        return $con->execute_query($query, $params);
+    static function delete (string $query, ?array $params=null): int {
+        try {
+            self::validar_query($query, "delete");
+            $con = self::conexao();
+            $result = $con->execute_query($query, $params);
+            
+            if ($result === false) {
+                throw new BancoException("Erro ao executar DELETE: $con->error (Código: $con->errno)");
+            }
+            
+            return $con->affected_rows;
+        } catch (BancoException $e) {
+            throw $e;
+        } catch (Exception $e) {
+            throw new BancoException("Erro ao executar DELETE: {$e->getMessage()}", $e->getCode(), $e);
+        }
     }
 
 
     /**
-     * Busca todos os valores únicos de uma coluna
+     * Busca todos os valores unicos de uma coluna
+     * @param string $coluna Nome da coluna
+     * @return array Array com os valores unicos
      */
     static function unique (string $coluna): array {
         $q = "SELECT $coluna FROM produtos GROUP BY $coluna ORDER BY $coluna";

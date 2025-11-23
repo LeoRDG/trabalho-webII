@@ -8,19 +8,16 @@
 <body>
     <?php
     require_once __DIR__ . "/../src/Produto.php";
-    require_once __DIR__ . "/../src/HTML.php";
     require_once __DIR__ . "/../src/util.php";
     require_once __DIR__ . "/modulos/menu.php";
+    require_once __DIR__ . "/modulos/msg.php";
 
     $id = get_id_produto();
 
     $p = new Produto(["id" => $id]);
     $sucesso = $p->carregar();
 
-    if (!$sucesso) {
-        echo ("ID nao existe na tabela!");
-        exit;
-    }; ?>
+    ?>
 
     <button id='edit'>Editar</button>
     <main>
@@ -44,7 +41,7 @@
                 <datalist id="marcas">
                     <?php foreach (Produto::marcas() as $m): ?>
                         <option value=<?= $m ?>>
-                        <?php endforeach ?>
+                    <?php endforeach ?>
                 </datalist>
             </div>
 
@@ -53,9 +50,9 @@
                 <input disabled list="categorias" name="categoria" id="categoria" value="<?= $p->categoria ?>">
                 <small class="erro" hidden></small>
                 <datalist id="categorias">
-                    <?php foreach (Produto::marcas() as $c): ?>
+                    <?php foreach (Produto::categorias() as $c): ?>
                         <option value=<?= $c ?>>
-                        <?php endforeach ?>
+                    <?php endforeach ?>
                 </datalist>
             </div>
 
@@ -102,13 +99,13 @@
                     <input disabled <?= $checked ?> type="radio" value="Recondicionado" id="Recondicionado" name="condicao">
                     Recondicionado
                 </label>
-                <small class="ë></small>
+                <small class="erro"></small>
             </fieldset>
 
             <div class="campo check">
                 <?php $checked = ($p->frete_gratis) ? "checked" : "" ?>
                 <label for="frete">
-                    <input disabled $checked type="checkbox" id="frete" name="frete_gratis">
+                    <input disabled <?= $checked ?> type="checkbox" id="frete" name="frete_gratis">
                     Frete Grátis
                 </label>
             </div>

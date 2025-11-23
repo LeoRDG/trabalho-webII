@@ -9,7 +9,7 @@
     --primaria: #29D3E8;
     --primaria2: #16c4d3;
 
-    --sucesso: #3DF57F;
+    --sucesso: #33e583;
     --aviso: #F5C039;
     --erro: #FF4C4C;
     --desativado: #CCCCCC;
@@ -35,9 +35,35 @@ div {
     background-color: transparent;
 }
 
-.erro{
+p, span {
+    background-color: inherit;
+    color: inherit;
+}
+
+/************************ FEEDBACK ************************/
+
+.erro {
     border-color: var(--erro)!important;
     color: var(--erro)!important;
+}
+
+.sucesso {
+    border-color: var(--sucesso)!important;
+    color: var(--sucesso)!important;
+}
+
+div.msg span {
+    font-size: 40px;
+}
+
+div.msg {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
 }
 
 /************************ INPUTS ************************/

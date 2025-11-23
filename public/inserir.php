@@ -1,15 +1,25 @@
 <?php 
 
 require_once __DIR__ . "/../src/Produto.php";
+require_once __DIR__ . "/../src/util.php";
 
-if ( isset($_GET["multiplos"]) && is_numeric($_GET["multiplos"]) ) {
-    Produto::insereTeste($_GET["multiplos"]);
+try {
+    $qtd = $_GET["multiplos"] ?? null;
+    if ( is_numeric($qtd) ) {
+        Produto::insereTeste($qtd);
+        $red_url = "adicionarproduto.php?sucesso=$qtd produtos inserido com sucesso!";
+    }
+
+    if (!empty($_POST)) {
+        $produto = new Produto($_POST);
+        $id = $produto->insert();
+        $red_url = "adicionarproduto.php?sucesso=Produto inserido com sucesso! id=$id";
+    }
+}
+catch (Exception $e) {
+    $red_url = "adicionarproduto.php?erro={$e->getMessage()}";
+} 
+finally {
+    redirecionar($red_url ?? null);
 }
 
-if (!empty($_POST)) {
-    $produto = new Produto($_POST);
-    $id = $produto->insert();
-    $redirecionar = "adicionarproduto.php?sucesso=$id";
-}
-
-redirecionar($redirecionar ?? null);

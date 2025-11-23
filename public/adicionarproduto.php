@@ -10,12 +10,9 @@
 <body>
     <?php 
     require_once __DIR__ . "/modulos/menu.php";
+    require_once __DIR__ . "/modulos/msg.php";
     require_once __DIR__ . "/../src/util.php";
     require_once __DIR__ . "/../src/Produto.php";
-    
-    if (isset($_GET["sucesso"]) && $_GET["sucesso"] > 0) {
-        echo ("Produto inserido com sucesso! id = {$_GET['sucesso']}");
-    }
     ?>
 
     <a class="erro" href="inserir.php?multiplos=1000">Inserir 1000 produtos aleatórios!</a>
@@ -38,8 +35,8 @@
                 <datalist id="marcas">
 
                     <?php foreach (Produto::marcas() as $m): ?>
-                        <option value=<?= $m ?>>
-                        <?php endforeach ?>
+                        <option value="<?= $m ?>">
+                    <?php endforeach ?>
 
                 </datalist>
             </div>
@@ -51,7 +48,7 @@
                 <datalist id="categorias">
 
                     <?php foreach (Produto::categorias() as $c): ?>
-                        <option value=<?= $c ?>>
+                        <option value="<?= $c ?>">
                     <?php endforeach ?>
 
                 </datalist>
@@ -65,7 +62,7 @@
 
             <div class="campo">
                 <label for="preco">Preço: </label>
-                <input class="numero" required type="text" id="preco" name="preco" min="0" step="0.01">
+                <input class="numero" required type="number" id="preco" name="preco" min="0" step="0.01">
                 <small class="erro" hidden></small>
             </div>
 

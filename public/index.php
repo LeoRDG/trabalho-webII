@@ -36,7 +36,7 @@
             <ul>
                 <li><span class="material-symbols-outlined">check</span> Usando <b>tipos adequados.</b></li>
                 <li><span class="material-symbols-outlined">check</span> <b>Formatação</b> com <i>CSS/Bootstrap/etc.</i></li>
-                <li><span class="material-symbols-outlined">  </span> <i>JavaScript</i> funcional para <b>validação.</b></li>
+                <li><span class="material-symbols-outlined">check</span> <i>JavaScript</i> funcional para <b>validação.</b></li>
                 <li><span class="material-symbols-outlined">check</span> <i>PHP</i> para <b>Inserir</b> dados no <i>BD</i>.</li>
             </ul>
         </li>
@@ -45,7 +45,7 @@
 
         <li><span class="material-symbols-outlined">check</span><b>Página para Alteração de Dados.</b>
             <ul>
-                <li><span class="material-symbols-outlined">  </span>Com as mesmas <b>validações</b> da <i>inserção</i></li>
+                <li><span class="material-symbols-outlined">check</span>Com as mesmas <b>validações</b> da <i>inserção</i></li>
             </ul>
         </li>
     </ol>

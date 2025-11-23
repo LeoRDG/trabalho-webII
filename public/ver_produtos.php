@@ -5,7 +5,6 @@ define("BOTOES_PAGINACAO", 3);
 require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
 require_once __DIR__ . "/../src/consts.php";
-require_once __DIR__ . "/../src/HTML.php";
 
 $pagina = (int) ($_GET["pagina"] ?? 1);
 $filtros = array_filter($_GET, fn ($valor, $chave) => ($valor && in_array($chave, FILTROS_GET_PERMITIDOS)), ARRAY_FILTER_USE_BOTH);
@@ -29,7 +28,10 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 </head>
 
 <body>
-    <?php require_once __DIR__ . "/modulos/menu.php"; ?>
+    <?php 
+    require_once __DIR__ . "/modulos/menu.php";
+    require_once __DIR__ . "/modulos/msg.php";
+    ?>
 
     <form id="form-filtros" action="">
         <div class="filtros">

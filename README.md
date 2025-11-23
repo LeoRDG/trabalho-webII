@@ -19,10 +19,10 @@ PHP/MySQL.*
 - [x] **3. Formulário HTML para inserir dados.**
    - [x] Usando **tipos adequados.**
    - [x] **Formatação** com *CSS/Bootstrap/etc.*
-   - [ ] *JavaScript* funcional para **validação.**
+   - [x] *JavaScript* funcional para **validação.**
    - [x] *PHP* para **Inserir** dados no *BD*.
 
 - [x] **4. Página para Excluir Dados.**
 
 - [x] **5. Página para Alteração de Dados.**
-   - [ ] Com as mesmas **validações** da *inserção*
+   - [x] Com as mesmas **validações** da *inserção*
