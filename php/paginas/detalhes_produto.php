@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 
 <head>
-    <?php require_once __DIR__ . "/modulos/head.php" ?>
-    <link rel="stylesheet" href="style/detalhes.css">
+    <?php include __DIR__ . "/../include/head.php" ?>
+    <link rel="stylesheet" href="../../css/detalhes_produto.css">
 </head>
 
 <body>
     <?php
     require_once __DIR__ . "/../src/Produto.php";
     require_once __DIR__ . "/../src/util.php";
-    require_once __DIR__ . "/modulos/menu.php";
-    require_once __DIR__ . "/modulos/msg.php";
+    include __DIR__ . "/../include/menu.php";
+    include __DIR__ . "/../include/msg.php";
 
     $id = get_id_produto();
 
@@ -21,7 +21,7 @@
 
     <button id='edit'>Editar</button>
     <main>
-        <form action="alterar.php" method="POST" enctype="multipart/form-data">
+        <form action="../actions/alterar.php" method="POST" enctype="multipart/form-data">
             <div class="campo">
                 <label for="id">ID: </label>
                 <input readonly class="static" required type="text" id="id" name="id" value="<?= $id ?>">

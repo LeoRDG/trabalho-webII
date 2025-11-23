@@ -1,7 +1,7 @@
 <?php 
 
 require_once __DIR__ . "/Banco.php";
-require_once __DIR__ . "/consts.php";
+require_once __DIR__ . "/util.php";
 
 class Produto {
     public int $id;

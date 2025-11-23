@@ -4,7 +4,6 @@ define("BOTOES_PAGINACAO", 3);
 
 require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
-require_once __DIR__ . "/../src/consts.php";
 
 $pagina = (int) ($_GET["pagina"] ?? 1);
 $filtros = array_filter($_GET, fn ($valor, $chave) => ($valor && in_array($chave, FILTROS_GET_PERMITIDOS)), ARRAY_FILTER_USE_BOTH);
@@ -23,14 +22,14 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
 
 <head>
     <title>Ver Produtos</title>
-    <?php require_once __DIR__ . "/modulos/head.php"; ?>
-    <link rel="stylesheet" href="style/ver_produtos.css">
+    <?php include __DIR__ . "/../include/head.php"; ?>
+    <link rel="stylesheet" href="../../css/ver_produtos.css">
 </head>
 
 <body>
     <?php 
-    require_once __DIR__ . "/modulos/menu.php";
-    require_once __DIR__ . "/modulos/msg.php";
+    include __DIR__ . "/../include/menu.php";
+    include __DIR__ . "/../include/msg.php";
     ?>
 
     <form id="form-filtros" action="">
@@ -82,7 +81,7 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
     
     <main>
         <div id="tabela">
-            <a id="add-novo" href="adicionarproduto.php">Novo Produto</a>
+            <a id="add-novo" href="adicionar_produto.php">Novo Produto</a>
             <?= "<p>" . $total_filtro . " de " . $total . " Produtos encontrados (" . ($inicio + 1) . "-" . $fim . ")</p>" ?>
             <div id="paginas">
                 <?php
@@ -114,8 +113,8 @@ $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
                             <td class='atributo' id='preco'> <?= $produto->preco ?></td>
                             <td class='atributo' id='marca'> <?= $produto->marca ?></td>
                             <td class='atributo' id='categoria'> <?= $produto->categoria ?></td>
-                            <td class='atributo'><a href='detalhes.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>visibility</a></td>
-                            <td class='atributo'><a href='excluir.php?pid=<?= $produto->id ?>' class='remover material-symbols-outlined'>delete</a></td>
+                            <td class='atributo'><a href='detalhes_produto.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>visibility</a></td>
+                            <td class='atributo'><a href='../actions/excluir.php?pid=<?= $produto->id ?>' class='remover material-symbols-outlined'>delete</a></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

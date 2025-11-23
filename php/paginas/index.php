@@ -2,13 +2,13 @@
 <html lang="pt-br">
 
 <head>
-    <?php require_once __DIR__ . "/modulos/head.php" ?>
-    <link rel="stylesheet" href="style/index.css">
+    <?php include __DIR__ . "/../include/head.php" ?>
+    <link rel="stylesheet" href="../../css/index.css">
 </head>
 
 <body>
 
-    <?php require_once __DIR__ . "/modulos/menu.php"; ?>
+    <?php include __DIR__ . "/../include/menu.php"; ?>
 
     <h1>Trabalho Web II</h1>
 

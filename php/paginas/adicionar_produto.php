@@ -3,22 +3,22 @@
 
 <head>
     <title>Adicionar Produto</title>
-    <?php require_once __DIR__ . "/modulos/head.php" ?>
-    <link rel="stylesheet" href="style/adicionar_produto.css">
+    <?php include __DIR__ . "/../include/head.php" ?>
+    <link rel="stylesheet" href="../../css/adicionar_produto.css">
 </head>
 
 <body>
     <?php 
-    require_once __DIR__ . "/modulos/menu.php";
-    require_once __DIR__ . "/modulos/msg.php";
+    include __DIR__ . "/../include/menu.php";
+    include __DIR__ . "/../include/msg.php";
     require_once __DIR__ . "/../src/util.php";
     require_once __DIR__ . "/../src/Produto.php";
     ?>
 
-    <a class="erro" href="inserir.php?multiplos=1000">Inserir 1000 produtos aleatórios!</a>
-    <a class="remover" href="excluir.php?todos=1">Deletar todos os produtos</a>
+    <a class="erro" href="../actions/inserir.php?multiplos=1000">Inserir 1000 produtos aleatórios!</a>
+    <a class="remover" href="../actions/excluir.php?todos=1">Deletar todos os produtos</a>
 
-    <form action="inserir.php" method="POST" enctype="multipart/form-data">
+    <form action="../actions/inserir.php" method="POST" enctype="multipart/form-data">
         <fieldset class=form-add>
             <legend><h3>Adicionar Produto</h3></legend>
 
