@@ -30,6 +30,7 @@ catch (Exception $e) {
 <head>
     <title>Ver Produtos</title>
     <?php include __DIR__ . "/../include/head.php"; ?>
+    <script src="../../js/ajax_produto.js"></script>
     <link rel="stylesheet" href="../../css/ver_produtos.css">
 </head>
 
@@ -95,48 +96,37 @@ catch (Exception $e) {
         </div>
     </form>
     
-    <main>
-        <div id="tabela">
-            <a id="add-novo" href="adicionar_produto.php">Novo Produto</a>
-            <?= "<p>" . $total_filtro . " de " . $total . " Produtos encontrados (" . ($inicio + 1) . "-" . $fim . ")</p>" ?>
-            <div id="paginas">
-                <?php
-                // Gera os links para ir para outras paginas
-                for ($i = $pagina - BOTOES_PAGINACAO; $i <= $pagina + BOTOES_PAGINACAO; $i++) {
-                    if ($i <= 0 || $i > $pag_max) continue;
-                    $atual = ($i == $pagina) ? "atual" : "";
-                    $url = ($i == $pagina) ? "" : gerar_paginacao_url($i, $filtros);
-                    echo "<a class='pagina $atual' href='$url'>$i</a>";
-                }
-                ?>
-            </div>
-
-            <table>
-                <!-- <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Preço</th>
-                        <th>Marca</th>
-                        <th>Categoria</th>
-                        <th colspan=2>Ação</th>
-                    </tr>
-                </thead> -->
-
-                <tbody>
-                    <?php foreach ($produtos as $produto) : ?>
-                        <tr>
-                            <td class='atributo' id='nome'> <?= $produto->nome ?></td>
-                            <td class='atributo' id='preco'> <?= $produto->preco ?></td>
-                            <td class='atributo' id='marca'> <?= $produto->marca ?></td>
-                            <td class='atributo' id='categoria'> <?= $produto->categoria ?></td>
-                            <td class='atributo'><a href='detalhes_produto.php?pid=<?= $produto->id ?>' class='material-symbols-outlined'>visibility</a></td>
-                            <td class='atributo'><a href='../actions/excluir.php?pid=<?= $produto->id ?>' class='remover material-symbols-outlined'>delete</a></td>
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
+    <div id="tabela">
+        <a id="add-novo" href="adicionar_produto.php">Novo Produto</a>
+        <?= "<p>" . $total_filtro . " de " . $total . " Produtos encontrados (" . ($inicio + 1) . "-" . $fim . ")</p>" ?>
+        <div id="paginas">
+            <?php
+            // Gera os links para ir para outras paginas
+            for ($i = $pagina - BOTOES_PAGINACAO; $i <= $pagina + BOTOES_PAGINACAO; $i++) {
+                if ($i <= 0 || $i > $pag_max) continue;
+                $atual = ($i == $pagina) ? "atual" : "";
+                $url = ($i == $pagina) ? "" : gerar_paginacao_url($i, $filtros);
+                echo "<a class='pagina $atual' href='$url'>$i</a>";
+            }
+            ?>
         </div>
-    </main>
+
+        <div id="produtos-lista">
+            <?php foreach ($produtos as $produto) : ?>
+                <div class="produto-container">
+                    <div class="produto" id="<?= $produto->id ?>">
+                        <span class='nome'> <?= $produto->nome ?></span>
+                        <span class='preco'> <?= "R$ " . number_format($produto->preco, 2, ",", ".") ?></span>
+                        <span class='marca'> <?= $produto->marca ?></span>
+                        <span class='categoria'> <?= $produto->categoria ?></span>
+                        <a href='detalhes_produto.php?pid=<?= $produto->id ?>' class='detalhes material-symbols-outlined'>edit</a>
+                        <a href='../actions/excluir.php?pid=<?= $produto->id ?>' class='remover material-symbols-outlined'>delete</a>
+                    </div>
+                    <div class="produto-detalhes" id="<?= $produto->id ?>" hidden></div>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>
 
 </body>
 

@@ -13,8 +13,8 @@ fieldset.form-add {
 
 .form-add legend,
 legend h3 {
-    font-weight: 600;
-    color: var(--primaria);
+    font-weight: bold;
+    color: var(--fg);
 }
 
 #extras {

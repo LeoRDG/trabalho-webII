@@ -24,9 +24,9 @@
 div#paginas{
     display: flex;
     flex-direction: row;
-    justify-content: right;
+    justify-content: left;
     gap: 10px;
-    width: 50%;
+    width: 100%;
 }
 
 a.pagina {
@@ -40,7 +40,8 @@ a.pagina {
     padding: 5px;
     margin: 0;
     font-size: 20px;
-    border-radius: 6px;
+    border-radius: 10px;
+    font-weight: bold;
 }
 
 a.pagina.atual {
@@ -97,58 +98,112 @@ div#botoes {
     flex: 0;
 }
 
-/************************** TABLE **************************/
-
-main{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
+/************************** PRODUTOS **************************/
 
 div#tabela {
-    width: 100%;
+    margin: auto;
+    width: 75%;
+    min-width: 720px;
     gap: 8px;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-table {
-    border-spacing: 0 20px;
-    border: none;
+#produtos-lista {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-th {
+.produto-container {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    border-radius: 20px;
     background-color: var(--card);
-    border: 2px solid var(--fg);
-    border-width: 0 0 3px 0;
-    height: 80px;
-    padding: 12px 10px 12px 15px;
 }
-
-td {
-    border: solid var(--border);
-    border-width: 1px 0 1px 0;
-    padding: 12px 10px 12px 15px;
-    height: 80px;
-    text-wrap: wrap;
-}
-
-td:first-child {
-    border: solid var(--border);
-    border-width: 1px 0 1px 1px;
-    border-radius: 20px 0 0 20px;
-}
-
-td:last-child {
-    border: solid var(--border);
-    border-width: 1px 1px 1px 0;
-    border-radius: 0 20px 20px 0;
-}
-
-tr:hover td {
+    
+.produto-container:hover {
     background-color: var(--input-focus);
     border-color: var(--border-focus);
+}
+
+.produto-container:hover * {
+    cursor: inherit;
+}
+
+.produto {
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    gap: 20px;
+    align-items: center;
+    min-height: 80px;
+    padding: 10px 20px;
+}
+        
+.produto > * {
+    text-align: left;
+    text-wrap: wrap;
+    flex: 2;
+    height: 100%;
+}
+
+.produto .nome {
+    flex: 4;
+}
+
+.produto .preco {
+    flex: 1;
+}
+
+.produto a {
+    flex: 0;
+}
+
+/********************** DETALHES DO PRODUTO **********************/
+
+.produto-detalhes {
+    z-index: -10;
+    width: 100%;
+    margin-top: -15px;
+    padding: 20px;
+    border-radius: 0 0 20px 20px;
+    border: solid var(--border);
+    border-width: 1px 1px 1px 1px;
+}
+
+.produto-detalhes input {
+    background-color: transparent!important;
+    border-width: 0 0 1px 0!important;
+}
+
+.produto-detalhes > div {
+    flex-direction: row;
+    align-items: center;
+}
+
+.produto-detalhes .campo {
+    margin: 4px 0;
+}
+
+.produto-detalhes label:not(label:has(input)){
+    font-weight: bold;
+    font-size: 16px;
+    width: 25%;
+}
+
+.condicao label {
+    display: none;
+}
+
+.condicao label:has(input:checked) {
+    display: block;
+}
+
+fieldset:hover {
+    border-color: var(--border);
 }
