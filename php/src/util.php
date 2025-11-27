@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 define("FILTROS_GET_PERMITIDOS", 
     [ 
     "nome",
@@ -8,6 +10,14 @@ define("FILTROS_GET_PERMITIDOS",
     "criado_em", "criado_em_min", "criado_em_max"
     ]
 );
+
+function set_msg($tipo, $texto, $ttl) {
+    $_SESSION["msg"] = [
+        "tipo" => $tipo,
+        "texto" => $texto,
+        "ttl"=> $ttl,
+    ];
+}
 
 function url(string $url, array $params=[]): string {
     if ( !empty($params) ) $url .= "?" . http_build_query($params);

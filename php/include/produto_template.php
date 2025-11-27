@@ -1,14 +1,20 @@
 <?php
-require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
+require_once __DIR__ . "/../src/Produto.php";
 
 $id = get_id_produto();
 
 $p = new Produto(["id" => $id]);
 
-$marcas = isset($_GET["apenas_detalhes"]) ? [] : Produto::marcas();
-$categorias = isset($_GET["apenas_detalhes"]) ? [] : Produto::categorias();
-$sucesso = $p->carregar();
+try {
+    $p->carregar();
+    $marcas = Produto::marcas();
+    $categorias = Produto::categorias();
+} 
+catch (Exception $e) {
+    set_msg("erro", $e->getMessage(), 5000);
+    redirecionar("index.php");
+}
 
 ?>
 

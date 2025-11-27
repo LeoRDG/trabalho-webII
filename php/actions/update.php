@@ -1,17 +1,18 @@
 <?php
-require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
+require_once __DIR__ . "/../src/Produto.php";
 
 try {
     if ( !empty($_POST) ) {
         $p = new Produto($_POST);
         $p->update();
-        $target_url = "../paginas/detalhes_produto.php?pid=$p->id&sucesso=Produto atualizado com sucesso";
+        $target_url = "../paginas/detalhes_produto.php?pid=$p->id";
+        set_msg("sucesso", "Produto atualizado com sucesso", 5000);
     }
 }
 catch (Exception $e) {
-        $erro = $e->getMessage();
-        $target_url = "../paginas/detalhes_produto.php?&erro=$erro";
+    $target_url = "../paginas/detalhes_produto.php";
+    set_msg("erro", $e->getMessage(), 5000);
 } finally {
-    redirecionar($target_url ?? null);
+    redirecionar($target_url);
 }

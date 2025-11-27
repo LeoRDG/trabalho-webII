@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
 require_once __DIR__ . "/../actions/read.php";
 ?>

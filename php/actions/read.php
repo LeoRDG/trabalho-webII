@@ -1,4 +1,6 @@
 <?php 
+require_once __DIR__ . "/../src/util.php";
+require_once __DIR__ . "/../src/Produto.php";
 
 $qtd_items = 30;
 $qtd_botoes = 3;
@@ -18,5 +20,6 @@ try {
     $categorias = Produto::categorias();
 }
 catch (Exception $e) {
-    redirecionar("ver_produtos.php?erro={$e->getMessage()}");
+    set_msg("erro", $e->getMessage(), 5000);
+    redirecionar("ver_produtos.php?");
 }

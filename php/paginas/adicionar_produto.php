@@ -1,3 +1,8 @@
+<?php 
+    require_once __DIR__ . "/../src/util.php";
+    require_once __DIR__ . "/../src/Produto.php";
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -11,8 +16,6 @@
     <?php 
     include __DIR__ . "/../include/menu.php";
     include __DIR__ . "/../include/msg.php";
-    require_once __DIR__ . "/../src/util.php";
-    require_once __DIR__ . "/../src/Produto.php";
 
     try {
         $marcas = Produto::marcas();

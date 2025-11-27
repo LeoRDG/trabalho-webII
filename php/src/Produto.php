@@ -52,7 +52,7 @@ class Produto {
     
     function carregar(): bool {
         $resultado = Banco::select("SELECT * FROM produtos WHERE id = ?", [$this->id], true);
-        if (!$resultado) return false;
+        if (!$resultado) throw new BancoException("Nao foi possivel carregar o produto: ID $this->id nao existe!");
         $resultado = $resultado[0];
 
         foreach ($resultado as $chave => $valor){

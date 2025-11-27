@@ -17,7 +17,7 @@
     --border: #22303B;
     --border-focus: #29D3E8;
 
-    --input-focus: rgba(41, 211, 232, 0.05);
+    --input-focus: rgba(16, 30, 37);
     --sombra: rgba(41, 211, 232, 0.4);
     --sombra2: rgba(245, 192, 57, 0.4);
 }
@@ -303,7 +303,7 @@ ul.menu {
     display: flex;
     justify-content: center;
     text-transform: uppercase;
-    font-size: 20px;
+    font-size: 18px;
     list-style: none;
     position: sticky;
     top: 0;
@@ -318,12 +318,13 @@ ul.menu {
 }
 
 .menu a {
-    color: var(--text)!important;
+    color: var(--fg);
     text-align: center;
     font-weight: Bold;
     height: 96%;
     display: block;
     padding:10px;
+    margin: 0;
 }
 
 .menu a.current {
