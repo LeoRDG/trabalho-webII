@@ -20,7 +20,11 @@ class Produto {
 
     function __construct($arr){
         foreach ($arr as $chave => $valor){
-            if (property_exists($this, $chave)) $this->$chave = $valor;
+            if (!property_exists($this, $chave)) continue;
+            if ($chave == "modificado_em") {
+                $this->$chave = date_create_from_format("d/m/Y H:i:s", $valor);
+            }
+            else $this->$chave = $valor;
         }
     }
 
