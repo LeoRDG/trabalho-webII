@@ -23,7 +23,7 @@
     }
     ?>
 
-    <form action="../actions/inserir.php" method="POST" enctype="multipart/form-data">
+    <form action="../actions/create.php" method="POST" enctype="multipart/form-data">
         <fieldset class=form-add>
             <legend><h3>Adicionar Produto</h3></legend>
 
@@ -118,7 +118,7 @@
     </form>
 
     <div id="extras">
-        <form action="../actions/inserir.php" method="POST">
+        <form action="../actions/create.php" method="POST">
             <button class="remover" type="submit">
                 Inserir
                 <input min=1 max=9999 type="number" id="multiplos" name="multiplos" value=100>
@@ -126,7 +126,7 @@
             </button>
         </form>
 
-        <form action="../actions/excluir.php" method="POST">
+        <form action="../actions/delete.php" method="POST">
             <input type="hidden" name="todos" value="1">
             <button type="submit" class="remover">Deletar todos os produtos</button>
         </form>

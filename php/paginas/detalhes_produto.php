@@ -19,7 +19,7 @@ if (isset($_GET["apenas_detalhes"])) {
     ?>
 
     <main>
-        <form action="../actions/alterar.php" method="POST" enctype="multipart/form-data">
+        <form action="../actions/update.php" method="POST" enctype="multipart/form-data">
 
             <?php include __DIR__ . "/../include/produto_template.php" ?>
 

@@ -15,10 +15,11 @@ function carregar_produto(produto) {
     div.slideToggle(300, "swing");
 
     // O paramatro apenas_detalhes faz com que a pagina carrega apenas os labels e inputs
-    if (div.children().length == 0) div.load(url+"&apenas_detalhes");
-
-    // Desabilita todos os inputs
-    div.find("input textarea").each(function () { 
-        $(this).prop("disabled", true);
+    if (div.children().length == 0) div.load(url + "&apenas_detalhes", () => {
+        // Desabilita todos os inputs, quando terminar de carregar
+        div.find("input, textarea").each(function () { 
+            $(this).prop("disabled", true);
+        });
     });
+
 }

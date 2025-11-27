@@ -1,27 +1,7 @@
 <?php
-define("ITENS_POR_PAGINA", 30);
-define("BOTOES_PAGINACAO", 3);
-
 require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
-
-$pagina = (int) ($_GET["pagina"] ?? 1);
-$filtros = array_filter($_GET, fn ($valor, $chave) => ($valor && in_array($chave, FILTROS_GET_PERMITIDOS)), ARRAY_FILTER_USE_BOTH);
-
-try {
-    $total = Produto::quantidade_total();
-    $total_filtro = Produto::quantidade_total($filtros);
-    $pag_max = ceil($total_filtro / ITENS_POR_PAGINA);
-    $inicio = ($pagina - 1) * ITENS_POR_PAGINA;
-    $fim = ($pagina == $pag_max) ? $total_filtro : $inicio + ITENS_POR_PAGINA;
-
-    $produtos = Produto::get_produtos($inicio, ITENS_POR_PAGINA, $filtros);
-    $marcas = Produto::marcas();
-    $categorias = Produto::categorias();
-}
-catch (Exception $e) {
-    redirecionar("index.php?erro={$e->getMessage()}");
-}
+require_once __DIR__ . "/../actions/read.php";
 ?>
 
 <!DOCTYPE html>
@@ -98,12 +78,12 @@ catch (Exception $e) {
     
     <div id="tabela">
         <a id="add-novo" href="adicionar_produto.php">Novo Produto</a>
-        <?= "<p>" . $total_filtro . " de " . $total . " Produtos encontrados (" . ($inicio + 1) . "-" . $fim . ")</p>" ?>
+        <?= "<p>" . $total_com_filtro . " de " . $total . " Produtos encontrados (" . ($inicio + 1) . "-" . $fim . ")</p>" ?>
         <div id="paginas">
             <?php
             // Gera os links para ir para outras paginas
-            for ($i = $pagina - BOTOES_PAGINACAO; $i <= $pagina + BOTOES_PAGINACAO; $i++) {
-                if ($i <= 0 || $i > $pag_max) continue;
+            for ($i = $pagina - $qtd_botoes; $i <= $pagina + $qtd_botoes; $i++) {
+                if ($i <= 0 || $i > $ultima_pagina) continue;
                 $atual = ($i == $pagina) ? "atual" : "";
                 $url = ($i == $pagina) ? "" : gerar_paginacao_url($i, $filtros);
                 echo "<a class='pagina $atual' href='$url'>$i</a>";
@@ -120,7 +100,7 @@ catch (Exception $e) {
                         <span class='marca'> <?= $produto->marca ?></span>
                         <span class='categoria'> <?= $produto->categoria ?></span>
                         <a href='detalhes_produto.php?pid=<?= $produto->id ?>' class='detalhes material-symbols-outlined'>edit</a>
-                        <a href='../actions/excluir.php?pid=<?= $produto->id ?>' class='remover material-symbols-outlined'>delete</a>
+                        <a href='../actions/delete.php?pid=<?= $produto->id ?>' class='remover material-symbols-outlined'>delete</a>
                     </div>
                     <div class="produto-detalhes" id="<?= $produto->id ?>" hidden></div>
                 </div>
