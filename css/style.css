@@ -293,7 +293,7 @@ a:hover {
     color: var(--primaria2);
 }
 
-a.remover {
+.remover {
     color: var(--erro);
 }
 

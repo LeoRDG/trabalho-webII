@@ -17,9 +17,10 @@ legend h3 {
     color: var(--fg);
 }
 
+/* ************************** */
+
 #extras {
-    display: block;
-    margin: 0 auto 80px auto;
+    margin: 100px auto 80px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,13 +28,28 @@ legend h3 {
     max-width: 700px;
 }
 
-#extras a {
+#extras form {
+    margin: 0;
+    width: 100%;
+}
+
+#extras button {
     background-color: var(--card);
     text-align: center;
     padding: 8px;
     width: 100%;
 }
 
-#extras a:hover {
+#extras button:hover {
     color: var(--aviso);
+}
+
+button input {
+    color: var(--aviso);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: transparent;
+    text-align: center;
+    border: none;
+    width: 4ch;
 }

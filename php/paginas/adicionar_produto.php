@@ -118,8 +118,18 @@
     </form>
 
     <div id="extras">
-        <a class="remover" href="../actions/inserir.php?multiplos=1000">Inserir 1000 produtos aleatórios!</a>
-        <a class="remover" href="../actions/excluir.php?todos=1">Deletar todos os produtos</a>
+        <form action="../actions/inserir.php" method="POST">
+            <button class="remover" type="submit">
+                Inserir
+                <input min=1 max=9999 type="number" id="multiplos" name="multiplos" value=100>
+                produtos aleatórios!
+            </button>
+        </form>
+
+        <form action="../actions/excluir.php" method="POST">
+            <input type="hidden" name="todos" value="1">
+            <button type="submit" class="remover">Deletar todos os produtos</button>
+        </form>
     </div>
 </body>
 

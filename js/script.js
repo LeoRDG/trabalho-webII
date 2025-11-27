@@ -13,7 +13,7 @@ $(window).on("load", () => {
     $("#enviar").click((e) => submit(e));
 
     // Confirmacao ao clicar em um link que exige confirmacao
-    $("a.remover").click((e) => confirm("Tem certeza que quer fazer isso?") ? null : e.preventDefault());
+    $(".remover").click((e) => confirm("Tem certeza que quer fazer isso?") ? null : e.preventDefault());
 
     // Mostrando e Escondendo mensagem de erro/sucesso
     $(".msg").slideDown(200);

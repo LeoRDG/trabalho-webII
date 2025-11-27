@@ -3,7 +3,7 @@ require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
 
 try {
-    if (isset($_GET["todos"]) && $_GET["todos"] == 1) {
+    if (isset($_POST["todos"]) && $_POST["todos"] == 1) {
         Produto::remover_todos();
         $red_url = "../paginas/ver_produtos.php?sucesso=Todos os produtos foram removidos.";
     }

@@ -4,10 +4,11 @@ require_once __DIR__ . "/../src/Produto.php";
 require_once __DIR__ . "/../src/util.php";
 
 try {
-    $qtd = $_GET["multiplos"] ?? null;
+    $qtd = $_POST["multiplos"] ?? null;
     if ( is_numeric($qtd) ) {
         Produto::insereTeste($qtd);
         $red_url = "../paginas/ver_produtos.php?sucesso=$qtd produtos inserido com sucesso!";
+        unset($_POST["multiplos"]);
     }
 
     if (!empty($_POST)) {
