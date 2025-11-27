@@ -99,7 +99,7 @@
                     <input type="radio" value="Recondicionado" id="Recondicionado" name="condicao">
                     Recondicionado
                 </label>
-                <small class="erro" hidden></small>
+                <small class="condicao erro"></small>
             </fieldset>
 
             <div class="campo check">
