@@ -43,3 +43,35 @@ li span{
 
     color: var(--primaria);
 }
+
+/************************** RESPONSIVIDADE ***************************/
+
+@media (max-width: 768px) {
+    main {
+        width: 95%;
+        padding: 0 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin: 20px 0;
+    }
+
+    ol {
+        padding: 20px 24px;
+    }
+
+    ol > li {
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+    ul:not(.menu) {
+        margin-left: 20px;
+    }
+
+    ul > li:not(.menu li) {
+        margin-bottom: 1px;
+        font-size: 13px;
+    }
+}

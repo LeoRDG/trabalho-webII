@@ -76,7 +76,6 @@ require_once __DIR__ . "/../actions/read.php";
     </form>
     
     <div id="tabela">
-        <a id="add-novo" href="adicionar_produto.php">Novo Produto</a>
         <?= "<p>" . $total_com_filtro . " de " . $total . " Produtos encontrados (" . ($inicio + 1) . "-" . $fim . ")</p>" ?>
         <div id="paginas">
             <?php

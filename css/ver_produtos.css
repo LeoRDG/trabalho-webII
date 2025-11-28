@@ -153,6 +153,7 @@ div#tabela {
 }
 
 .produto .nome {
+    font-weight: bold;
     flex: 4;
 }
 
@@ -202,4 +203,68 @@ div#tabela {
 
 fieldset:hover {
     border-color: var(--border);
+}
+
+/************************** RESPONSIVIDADE **************************/
+
+@media (max-width: 768px) {
+    div#tabela {
+        width: 100%;
+        min-width: unset;
+        padding: 0 10px;
+    }
+
+    .produto {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 15px;
+        min-height: auto;
+    }
+
+    .produto > * {
+        text-align: center;
+        width: 100%;
+    }
+
+    .produto .nome {
+        font-size: 16px;
+    }
+
+    .produto-detalhes {
+        padding: 15px;
+        margin-top: -10px;
+    }
+
+    .produto-detalhes > div {
+        flex-direction: column;
+    }
+
+    .produto-detalhes label:not(label:has(input)) {
+        width: 100%;
+        margin: 4px 0;
+    }
+
+    div.filtros {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .filtros .campo {
+        min-width: unset;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    div#paginas {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    a.pagina {
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+    }
 }

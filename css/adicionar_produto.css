@@ -53,3 +53,17 @@ button input {
     border: none;
     width: 4ch;
 }
+
+/************************** RESPONSIVIDADE **************************/
+
+@media (max-width: 768px) {
+    fieldset.form-add,
+    #extras {
+        width: 95%;
+    }
+
+    #extras button {
+        padding: 12px;
+        font-size: 14px;
+    }
+}

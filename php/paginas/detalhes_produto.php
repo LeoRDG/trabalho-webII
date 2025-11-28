@@ -21,11 +21,11 @@ if (isset($_GET["apenas_detalhes"])) {
 
     <main>
         <form action="../actions/update.php" method="POST" enctype="multipart/form-data">
-
-            <?php include __DIR__ . "/../include/produto_template.php" ?>
-
+            <div>
+                <?php include __DIR__ . "/../include/produto_template.php" ?>
+            </div>
             <div class="campo" id="botoes">
-                <input class="static" type="reset" id="resetar" value="Resetar">
+                <input type="reset" id="resetar" value="Resetar">
                 <input type="submit" id="enviar" value="Atualizar">
             </div>
         </form>
