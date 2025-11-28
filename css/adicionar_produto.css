@@ -4,11 +4,11 @@ fieldset.form-add {
     margin: 30px auto 0 auto;
     padding: 10px 20px 20px 20px;
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 32px var(--sombra-card);
 }
 
 .form-add:hover {
-    box-shadow: 0 12px 40px rgba(41, 211, 232, 0.05);
+    box-shadow: 0 12px 40px var(--sombra);
 }
 
 .form-add legend,

@@ -16,7 +16,7 @@
 #add-novo:hover {
     background-color: var(--primaria2);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(41, 211, 232, 0.4);
+    box-shadow: 0 4px 12px var(--sombra);
 }
 
 /********** Links Paginas **********/

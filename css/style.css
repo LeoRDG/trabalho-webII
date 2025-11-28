@@ -18,8 +18,14 @@
     --border-focus: #29D3E8;
 
     --input-focus: rgba(16, 30, 37);
+    --input-static: rgba(34, 48, 59, 0.7);
+    --input-disabled: rgba(34, 48, 59, 0.3);
+
     --sombra: rgba(41, 211, 232, 0.4);
     --sombra2: rgba(245, 192, 57, 0.4);
+    --sombra-card: rgba(0, 0, 0, 0.2);
+
+    --msg-bg: rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -57,7 +63,7 @@ div.msg span {
 }
 
 div.msg {
-    background-color: #00000066;
+    background-color: var(--msg-bg);
     align-items: center;
     display: flex;
     flex-direction: row;

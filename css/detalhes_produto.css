@@ -10,7 +10,7 @@ form {
     background-color: var(--card);
     padding: 30px;
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px var(--sombra-card);
     margin: 0px auto 30px auto;
     width: 65%;
     min-width: 720px;
@@ -42,7 +42,7 @@ form > div {
 }
 
 .campo input.static {
-    background-color: rgba(34, 48, 59, 0.7);
+    background-color: var(--input-static);
     color: var(--text);
     font-style: italic;
 }
@@ -51,11 +51,11 @@ form > div {
 .campo textarea:disabled {
     opacity: 0.6;
     cursor:default;
-    background-color: rgba(34, 48, 59, 0.3);
+    background-color: var(--input-disabled);
 }
 
 .campo input.static {
-    background-color: rgba(34, 48, 59, 0.5);
+    background-color: var(--input-static);
     cursor: default;
 }
 
