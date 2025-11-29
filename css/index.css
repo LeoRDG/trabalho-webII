@@ -1,5 +1,6 @@
 main {
     width: 55%;
+    min-width: 720px;
     margin: auto;
 }
 
@@ -49,6 +50,7 @@ li span{
 @media (max-width: 768px) {
     main {
         width: 95%;
+        min-width: unset;
         padding: 0 10px;
     }
 
