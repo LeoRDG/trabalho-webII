@@ -1,12 +1,12 @@
 $(window).on("load", () => {
     // Validacao dos inputs
-    $("#nome").on("keyup change reset", (e) => validar_texto(e.target, 100, /[^\w ãõáéíóúÁÉÍÓÚçâôêÂÔ]/g));
-    $("#marca").on("keyup change reset", (e) => validar_texto(e.target, 40));
-    $("#categoria").on("keyup change reset", (e) => validar_texto(e.target, 40));
+    $("#nome").on("keyup change reset", (e) => validar_texto(e.target, 60, /[^\w ãõáéíóúÁÉÍÓÚçâôêÂÔ]/g));
+    $("#marca").on("keyup change reset", (e) => validar_texto(e.target, 20));
+    $("#categoria").on("keyup change reset", (e) => validar_texto(e.target, 30));
     $("#descricao").on("keyup change reset", (e) => validar_texto(e.target, 4_000, /[^\w\sãõáéíóúÁÉÍÓÚçâôêÂÔ\-\.@&%$!\(\):,"\?]/g));
-    $(".preco, #preco").on("keyup change reset", (e) => validar_numero(e.target, 1.00, 1_000_000.00, 2));
-    $("#estoque").on("keyup change reset", (e) => validar_numero(e.target, 0, 500, 0));
-    $("#peso").on("keyup change reset", (e) => validar_numero(e.target, 1.0, 20_000.0, 1));
+    $(".preco, #preco").on("keyup change reset", (e) => validar_numero(e.target, 1.00, 100_000.00, 2));
+    $("#estoque").on("keyup change reset", (e) => validar_numero(e.target, 0, 5000, 0));
+    $("#peso").on("keyup change reset", (e) => validar_numero(e.target, 0.1, 50, 1));
     $('input[type="radio"]').on("change", (e) => validar_required_radio(e.target));
 
     // Validacao ao dar submit em um form
@@ -30,7 +30,12 @@ $(window).on("load", () => {
 function submit(evento) {
     console.log(typeof(evento))
     validar_required()
-    if ($("input.erro, textarea.erro").length > 0) {
+    let erros = $("input.erro, textarea.erro");
+    if (erros.length > 0) {
+        // scrolla até o primeiro erro
+        $('html').animate({
+            scrollTop: erros.first().offset().top - 100
+        }, 500);
         evento.preventDefault();
     }
 }

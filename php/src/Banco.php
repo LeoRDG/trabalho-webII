@@ -10,7 +10,7 @@ class Banco {
     private const HOST = "localhost";
     private const USUARIO = "mamp";
     private const SENHA = "root";
-    private const BANCO = "web2";
+    private const BANCO = "Trabalho_webII_Leonardo";
     
 
     /**

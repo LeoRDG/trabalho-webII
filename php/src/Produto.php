@@ -1,9 +1,39 @@
 <?php 
-
-require_once __DIR__ . "/Banco.php";
 require_once __DIR__ . "/util.php";
+require_once __DIR__ . "/Banco.php";
 
 class Produto {
+    private const ATRIBUTOS = [
+        "id",
+        "estoque",
+        "preco",
+        "peso",
+        "nome",
+        "marca",
+        "categoria",
+        "descricao",
+        "vencimento",
+        "condicao",
+        "frete_gratis",
+        "criado_em",
+        "modificado_em",
+    ];
+
+    private const DATETIMES = ["modificado_em", "criado_em"];
+    private const IMUTAVEIS = ["modificado_em", "criado_em", "id"];
+    
+    public const FILTROS_PERMITIDOS = [
+        "nome",
+        "marca",
+        "categoria",
+        "preco",
+        "preco_min",
+        "preco_max",
+        "criado_em",
+        "criado_em_min",
+        "criado_em_max"
+    ];
+
     public int $id;
     public int $estoque;
     public float $preco;
@@ -12,41 +42,41 @@ class Produto {
     public string $marca;
     public string $categoria;
     public string $descricao;
+    public string $vencimento;
     public string $condicao;
     public bool $frete_gratis;
-    public string $criado_em; 
-    public DateTime $modificado_em; 
+    public DateTime $criado_em;
+    public DateTime $modificado_em;
 
 
     function __construct($arr){
         foreach ($arr as $chave => $valor){
-            if (!property_exists($this, $chave)) continue;
-            if ($chave == "modificado_em") {
-                $this->$chave = date_create_from_format("d/m/Y H:i:s", $valor);
+            if ( in_array($chave, self::ATRIBUTOS) ) {
+                if ( in_array($chave, self::DATETIMES) ) {
+                    $this->$chave = date_create_from_format("d/m/Y H:i:s", $valor);
+                }
+                else $this->$chave = $valor;
             }
-            else $this->$chave = $valor;
         }
     }
 
     function insert(): int {
-        if (isset($this->id)) return -1; // Produto ja existe, entao nao inserir;
+        if ( isset($this->id) ) throw new BancoException("Já existe um produto com esse id!");
         
-        // Filtra os campos em exclude para que nao sejam inseridos na tabela pois o valor será calculado pelo mysql
-        // Carrega os valores dinamicamente a partir dos atributos desse objeto
-        $filtered_vars = [];
-        $exclude = ["id", "modificado_em", "criado_em"];
-        foreach (get_object_vars($this) as $chave => $valor) {
-            if (!isset($exclude[$chave])) $filtered_vars[$chave] = $valor;
+        // Constroi um array com os atributos da tabela usando os atributos desse objeto
+        // Filtra os atributos que nao estao em $atributos ou estao em $imutaveis
+        $nomes = [];
+        $valores = [];
+        foreach ($this->atributos_banco() as [$nome, $valor]) {
+            $nomes[] = $nome;
+            $valores[] = $valor;
         }
         
-        // Manualmente adicionar a data
-        $filtered_vars["criado_em"] = date_format(new DateTime(), "Y-m-d");
-        
         // Crias as strings com os atributos e as interrogacoes
-        $atributos = implode(",", array_keys($filtered_vars) );
-        $inters = implode(",", array_map(fn ($i) => "?", $filtered_vars) );
+        $interrogacoes = implode(",", array_map(fn () => "?", $nomes));
+        $colunas = implode(",", $nomes);
         
-        return Banco::insert("INSERT INTO produtos ($atributos) VALUES ($inters)", array_values($filtered_vars));
+        return Banco::insert("INSERT INTO produtos ($colunas) VALUES ($interrogacoes)", $valores);
     }
     
     
@@ -55,9 +85,11 @@ class Produto {
         if (!$resultado) throw new BancoException("Nao foi possivel carregar o produto: ID $this->id nao existe!");
         $resultado = $resultado[0];
 
-        foreach ($resultado as $chave => $valor){
+        foreach ($resultado as $chave => $valor) {
             if (property_exists($this, $chave) && $valor !== null) {
-                if ($chave == "modificado_em") $this->$chave = date_create_from_format("Y-m-d H:i:s", $valor);
+                if ( in_array($chave, self::DATETIMES) ) {
+                    $this->$chave = date_create_from_format("Y-m-d H:i:s", $valor);
+                } 
                 else $this->$chave = $valor;
             }
         }
@@ -65,23 +97,19 @@ class Produto {
     }
     
     function update(): bool {
-        if (!isset($this->id)) return false; // Produto sem id, nao atualizar
-        
-        $strings = [];
-        $params = [];
-        
-        $exclude = ["id", "modificado_em", "criado_em"];
-        foreach (get_object_vars($this) as $chave => $valor) {
-            if (in_array($chave, $exclude)) continue;
-            $strings[] = "$chave = ?";
-            $params[] = $valor;
-        }
-        $params[] = $this->id;
-        
-        $q = "UPDATE produtos SET\n " . implode(",\n ", $strings) . "\n WHERE id = ?";
-        // Crias as strings com os atributos e as interrogacoes
+        if ( !isset($this->id) ) throw new BancoException("Id nulo, impossível atualizar");
 
-        return Banco::update($q, $params);
+        $substrings = [];
+        $valores = [];
+        foreach ($this->atributos_banco() as [$nome, $valor]) {
+            $substrings[] = "$nome = ?";
+            $valores[] = $valor;
+        }
+        $valores[] = $this->id;
+        
+        $q = "UPDATE produtos SET\n " . implode(",\n ", $substrings) . "\n WHERE id = ?";
+
+        return Banco::update($q, $valores);
     }
 
 
@@ -90,26 +118,16 @@ class Produto {
     }
 
 
-    static function get(): array {   
-        $resultado = Banco::select("SELECT * FROM produtos", null, true);
-
-        return $resultado;
+    function atributos_banco(): Generator {
+        foreach (get_object_vars($this) as $chave => $valor) {
+            if ( !in_array($chave, self::ATRIBUTOS) || in_array($chave, self::IMUTAVEIS) ) continue;
+            yield [$chave, $valor];
+        }
     }
 
 
-    static function produtos(): array {
-        $produtos = [];
-        $q = "SELECT nome, preco, estoque, categoria FROM produtos";
-        $result = Banco::select($q, null, true);
-        foreach ($result as $p){
-            $produtos[] = new Produto($p);
-        } 
-        return $produtos;
-    }
-
-
-    static function insereTeste($qtd){
-        $conds = ["Novo", "Usado", "Recondicionado"];
+    static function insereTeste($quantidade){
+        $condicoes = ["Novo", "Usado", "Recondicionado"];
         $produtos = [
             "Mouse Óptico USB",
             "Teclado Mecânico RGB",
@@ -118,29 +136,14 @@ class Produto {
             "Headset Gamer Surround",
             "Cadeira Ergonômica de Escritório",
             "Smartphone 128GB",
-            "Tablet Android 10''",
             "Impressora Multifuncional Wi-Fi",
-            "HD Externo 1TB",
             "SSD 512GB NVMe",
             "Roteador Dual Band AC1200",
-            "Webcam Full HD",
-            "Microfone Condensador USB",
-            "Caixa de Som Bluetooth",
-            "Pendrive 64GB",
             "Carregador Portátil 10000mAh",
             "Fonte 500W 80 Plus Bronze",
             "Placa de Vídeo RTX 3060",
             "Processador Ryzen 5 5600G",
             "Memória RAM 16GB DDR4",
-            "Placa-Mãe B550M",
-            "Cooler para CPU RGB",
-            "Cabo HDMI 2.1 2m",
-            "Adaptador USB-C para HDMI",
-            "Hub USB 3.0 4 Portas",
-            "Leitor de Cartão SD",
-            "Controle Bluetooth para PC",
-            "Tapete Gamer XXL",
-            "Suporte Articulado para Monitor"
         ];
         $categorias = [
                 "Periféricos",
@@ -165,26 +168,22 @@ class Produto {
             "Acer",
             "Samsung",
             "Kingston",
-            "Seagate",
-            "TP-Link"
         ];
 
-
-        for ($i=0;$i<$qtd;$i++){
-            $time = mt_rand(1577836800, 1735689600);
-            $date = date("Y-m-d", $time);
+        // Gera produtos com dados aleatorios
+        for ($i=0; $i<$quantidade; $i++){
             $campos = [
                 "nome" => $produtos[array_rand($produtos)],
                 "marca" => $marcas[array_rand($marcas)],
                 "categoria" => $categorias[array_rand($categorias)],
-                "descricao" => ($i%2==0) ? "" : "iiwejfiwefjwief jwiefj wiefjiw ejf wiefjnw ijefn wiejfnwiefn wiefnw ienfiwenfwienf eijfn3i4nf4 n3fn3efe",
-                "preco" => mt_rand(10000, 12034000) / 1000,
-                "estoque" => mt_rand(1, 500),
-                "peso" => mt_rand(100, 10000) / 1000,
-                "condicao" => $conds[array_rand($conds)],
-                "frete_gratis" => 1,
-                "criado_em" => $date,
+                "descricao" => rand(1, 10) <= 8 ? str_shuffle(str_repeat("qwerty uiopasd fghjklzx cvbnm", rand(0, 30))) : "",
+                "preco" => rand(100, 10000000) / 100,
+                "estoque" => rand(1, 5000),
+                "peso" => rand(1, 500) / 10,
+                "condicao" => $condicoes[array_rand($condicoes)],
+                "vencimento" => date("Y-m-d", rand(time(), strtotime("+5 years") )),
             ];
+            if (rand(1, 2) > 1) $campos["frete_gratis"] = 1;
             
             $p = new Produto($campos);
             $p->insert();
@@ -219,7 +218,7 @@ class Produto {
         $string = "";
 
         foreach ($filtros as $chave => $valor) {
-            if (!$valor || !in_array($chave, FILTROS_GET_PERMITIDOS)) continue;
+            if (!$valor || !in_array($chave, self::FILTROS_PERMITIDOS)) continue;
 
             if (str_ends_with($chave, "_min") || str_ends_with($chave, "_max")){
                 $minmax = substr($chave, strlen($chave) - 3);
