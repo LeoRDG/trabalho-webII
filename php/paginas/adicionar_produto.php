@@ -17,14 +17,6 @@
     <?php 
     include __DIR__ . "/../include/menu.php";
     include __DIR__ . "/../include/msg.php";
-
-    try {
-        $marcas = Produto::marcas();
-        $categorias = Produto::categorias();
-    } 
-    catch (Exception $e) {
-        redirecionar("index.php?erro={$e->getMessage()}");
-    }
     ?>
 
     <form action="../actions/create.php" method="POST" enctype="multipart/form-data">

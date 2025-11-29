@@ -75,7 +75,7 @@ catch (Exception $e) {
 </div>
 
 <div class="campo">
-    <label for="peso">Peso (g): </label>
+    <label for="peso">Peso (kg): </label>
     <input required type="number" id="peso" name="peso" min="0" step="0.1" value="<?= $p->peso ?? null ?>">
     <small class="erro" hidden></small>
 </div>
@@ -105,7 +105,6 @@ catch (Exception $e) {
     <label class="container" for="Recondicionado">
         <input <?= $checked ?> type="radio" value="Recondicionado" id="Recondicionado" name="condicao">
         Recondicionado
-
     </label>
     <small class="condicao erro"></small>
 </fieldset>
@@ -113,7 +112,6 @@ catch (Exception $e) {
 <div class="campo check">
     <?php $checked = isset($p->frete_gratis) && $p->frete_gratis == 1 ? "checked" : "" ?>
     <label class="container" for="frete">
-
         <input <?= $checked ?> type="checkbox" id="frete" name="frete_gratis">
         Frete Grátis
     </label>
@@ -121,13 +119,13 @@ catch (Exception $e) {
 
 <?php if ($modo != "add"): ?>
     <div class="campo">
-        <?php $data = date_format($p->criado_em, "d/m/Y h:i:s") ?>
+        <?php $data = date_format($p->criado_em, "d/m/Y H:i:s") ?>
         <label for="criado_em"> Criado em</label>
         <input class="static" readonly type="text" id="criado_em" name="criado_em" value="<?= $data ?>">
     </div>
 
     <div class="campo">
-        <?php $data = date_format($p->modificado_em, "d/m/Y h:i:s") ?>
+        <?php $data = date_format($p->modificado_em, "d/m/Y H:i:s") ?>
         <label for="modificado_em">Modificado em</label>
         <input class="static" readonly type="text" id="modificado_em" name="modificado_em" value="<?= $data ?>">
     </div>

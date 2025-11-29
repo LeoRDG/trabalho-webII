@@ -11,7 +11,7 @@ try {
     }
 }
 catch (Exception $e) {
-    $target_url = "../paginas/detalhes_produto.php";
+    $target_url = "../paginas/detalhes_produto.php?pid=$p->id";
     set_msg("erro", $e->getMessage(), 5000);
 } finally {
     redirecionar($target_url);

@@ -1,10 +1,4 @@
-<?php
-require_once __DIR__ . "/../src/util.php";
-if (isset($_GET["apenas_detalhes"])) {
-    include __DIR__ . "/../include/produto_template.php";
-    exit;
-}
-?>
+<?php require_once __DIR__ . "/../src/util.php" ?>
 
 <!DOCTYPE html>
 
