@@ -1,14 +1,20 @@
 <?php 
+/**
+ * Página para deletar produtos
+ */
+
 require_once __DIR__ . "/../src/util.php";
 require_once __DIR__ . "/../src/Produto.php";
 
 try {
+    // Verifica se é para deletar todos os produtos
     if (isset($_POST["todos"]) && $_POST["todos"] == 1) {
         Produto::remover_todos();
         $red_url = "../paginas/ver_produtos.php";
         set_msg("sucesso", "Todos os produtos foram removidos.", 5000);
     }
     else {
+        // Deleta um produto pelo ID
         $id = get_id_produto();
         $p = new Produto(["id" => $id]);
         $excluidos = $p->deletar();

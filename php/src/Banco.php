@@ -42,6 +42,7 @@ class Banco {
      * @return void Nao retorna nada, Cria um novo erro se o uqery nao for valido
      */
     private static function validar_query(string $query, string $comando_esperado){
+        // Extrai o primeiro comando da query (SELECT, INSERT, etc.)
         $comando = strtoupper( strtok($query, " ") );
         $comando_esperado = strtoupper($comando_esperado);
 
@@ -102,9 +103,11 @@ class Banco {
             }
             
             return $con->insert_id;
-        } catch (BancoException $e) {
+        }
+        catch (BancoException $e) {
             throw $e;
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             throw new BancoException("Erro ao executar INSERT: {$e->getMessage()}", $e->getCode(), $e);
         }
     }
@@ -153,9 +156,11 @@ class Banco {
             }
             
             return $con->affected_rows;
-        } catch (BancoException $e) {
+        }
+        catch (BancoException $e) {
             throw $e;
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             throw new BancoException("Erro ao executar DELETE: {$e->getMessage()}", $e->getCode(), $e);
         }
     }

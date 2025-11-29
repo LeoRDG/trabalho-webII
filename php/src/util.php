@@ -1,17 +1,14 @@
 <?php 
 session_start();
 
-define("FILTROS_GET_PERMITIDOS", 
-    [ 
-    "nome",
-    "marca",
-    "categoria",
-    "preco", "preco_min", "preco_max",
-    "criado_em", "criado_em_min", "criado_em_max"
-    ]
-);
 
-function set_msg($tipo, $texto, $ttl) {
+/**
+ * Cria uma mensagem no $_SESSION para ser exibida ao usuario
+ * @param string $tipo Tipo da mensagem: sucesso/erro
+ * @param string $texto Texto da mensagem
+ * @param int $ttl Tempo de vida da mensagem em milissegundos
+ */
+function set_msg(string $tipo, string $texto, int $ttl): void {
     $_SESSION["msg"] = [
         "tipo" => $tipo,
         "texto" => $texto,
@@ -19,44 +16,46 @@ function set_msg($tipo, $texto, $ttl) {
     ];
 }
 
-function url(string $url, array $params=[]): string {
-    if ( !empty($params) ) $url .= "?" . http_build_query($params);
-    return $url;
-}
 
 /**
  * Gera a url para os botoes para ir para proxima pagina
- * Inclui na url os parametros dos filtros
+ * @param string $pagina_num O numero da página
+ * @param array $filtros Os filtros para pesquisar produtos
+ * 
  */
 function gerar_paginacao_url(string $pagina_num, array $filtros=[]): string{
     $params = ["pagina" => $pagina_num];
     foreach ($filtros as $chave => $valor) {
-        if ( !$valor || !in_array($chave, FILTROS_GET_PERMITIDOS) ) continue;
+        if ( !$valor || !in_array($chave, Produto::FILTROS_PERMITIDOS) ) continue;
         $params[$chave] = $valor;
     }
-    return url("ver_produtos.php", $params);
+    return "ver_produtos.php?" . http_build_query($params);
 }
 
 
-function redirecionar($url) {
+/**
+ * Redireciona para outra pagina
+ * Se a URL nao for informada, tenta usar a pagina anterior ou index.html
+ * @param ?string $url URL para redirecionar
+ */
+function redirecionar(?string $url=null): void{
     $location = $url ?? $_SERVER["HTTP_REFERER"] ?? "index.html";
     header("Location: $location");
-        
 }
 
 
+/**
+ * Obtem e verifica se o id informado no get é valido
+ * @return int ID do produto
+ * @throws InvalidArgumentException Se o ID nao for passadp ou se for invalido
+ */
 function get_id_produto(): int {
-    if ( !isset($_GET["pid"]) ) {
-        echo ("Informe o ID do produto!");
-        exit;
-    };
+    if ( !isset($_GET["pid"]) ) throw new InvalidArgumentException("Informe o ID do produto!");
 
     $id = $_GET["pid"];
 
-    if (!is_numeric($id)) {
-        echo ("ID invalido!");
-        exit;
-    }
+    // Verifica se o ID é numerico
+    if (!is_numeric($id)) throw new InvalidArgumentException("ID informado invalido!");
 
     return $id;
 }

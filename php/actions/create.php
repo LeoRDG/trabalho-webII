@@ -1,8 +1,14 @@
 <?php 
+/**
+ * Pagina para criar novos produtos
+ */
+
 require_once __DIR__ . "/../src/util.php";
 require_once __DIR__ . "/../src/Produto.php";
 
 try {
+    // Insere multiplos produtos aleatórios
+    // Remove multiplos do POST para nao dar erro logo após
     $qtd = $_POST["multiplos"] ?? null;
     if ( is_numeric($qtd) ) {
         Produto::insereTeste($qtd);
@@ -11,6 +17,7 @@ try {
         unset($_POST["multiplos"]);
     }
     
+    // Cria um produto com o que foi informado no form
     if (!empty($_POST)) {
         $produto = new Produto($_POST);
         $id = $produto->insert();

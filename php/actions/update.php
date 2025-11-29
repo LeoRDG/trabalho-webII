@@ -1,4 +1,8 @@
 <?php
+/**
+ * Página para atualizar produtos existentes
+ */
+
 require_once __DIR__ . "/../src/util.php";
 require_once __DIR__ . "/../src/Produto.php";
 
