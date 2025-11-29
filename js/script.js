@@ -1,5 +1,5 @@
 $(window).on("load", () => {
-    const EVENTS = "input change resetc"
+    const EVENTS = "input"
     // Validacao dos inputs
     $("#nome").on(EVENTS, (e) => validar_texto(e.target, 60, /[^\w ãõáéíóúÁÉÍÓÚçâôêÂÔ]/g));
     $("#marca").on(EVENTS, (e) => validar_texto(e.target, 20));
@@ -72,7 +72,6 @@ function validar(input, validacoes) {
  * @param {object} evento O evento (click no botao submit).
  */
 function submit(evento) {
-    console.log(typeof(evento))
     validar_required()
     let erros = $("input.erro, textarea.erro");
     if (erros.length > 0) {
@@ -150,7 +149,7 @@ function validar_vencimento(input) {
     let data_min = new Date(agora.getTime() + 30 * 86400000);
     let data_max = new Date(agora.getTime() + 3 * 365 * 86400000);
 
-    validacoes = [
+    let validacoes = [
         { valido: bp || dia >= 1 && dia <= 31, mensagem: `${dia} não é um dia válido` },
         { valido: bp || mes >= 1 && mes <= 12, mensagem: `${mes} não é um mês válido` },
         { valido: bp || !!ano,                 mensagem: "Informe um ano!" },

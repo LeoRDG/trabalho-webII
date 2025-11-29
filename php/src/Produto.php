@@ -267,7 +267,7 @@ class Produto {
         $filtro_strings = [];
         $filtro_valores = [];
         $filtros_compostos = [];
-        
+
         foreach ($filtros as $chave => $valor) {
             // Ignora filtros vazios ou não permitidos
             if (!$valor || !in_array($chave, self::FILTROS_PERMITIDOS)) continue;

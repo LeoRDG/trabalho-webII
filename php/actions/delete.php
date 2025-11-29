@@ -24,7 +24,7 @@ try {
     }
 } 
 catch (Exception $e) {
-    $red_url = "../../index.php?erro={}";
+    $red_url = "../../index.php";
     set_msg("erro", $e->getMessage(), 5000);
 } 
 finally {

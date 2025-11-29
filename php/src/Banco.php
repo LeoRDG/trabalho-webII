@@ -49,7 +49,6 @@ class Banco {
         if ($comando === $comando_esperado) return;
 
         $msg = "Query deve ser $comando_esperado, não $comando";
-        echo $msg;
         throw new BancoException($msg);
     }
 

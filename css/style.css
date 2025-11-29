@@ -125,12 +125,6 @@ div.campo {
     gap: 4px;
 }
 
-div.frete_gratis{
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-}
-
 .campo input[type="text"],
 .campo input[type="number"],
 .campo input[type="date"],
