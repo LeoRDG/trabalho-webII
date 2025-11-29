@@ -81,9 +81,10 @@ catch (Exception $e) {
 </div>
 
 <div class="campo">
+    <?php $data = isset($p->vencimento) ? date_format(date_create_from_format("Y-m-d", $p->vencimento), "d/m/Y") : "" ?>
     <label for="vencimento">Data de vencimento: </label>
     <!-- type="date" é muito limitado, entao escolhi type="text" com jquery mask -->
-    <input placeholder="" class="data" type="text" id="vencimento" name="vencimento" value="<?= $p->vencimento ?? null ?>">
+    <input placeholder="" class="data" type="text" id="vencimento" name="vencimento" value="<?= $data ?>">
     <small class="erro" hidden></small>
 </div>
 
