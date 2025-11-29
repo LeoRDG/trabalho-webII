@@ -7,7 +7,10 @@ $(window).on("load", () => {
     $(".preco, #preco").on("keyup change reset", (e) => validar_numero(e.target, 1.00, 100_000.00, 2));
     $("#estoque").on("keyup change reset", (e) => validar_numero(e.target, 0, 5000, 0));
     $("#peso").on("keyup change reset", (e) => validar_numero(e.target, 0.1, 50, 1));
+    $('#vencimento').on("keyup blur change reset", (e) => validar_vencimento(e.target)); // Data valida se for entre daqui 30 dias e 3 anos
     $('input[type="radio"]').on("change", (e) => validar_required_radio(e.target));
+
+    $("#vencimento").mask("00/00/0000");
 
     // Validacao ao dar submit em um form
     $("#enviar").click((e) => submit(e));
@@ -19,6 +22,19 @@ $(window).on("load", () => {
     $(".msg").slideDown(200);
     setTimeout(() => $(".msg").slideUp(200), 5000);
 });
+
+
+/**
+ * Formata uma data para pt br
+ * @param {Date} data Um objeto Date 
+ * @returns {string} Uma string formatada no formato brasileiro
+ */
+function formatar_date(data) {
+    let dia = String(data.getDate()).padStart(2, "0");
+    let mes = String(data.getMonth() + 1).padStart(2, "0");
+    let ano = String(data.getFullYear()).padStart(2, "0");
+    return `${dia}/${mes}/${ano}`;
+}
 
 
 /**
@@ -104,6 +120,74 @@ function validar_numero(input, min, max, casas) {
         valor = (casas > 0) ? parseFloat(valor).toFixed(casas) : parseInt(valor);
         valido = (valor >= min && valor <= max);
         small.text(`O número deve ser entre ${Intl.NumberFormat("pt-BR").format(min)} e ${Intl.NumberFormat("pt-BR").format(max)}`);
+    }
+
+    small.toggle(!valido);
+    $(input).toggleClass("erro", !valido);
+}
+
+
+/**
+ * Valida a data de vencimento do produto
+ * @param {object} input O input
+ */
+function validar_vencimento(input) {
+    let small = $(input).next("small");
+    let valor = $(input).val();
+    let valido = true;
+    
+    if (!valor) return;
+
+    let [dia, mes, ano] = valor.split("/").map(Number);
+    let agora = new Date();
+    let data = new Date(ano, mes - 1, dia);
+    
+    // Constantes para os limites de data
+    const DIAS_MINIMOS = 30;
+    const ANOS_MAXIMOS = 3;
+    const MS_POR_DIA = 24 * 60 * 60 * 1000;
+    const MS_POR_ANO = 365 * MS_POR_DIA;
+    
+    let data_min = new Date(agora.getTime() + DIAS_MINIMOS * MS_POR_DIA);
+    let data_max = new Date(agora.getTime() + ANOS_MAXIMOS * MS_POR_ANO);
+
+    // Validações
+    let validacoes = [
+        {
+            valido: dia >= 1 && dia <= 31,
+            mensagem: `${dia} não é um dia válido`
+        },
+        {
+            valido: mes >= 1 && mes <= 12,
+            mensagem: `${mes} não é um mês válido`
+        },
+        {
+            valido: !!ano,
+            mensagem: "Informe um ano!"
+        },
+        {
+            valido: data.getDate() == dia,
+            mensagem: "Dia inválido para esse mês"
+        },
+        {
+            valido: data > agora,
+            mensagem: "O produto deve não estar vencido"
+        },
+        {
+            valido: data > data_min,
+            mensagem: `O vencimento mínimo é de ${DIAS_MINIMOS} dias. Informe uma data após: ${formatar_date(data_min)}`
+        },
+        {
+            valido: data < data_max,
+            mensagem: `O vencimento máximo é de ${ANOS_MAXIMOS} anos. Informe uma data até: ${formatar_date(data_max)}`
+        }
+    ];
+
+    for (let v of validacoes ) {
+        if (v.valido) continue;
+        valido = false;
+        small.text(v.mensagem);
+        break;
     }
 
     small.toggle(!valido);

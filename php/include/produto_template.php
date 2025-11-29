@@ -82,7 +82,8 @@ catch (Exception $e) {
 
 <div class="campo">
     <label for="vencimento">Data de vencimento: </label>
-    <input class="data" type="date" id="vencimento" name="vencimento" value="<?= $p->vencimento ?? null ?>">
+    <!-- type="date" é muito limitado, entao escolhi type="text" com jquery mask -->
+    <input placeholder="" class="data" type="text" id="vencimento" name="vencimento" value="<?= $p->vencimento ?? null ?>">
     <small class="erro" hidden></small>
 </div>
 

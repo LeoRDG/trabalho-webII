@@ -6,4 +6,5 @@
 <link rel="stylesheet" href="../../css/style.css">
 <title>Trabalho Web II</title>
 <script src="../../js/jQuery.js"></script>
+<script src="../../js/jquery.mask.js"></script>
 <script src="../../js/script.js"></script>
