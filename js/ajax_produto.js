@@ -1,5 +1,8 @@
 $(window).on("load", () => {
-    $(".produto").on("click", function () { carregar_produto(this) });
+    $(".produto").on("click", function (e) { 
+        if ($(e.target).is('a') ) return;
+        carregar_produto(this);
+    });
 });
 
 

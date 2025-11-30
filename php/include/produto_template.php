@@ -40,7 +40,7 @@ catch (Exception $e) {
     <small class="erro" hidden></small>
     <datalist id="marcas">
         <?php foreach ($marcas as $m): ?>
-            <option value=<?= $m ?>>
+            <option value="<?= $m ?>">
         <?php endforeach ?>
     </datalist>
 </div>
@@ -51,7 +51,7 @@ catch (Exception $e) {
     <small class="erro" hidden></small>
     <datalist id="categorias">
         <?php foreach ($categorias as $c): ?>
-            <option value=<?= $c ?>>
+            <option value="<?= $c ?>">
         <?php endforeach ?>
     </datalist>
 </div>

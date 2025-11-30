@@ -282,6 +282,10 @@ label:has(input:checked) {
     font-weight: bold;
 }
 
+label:has(input:disabled) {
+    cursor: default;
+}
+
 label input{
     transform: translate(0, 2px);
     margin: 0 2px;
@@ -327,7 +331,8 @@ ul.menu {
     left: 0;
     background-color: var(--bg);
     margin-bottom: 10px;
-    box-shadow: 0 3px 10px var(--sombra);
+    box-shadow: 0 2px 4px var(--sombra-card);
+    border-bottom: 1px solid var(--border);
 }
 
 .menu li {

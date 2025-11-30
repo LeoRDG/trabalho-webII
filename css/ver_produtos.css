@@ -156,8 +156,7 @@ div#tabela {
 
 .produto-container {
     transition: all 0.3s ease;
-    cursor: pointer;
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: 20px;
     background-color: var(--card);
 }
@@ -167,11 +166,8 @@ div#tabela {
     border-color: var(--border-focus);
 }
 
-.produto-container:hover * {
-    cursor: inherit;
-}
-
 .produto {
+    cursor: pointer;
     z-index: 10;
     display: flex;
     flex-direction: row;
@@ -207,9 +203,7 @@ div#tabela {
     width: 100%;
     margin-top: -15px;
     padding: 20px;
-    border-radius: 0 0 20px 20px;
-    border: solid var(--border);
-    border-width: 1px 1px 1px 1px;
+    border-top: 1px solid var(--border);
 }
 
 .produto-detalhes input {
