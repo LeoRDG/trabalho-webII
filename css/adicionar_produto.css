@@ -8,7 +8,7 @@ fieldset.form-add {
 }
 
 .form-add:hover {
-    box-shadow: 0 12px 40px var(--sombra);
+    box-shadow: 0 4px 20px var(--sombra);
 }
 
 .form-add legend,

@@ -21,8 +21,8 @@
     --input-static: rgba(34, 48, 59, 0.7);
     --input-disabled: rgba(34, 48, 59, 0.3);
 
-    --sombra: rgba(41, 211, 232, 0.4);
-    --sombra2: rgba(245, 192, 57, 0.4);
+    --sombra: rgba(41, 211, 232, 0.2);
+    --sombra2: rgba(245, 192, 57, 0.2);
     --sombra-card: rgba(0, 0, 0, 0.2);
 
     --msg-bg: rgba(0, 0, 0, 0.4);
@@ -41,7 +41,7 @@ div {
     background-color: transparent;
 }
 
-p, span, small {
+p, span, small, h1, h2, ol, ul, pre {
     background-color: transparent;
     color: inherit;
 }
