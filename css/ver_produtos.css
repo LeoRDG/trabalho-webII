@@ -53,6 +53,11 @@ a.pagina:hover:not(.atual){
     background-color: var(--aviso);
 }
 
+a.pagina.primeira,
+a.pagina.ultima {
+    font-size: 22px;
+}
+
 /********** Links Detalhes/Delete **********/
 
 .material-symbols-outlined {

@@ -79,12 +79,24 @@ require_once __DIR__ . "/../actions/read.php";
         <?= "<p>" . $total_com_filtro . " de " . $total . " Produtos encontrados (" . ($inicio + 1) . "-" . $fim . ")</p>" ?>
         <div id="paginas">
             <?php
+            // Botao primeira pagina
+            if ($pagina > 1 && $ultima_pagina > 1) {
+                $url_primeira = gerar_paginacao_url(1, $filtros);
+                echo "<a class='pagina primeira material-symbols-outlined' href='$url_primeira' title='Primeira página'>first_page</a>";
+            }
+            
             // Gera os links para ir para outras paginas
             for ($i = $pagina - $qtd_botoes; $i <= $pagina + $qtd_botoes; $i++) {
                 if ($i <= 0 || $i > $ultima_pagina) continue;
                 $atual = ($i == $pagina) ? "atual" : "";
                 $url = ($i == $pagina) ? "" : gerar_paginacao_url($i, $filtros);
                 echo "<a class='pagina $atual' href='$url'>$i</a>";
+            }
+            
+            // Botao ultima pagina
+            if ($pagina < $ultima_pagina && $ultima_pagina > 1) {
+                $url_ultima = gerar_paginacao_url($ultima_pagina, $filtros);
+                echo "<a class='pagina ultima material-symbols-outlined' href='$url_ultima' title='Última página'>last_page</a>";
             }
             ?>
         </div>
