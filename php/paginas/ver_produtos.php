@@ -30,7 +30,7 @@ require_once __DIR__ . "/../actions/read.php";
 
             <div class="campo">
                 <label for="marca">Marca: </label>
-                <input list="marcas" name="marca" id="marca" value=<?= $filtros["marca"] ?? "" ?>>
+                <input list="marcas" name="marca" id="marca" value="<?= $filtros["marca"] ?? "" ?>">
                 <small class="erro" hidden></small>
                 <datalist id="marcas">
                     <?php foreach ($marcas as $m): ?>
@@ -41,7 +41,7 @@ require_once __DIR__ . "/../actions/read.php";
 
             <div class="campo">
                 <label for="categoria">Categoria: </label>
-                <input list="categorias" name="categoria" id="categoria" value=<?= $filtros["categoria"] ?? "" ?>>
+                <input list="categorias" name="categoria" id="categoria" value="<?= $filtros["categoria"] ?? "" ?>">
                 <small class="erro" hidden></small>
                 <datalist id="categorias">
                     <?php foreach ($categorias as $c): ?>
@@ -52,17 +52,17 @@ require_once __DIR__ . "/../actions/read.php";
 
             <div class="campo">
                 <label>Preço: </label>
-                <input type="number" class="preco" id="preco_min" placeholder="Min" name="preco_min" min="0" step="0.01" value=<?= $filtros["preco_min"] ?? "" ?>>
+                <input type="number" class="preco" id="preco_min" placeholder="Min" name="preco_min" min="0" step="0.01" value="<?= $filtros["preco_min"] ?? "" ?>">
                 <small class="erro" hidden></small>
-                <input type="number" class="preco" id="preco_max" placeholder="Max" name="preco_max" min="0" step="0.01" value=<?= $filtros["preco_max"] ?? "" ?>>
+                <input type="number" class="preco" id="preco_max" placeholder="Max" name="preco_max" min="0" step="0.01" value="<?= $filtros["preco_max"] ?? "" ?>">
                 <small class="erro" hidden></small>
             </div>
 
             <div class="campo">
                 <label>Criado entre: </label>
-                <input type="date" id="criado_em_min" placeholder="Min" name="criado_em_min" value=<?= $filtros["criado_em_min"] ?? "" ?>>
+                <input type="date" id="criado_em_min" placeholder="Min" name="criado_em_min" value="<?= $filtros["criado_em_min"] ?? "" ?>">
                 <small class="erro" hidden></small>
-                <input type="date" id="criado_em_max" placeholder="Max" name="criado_em_max" value=<?= $filtros["criado_em_max"] ?? "" ?>>
+                <input type="date" id="criado_em_max" placeholder="Max" name="criado_em_max" value="<?= $filtros["criado_em_max"] ?? "" ?>">
                 <small class="erro" hidden></small>
             </div>
 

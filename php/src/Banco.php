@@ -126,7 +126,7 @@ class Banco {
             $result = $con->execute_query($query, $params);
             
             if ($result === false) {
-                throw new BancoException("Erro ao executar UPDATE: $con->error Código: $con->errno)");
+                throw new BancoException("Erro ao executar UPDATE: $con->error (Código: $con->errno)");
             }
             
             return $result;

@@ -44,7 +44,7 @@ class Produto {
     public string $descricao;
     public string $vencimento;
     public string $condicao;
-    public bool $frete_gratis;
+    public int $frete_gratis;
     public DateTime $criado_em;
     public DateTime $modificado_em;
 
@@ -55,14 +55,24 @@ class Produto {
      * @param array $arr array associativo com os dados do produto
      */
     function __construct($arr) {
-        foreach ($arr as $chave => $valor){
+        foreach ($arr as $chave => $valor) {
             // Verifica se a chave é um atributo valido
             if ( in_array($chave, self::ATRIBUTOS) ) {
                 if ( in_array($chave, self::DATETIMES) ) {
                     $this->$chave = date_create_from_format("d/m/Y H:i:s", $valor);
                 }
+                else if ($chave == "vencimento") {
+                    $t = date_create_from_format("d/m/Y", $valor);
+                    if (!$t) $this->$chave = $valor;
+                    else $this->$chave = date_format($t, "Y-m-d");
+                }
                 else $this->$chave = $valor;
             }
+        }
+        
+        // Se frete_gratis nao foi definido, definir como false
+        if (!isset($this->frete_gratis)) {
+            $this->frete_gratis = false;
         }
     }
 
