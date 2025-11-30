@@ -8,7 +8,7 @@ $(window).on("load", () => {
     $(".preco, #preco").on(EVENTS, (e) => validar_numero(e.target, 1.00, 100_000.00, 2));
     $("#estoque").on(EVENTS, (e) => validar_numero(e.target, 0, 5000, 0));
     $("#peso").on(EVENTS, (e) => validar_numero(e.target, 0.1, 50, 1));
-    $('#vencimento').on(EVENTS, (e) => validar_vencimento(e.target)); // Data valida se for entre daqui 30 dias e 3 anos
+    $('#vencimento').on("input keyup", (e) => validar_vencimento(e.target)); // Data valida se for entre daqui 30 dias e 3 anos
     $('input[type="radio"]').on("change", (e) => validar_required_radio(e.target));
 
     $("#vencimento").mask("00/00/0000");
@@ -148,8 +148,8 @@ function validar_vencimento(input) {
     let [dia, mes, ano] = valor.split("/").map(Number);
     let agora = new Date();
     let data = new Date(ano, mes - 1, dia);
-    let data_min = new Date(agora.getTime() + 30 * 86400000);
-    let data_max = new Date(agora.getTime() + 3 * 365 * 86400000);
+    let data_min = new Date(agora.getTime() + 90 * 86400000);
+    let data_max = new Date(agora.getTime() + 5 * 365 * 86400000);
 
     let validacoes = [
         { valido: bp || dia >= 1 && dia <= 31, mensagem: `${dia} não é um dia válido` },
@@ -157,8 +157,8 @@ function validar_vencimento(input) {
         { valido: bp || !!ano,                 mensagem: "Informe um ano!" },
         { valido: bp || data.getDate() == dia, mensagem: "Dia inválido para esse mês" },
         { valido: bp || data > agora,          mensagem: "O produto deve não estar vencido" },
-        { valido: bp || data > data_min,       mensagem: `O vencimento mínimo é de 30 dias. Informe uma data após: ${formatar_date(data_min)}` },
-        { valido: bp || data < data_max,       mensagem: `O vencimento máximo é de 3 anos. Informe uma data até: ${formatar_date(data_max)}` },
+        { valido: bp || data > data_min,       mensagem: `O vencimento mínimo é de 90 dias. Informe uma data após: ${formatar_date(data_min)}`},
+        { valido: bp || data < data_max,       mensagem: `O vencimento máximo é de 5 anos. Informe uma data até: ${formatar_date(data_max)}`},
     ];
 
     validar(input, validacoes);
