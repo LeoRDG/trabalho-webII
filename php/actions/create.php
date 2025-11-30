@@ -13,7 +13,7 @@ try {
     if ( is_numeric($qtd) ) {
         Produto::insereTeste($qtd);
         $red_url = "../paginas/ver_produtos.php";
-        set_msg("sucesso", "$qtd produtos inseridos com sucesso!", 5000);
+        set_msg("sucesso", "$qtd produtos inseridos com sucesso!");
         unset($_POST["multiplos"]);
     }
     
@@ -22,11 +22,11 @@ try {
         $produto = new Produto($_POST);
         $id = $produto->insert();
         $red_url = "../paginas/adicionar_produto.php?sucesso=";
-        set_msg("sucesso", "Produto inserido com sucesso! id=$id", 5000);
+        set_msg("sucesso", "Produto inserido com sucesso! id=$id");
     }
 }
 catch (Exception $e) {
-    set_msg("erro", $e->getMessage(), 5000);
+    set_msg("erro", $e->getMessage(), 10000);
     $red_url = "../paginas/adicionar_produto.php";
 } 
 finally {

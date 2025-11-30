@@ -27,7 +27,9 @@ $(window).on("load", () => {
 
     // Mostrando e Escondendo mensagem de erro/sucesso
     $(".msg").slideDown(200);
-    setTimeout(() => $(".msg").slideUp(200), 5000);
+    let ttl = Number($(".msg").attr("ttl"));
+    setTimeout(() => $(".msg").slideUp(200), ttl);
+    $(".msg .progresso").animate({width: "0%"}, ttl, "linear");
 });
 
 

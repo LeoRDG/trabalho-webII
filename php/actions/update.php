@@ -16,7 +16,7 @@ try {
 }
 catch (Exception $e) {
     $target_url = "../paginas/editar_produto.php?pid=" . ($_POST["id"] ?? "") ;
-    set_msg("erro", $e->getMessage(), 5000);
+    set_msg("erro", $e->getMessage(), 10000);
 } finally {
     redirecionar($target_url);
 }

@@ -26,6 +26,6 @@ try {
     $categorias = Produto::categorias();
 }
 catch (Exception $e) {
-    set_msg("erro", $e->getMessage(), 5000);
+    set_msg("erro", $e->getMessage(), 10000);
     redirecionar("ver_produtos.php?");
 }

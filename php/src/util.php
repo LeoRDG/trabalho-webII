@@ -6,9 +6,9 @@ session_start();
  * Cria uma mensagem no $_SESSION para ser exibida ao usuario
  * @param string $tipo Tipo da mensagem: sucesso/erro
  * @param string $texto Texto da mensagem
- * @param int $ttl Tempo de vida da mensagem em milissegundos
+ * @param int $ttl Tempo de vida da mensagem em milissegundos (padrao: 5s)
  */
-function set_msg(string $tipo, string $texto, int $ttl): void {
+function set_msg(string $tipo, string $texto, int $ttl=5000): void {
     $_SESSION["msg"] = [
         "tipo" => $tipo,
         "texto" => $texto,

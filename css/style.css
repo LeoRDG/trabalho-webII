@@ -83,9 +83,27 @@ div.msg {
     position: fixed;
     right: 40px;
     bottom: 40px;
-    border-radius: 40px;
-    padding: 24px 20px;
+    font-weight: bolder;
+    padding: 8px 12px 8px 8px;
     backdrop-filter: blur(8px);
+    border-radius: 2px;
+    border: 1px solid var(--border);
+}
+
+.msg .progresso.erro {
+    background-color: var(--erro);
+}
+
+.msg .progresso.sucesso {
+    background-color: var(--sucesso);
+}
+
+.msg .progresso {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
 }
 
 /************************ INPUTS ************************/

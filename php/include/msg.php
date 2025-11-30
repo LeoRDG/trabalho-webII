@@ -11,6 +11,7 @@ if ( isset($_SESSION["msg"]) ) {
     <div class='msg $tipo' ttl='$ttl'>
         <span class='material-symbols-outlined'>$simbolo</span>
         <p>$texto</p>
+        <div class=\"progresso $tipo\"></div>
     </div>
     ";
 
