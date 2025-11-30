@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/../src/util.php";
 require_once __DIR__ . "/../actions/read.php";
+$modo = "view";
 ?>
 
 <!DOCTYPE html>

@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../src/util.php";
 require_once __DIR__ . "/../src/Produto.php";
-$modo = $modo ?? null;
+$modo = $_GET["modo"] ?? $modo ?? null;
 
 try {
     $marcas = Produto::marcas();
@@ -89,22 +89,23 @@ catch (Exception $e) {
 </div>
 
 <fieldset class="campo condicao">
-    <legend for="condicao">Condição: </legend>
+    <legend>Condição: </legend>
+    <?php $name = ($modo === "view") ? "condicao" . $p->id ?? "" : "condicao" ?>
     <?php $checked = (isset($p->condicao) && $p->condicao === "Novo") ? "checked" : "" ?>
-    <label class="container" for="Novo">
-        <input required <?= $checked ?> type="radio" value="Novo" id="Novo" name="condicao">
+    <label class="container">
+        <input required <?= $checked ?> type="radio" value="Novo" name="<?= $name ?>">
         Novo
     </label>
 
     <?php $checked = (isset($p->condicao) && $p->condicao === "Usado") ? "checked" : "" ?>
-    <label class="container" for="Usado">
-        <input <?= $checked ?> type="radio" value="Usado" id="Usado" name="condicao">
+    <label class="container">
+        <input <?= $checked ?> type="radio" value="Usado" name="<?= $name ?>">
         Usado
     </label>
 
     <?php $checked = (isset($p->condicao) && $p->condicao === "Recondicionado") ? "checked" : "" ?>
-    <label class="container" for="Recondicionado">
-        <input <?= $checked ?> type="radio" value="Recondicionado" id="Recondicionado" name="condicao">
+    <label class="container">
+        <input <?= $checked ?> type="radio" value="Recondicionado" name="<?= $name ?>">
         Recondicionado
     </label>
     <small class="condicao erro"></small>
