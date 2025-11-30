@@ -41,6 +41,7 @@ function gerar_paginacao_url(string $pagina_num, array $filtros=[]): string{
 function redirecionar(?string $url=null): void{
     $location = $url ?? $_SERVER["HTTP_REFERER"] ?? "index.html";
     header("Location: $location");
+    exit;
 }
 
 

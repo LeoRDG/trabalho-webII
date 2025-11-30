@@ -39,8 +39,8 @@ class Produto {
     public float $preco;
     public float $peso;
     public string $nome;
-    public string $marca;
-    public string $categoria;
+    public string $marca = "";
+    public string $categoria = "";
     public string $descricao;
     public string $vencimento;
     public string $condicao;
@@ -63,17 +63,14 @@ class Produto {
                 }
                 else if ($chave == "vencimento") {
                     $t = date_create_from_format("d/m/Y", $valor);
-                    if (!$t) $this->$chave = $valor;
-                    else $this->$chave = date_format($t, "Y-m-d");
+                    if ($t) $valor = date_format($t, "Y-m-d");
+                    if ($valor != "") $this->$chave = $valor;
                 }
                 else $this->$chave = $valor;
             }
         }
         
-        // Se frete_gratis nao foi definido, definir como false
-        if (!isset($this->frete_gratis)) {
-            $this->frete_gratis = false;
-        }
+        $this->frete_gratis = isset($this->frete_gratis) ? 1 : 0;
     }
 
 

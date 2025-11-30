@@ -70,7 +70,7 @@ catch (Exception $e) {
 
 <div class="campo">
     <label for="estoque">Estoque: </label>
-    <input type="number" id="estoque" name="estoque" min="0" value="<?= $p->estoque ?? null ?>">
+    <input required type="number" id="estoque" name="estoque" min="0" value="<?= $p->estoque ?? null ?>">
     <small class="erro" hidden></small>
 </div>
 
