@@ -174,7 +174,12 @@ function validar_required() {
             validar_required_radio(this);
             return;
         }
-        validar(this, [{ valido: !!$(this).val(), mensagem: "O campo nao pode ser nulo!" }]);
+        if (!$(this).val()) {
+            let small = $(this).next("small");
+            small.text("Esse campo não pode ser nulo!");
+            small.show();
+            $(this).addClass("erro");
+        }
     });
 }
 
