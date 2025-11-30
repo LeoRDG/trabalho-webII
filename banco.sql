@@ -14,9 +14,9 @@ CREATE TABLE `produtos` (
     `condicao` ENUM('Novo','Usado','Recondicionado') NOT NULL,
     `frete_gratis` BOOLEAN NOT NULL DEFAULT 0,
     `criado_em` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `modificado_em` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `modificado_em` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    CHECK (preco >= 1.00 AND preco <= 100000.00),
-    CHECK (estoque >= 0 AND estoque <= 5000),
-    CHECK (peso >= 0.1 AND peso <= 50.0)
+    CHECK (`preco` >= 1.00 AND `preco` <= 100000.00),
+    CHECK (`estoque` >= 0 AND `estoque` <= 5000),
+    CHECK (`peso` >= 0.1 AND `peso` <= 50.0)
 );
