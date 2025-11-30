@@ -63,7 +63,6 @@ a.pagina.atual {
     border-color: var(--primaria);
     cursor: default;
     font-weight: 700;
-    transform: scale(1.05);
 }
 
 a.pagina.primeira,
