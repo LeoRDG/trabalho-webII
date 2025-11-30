@@ -27,5 +27,5 @@ try {
 }
 catch (Exception $e) {
     set_msg("erro", $e->getMessage(), 10000);
-    redirecionar("ver_produtos.php?");
+    redirecionar("index.php?");
 }
