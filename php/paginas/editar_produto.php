@@ -4,7 +4,7 @@
 
 <head>
     <?php include __DIR__ . "/../include/head.php" ?>
-    <link rel="stylesheet" href="../../css/detalhes_produto.css">
+    <link rel="stylesheet" href="../../css/editar_produto.css">
 </head>
 
 <body>

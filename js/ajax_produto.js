@@ -14,7 +14,7 @@ function carregar_produto(produto) {
     let div = $(produto).next();
     div.slideToggle(300, "swing");
 
-    url = (url.replace("detalhes_produto", "../include/produto_template"))
+    url = (url.replace("editar_produto", "../include/produto_template"))
     if (div.children().length == 0) div.load(url, () => {
         // Desabilita todos os inputs, quando terminar de carregar
         div.find("input, textarea").each(function () { 

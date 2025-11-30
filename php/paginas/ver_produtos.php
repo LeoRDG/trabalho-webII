@@ -97,7 +97,7 @@ require_once __DIR__ . "/../actions/read.php";
                         <span class='preco'> <?= "R$ " . number_format($produto->preco, 2, ",", ".") ?></span>
                         <span class='marca'> <?= $produto->marca ?></span>
                         <span class='categoria'> <?= $produto->categoria ?></span>
-                        <a href='detalhes_produto.php?pid=<?= $produto->id ?>' class='detalhes material-symbols-outlined'>edit</a>
+                        <a href='editar_produto.php?pid=<?= $produto->id ?>' class='detalhes material-symbols-outlined'>edit</a>
                         <a href='../actions/delete.php?pid=<?= $produto->id ?>' class='remover material-symbols-outlined'>delete</a>
                     </div>
                     <div class="produto-detalhes" id="<?= $produto->id ?>" hidden></div>
