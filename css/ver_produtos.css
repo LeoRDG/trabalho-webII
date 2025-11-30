@@ -24,39 +24,53 @@
 div#paginas{
     display: flex;
     flex-direction: row;
-    justify-content: left;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     width: 100%;
+    flex-wrap: wrap;
+    padding: 10px 0;
 }
 
 a.pagina {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 32px;
-    height: 32px;
-    background-color: var(--primaria);
-    color: var(--bg);
-    padding: 5px;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--card);
+    color: var(--fg);
+    border: 2px solid var(--border);
     margin: 0;
-    font-size: 18px;
-    border-radius: 10px;
-    font-weight: bold;
+    font-size: 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+a.pagina:hover:not(.atual) {
+    background-color: var(--input-focus);
+    border-color: var(--border-focus);
+    color: var(--primaria);
+    transform: translateY(-2px);
 }
 
 a.pagina.atual {
-    background-color: var(--text);
+    background-color: var(--primaria);
+    color: var(--bg);
+    border-color: var(--primaria);
     cursor: default;
-}
-
-a.pagina:hover:not(.atual){
-    background-color: var(--aviso);
+    font-weight: 700;
+    transform: scale(1.05);
 }
 
 a.pagina.primeira,
 a.pagina.ultima {
-    font-size: 22px;
+    font-size: 20px;
 }
+
 
 /********** Links Detalhes/Delete **********/
 
@@ -113,6 +127,24 @@ div#tabela {
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+#info-paginacao {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    background-color: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+}
+
+#info-paginacao p {
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    color: var(--text);
+    background-color: transparent;
 }
 
 #produtos-lista {
@@ -221,6 +253,16 @@ fieldset:hover {
         padding: 0 10px;
     }
 
+    #info-paginacao {
+        padding: 12px 15px;
+        margin-bottom: 12px;
+    }
+
+    #info-paginacao p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
     .produto {
         flex-direction: column;
         align-items: center;
@@ -267,11 +309,22 @@ fieldset:hover {
     div#paginas {
         justify-content: center;
         flex-wrap: wrap;
+        gap: 6px;
+        padding: 8px 0;
     }
 
     a.pagina {
-        width: 32px;
-        height: 32px;
-        font-size: 15px;
+        min-width: 36px;
+        height: 36px;
+        padding: 0 10px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    a.pagina.primeira,
+    a.pagina.ultima {
+        min-width: 36px;
+        font-size: 18px;
+        padding: 0 8px;
     }
 }

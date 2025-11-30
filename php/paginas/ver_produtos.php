@@ -76,7 +76,19 @@ require_once __DIR__ . "/../actions/read.php";
     </form>
     
     <div id="tabela">
-        <?= "<p>" . $total_com_filtro . " de " . $total . " Produtos encontrados (" . ($inicio + 1) . "-" . $fim . ")</p>" ?>
+        <div id="info-paginacao">
+            <p>
+                <span class="destaque"><?= $total_com_filtro ?></span> de <span class="destaque"><?= $total ?></span> produtos encontrados
+                <?php if ($total_com_filtro > 0): ?>
+                    <span class="separador">-</span>
+                    Mostrando <span class="destaque"><?= ($inicio + 1) ?></span> a <span class="destaque"><?= $fim ?></span>
+                    <?php if ($ultima_pagina > 1): ?>
+                        <span class="separador">-</span>
+                        Página <span class="destaque"><?= $pagina ?></span> de <span class="destaque"><?= $ultima_pagina ?></span>
+                    <?php endif ?>
+                <?php endif ?>
+            </p>
+        </div>
         <div id="paginas">
             <?php
             // Botao primeira pagina

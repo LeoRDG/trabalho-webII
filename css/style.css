@@ -46,6 +46,18 @@ p, span, small {
     color: inherit;
 }
 
+.destaque {
+    color: var(--primaria);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.separador {
+    color: var(--text);
+    margin: 0 8px;
+    opacity: 0.5;
+}
+
 /************************ FEEDBACK ************************/
 
 .erro {
@@ -328,6 +340,14 @@ ul.menu {
 /************************** RESPONSIVIDADE **************************/
 
 @media (max-width: 768px) {
+    .destaque {
+        font-size: 14px;
+    }
+
+    .separador {
+        margin: 0 6px;
+    }
+
     ul.menu {
         flex-direction: column;
         font-size: 16px;
