@@ -66,11 +66,12 @@ class Produto {
                     if ($t) $valor = date_format($t, "Y-m-d");
                     if ($valor != "") $this->$chave = $valor;
                 }
+                else if ($chave == "frete_gratis") continue;
                 else $this->$chave = $valor;
             }
         }
         
-        $this->frete_gratis = isset($this->frete_gratis) ? 1 : 0;
+        $this->frete_gratis = isset($arr["frete_gratis"]) ? 1 : 0;
     }
 
 
