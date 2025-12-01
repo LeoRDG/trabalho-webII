@@ -53,13 +53,17 @@ function formatar_date(data) {
  */
 function validar(input, validacoes) {
     let small = $(input).next("small");
-    let valido = true;
+    let erros = [];
 
     for (let v of validacoes) {
-        if (v.valido) continue;
-        valido = false;
-        small.text(v.mensagem);
-        break;
+        if (!v.valido) erros.push(v.mensagem);
+    }
+
+    let valido = erros.length === 0;
+    
+    // Exibe todos os erros separados por quebra de linha
+    if (!valido) {
+        small.html(erros.join("<br>"));
     }
 
     small.toggle(!valido);
