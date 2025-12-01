@@ -29,9 +29,6 @@ class Produto {
         "preco",
         "preco_min",
         "preco_max",
-        "criado_em",
-        "criado_em_min",
-        "criado_em_max"
     ];
 
     public int $id;

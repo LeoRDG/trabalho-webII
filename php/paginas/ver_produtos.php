@@ -59,14 +59,6 @@ $modo = "view";
                 <small class="erro" hidden></small>
             </div>
 
-            <div class="campo">
-                <label>Criado entre: </label>
-                <input type="date" id="criado_em_min" placeholder="Min" name="criado_em_min" value="<?= $filtros["criado_em_min"] ?? "" ?>">
-                <small class="erro" hidden></small>
-                <input type="date" id="criado_em_max" placeholder="Max" name="criado_em_max" value="<?= $filtros["criado_em_max"] ?? "" ?>">
-                <small class="erro" hidden></small>
-            </div>
-
         </div>
         <div class="campo" id="botoes">
             <input type="reset" id="reset" value="Resetar">
