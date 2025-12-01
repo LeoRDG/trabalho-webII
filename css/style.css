@@ -1,31 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --bg: #0d141b;
-    --card: #141A21;
-    --fg: #D8E1E8;
-    --text: #adb2b4;
+    --bg: #1a2030;
+    --card: #232a38;
+    --fg: #f0f4f9;
+    --text: #c4d1e0;
 
-    --primaria: #29D3E8;
-    --primaria2: #16c4d3;
+    --primaria: #58a0d7;
+    --primaria2: #5a97c7;
 
-    --sucesso: #33e583;
-    --aviso: #F5C039;
-    --erro: #FF4C4C;
-    --desativado: #CCCCCC;
+    --sucesso: #5ad66e;
+    --aviso: #dea666;
+    --erro: #da6464;
+    --desativado: #a0a0a0;
 
-    --border: #22303B;
-    --border-focus: #29D3E8;
+    --border: #414d5f;
+    --border-focus: #6ba8d8;
 
-    --input-focus: rgba(16, 30, 37);
-    --input-static: rgba(34, 48, 59, 0.7);
-    --input-disabled: rgba(34, 48, 59, 0.3);
+    --input-focus: rgba(42, 50, 66, 0.85);
+    --input-static: rgba(65, 77, 95, 0.65);
+    --input-disabled: rgba(65, 77, 95, 0.35);
 
-    --sombra: rgba(41, 211, 232, 0.2);
-    --sombra2: rgba(245, 192, 57, 0.2);
+    --sombra: rgba(107, 168, 216, 0.18);
+    --sombra2: rgba(217, 176, 128, 0.18);
     --sombra-card: rgba(0, 0, 0, 0.2);
 
-    --msg-bg: rgba(0, 0, 0, 0.4);
+    --msg-bg: rgba(22, 27, 40, 0.9);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--fg);
 }
 
 * {
@@ -33,8 +38,8 @@
     margin: 0;
     padding: 0;
     font-family: Helvetica, sans-serif;
-    background-color: var(--bg);
-    color: var(--fg);
+    background-color: transparent;
+    color: inherit;
 }
 
 div {
@@ -328,7 +333,7 @@ ul.menu {
     position: sticky;
     top: 0;
     left: 0;
-    background-color: var(--bg);
+    background-color: var(--bg)!important;
     margin-bottom: 10px;
     box-shadow: 0 2px 4px var(--sombra-card);
     border-bottom: 1px solid var(--border);
