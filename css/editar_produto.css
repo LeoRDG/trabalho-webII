@@ -12,6 +12,7 @@ form {
     margin: 0px auto 30px auto;
     width: 65%;
     min-width: 720px;
+    max-width: 1400px;
 }
 
 form > div {

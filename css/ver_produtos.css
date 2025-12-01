@@ -87,6 +87,8 @@ a.pagina.ultima {
 #form-filtros {
     background-color: var(--card);
     padding: 30px 0px 25px 0;
+    max-width: 1400px;
+    margin: 20px auto;
 }
 
 div.filtros {
@@ -122,6 +124,7 @@ div#tabela {
     margin: auto;
     width: 75%;
     min-width: 720px;
+    max-width: 1400px;
     gap: 8px;
     display: flex;
     align-items: center;
