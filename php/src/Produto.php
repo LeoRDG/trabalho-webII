@@ -64,7 +64,7 @@ class Produto {
                     if ($valor != "") $this->$chave = $valor;
                 }
                 else if ($chave == "frete_gratis") continue;
-                else $this->$chave = $valor;
+                else $this->$chave = trim($valor);
             }
         }
         
